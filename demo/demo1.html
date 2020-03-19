@@ -1,0 +1,59 @@
+<html>
+  <body>
+    <h1>ToDo</h1>
+
+    <form>
+      <input type="" name="">
+      <button>Add</button>
+    </form>
+
+    <ul></ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+      //Gun connection
+      var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
+      var items = gun.get('items');
+
+      //Get form value
+      $('form').on('submit', function(e)
+      {
+          e.preventDefault();
+          items.set($('input').val());
+          $('input').val("");
+      });
+
+      //loop through form values and append to list
+      items.map().on(function(item, id)
+      {
+          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
+          if(item)
+          {
+              $(li).text(item);
+          } 
+          else 
+          {
+              $(li).hide();
+          }
+      });
+
+      //Remove item on doubleclick
+      $('body').on('dblclick', 'li', function(e)
+      {
+          items.get(this.id).put(null);
+      });
+
+
+    </script>
+
+    <style>
+      ul { padding: 0; }
+      li { display: flex; }
+      li span { width: 150px; word-break: break-all; }
+      img { height: 20px; margin-left: 8px; cursor: pointer; }
+      input { width: 150px; margin-right: 8px; }
+      input[type='checkbox'] { width: auto; }
+    </style>
+  </body>
+</html>
