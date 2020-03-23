@@ -1,66 +1,84 @@
 <html>
-  <body>
-    <h1>Todos</h1>
-
-    <ul></ul>
-
-    <form><input><button>Add</button></form>
-
-    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script>
-      var todos = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun").get('todos')
-
-      $('form').on('submit', function (event) {
-        var input = $('form').find('input')
-        todos.set({title: input.val()})
-        input.val('')
-        event.preventDefault()
-      })
-
-      todos.map().on(function (todo, id) {
-        var li = $('#' + id)
-        if (!li.get(0)) {
-          li = $('<li>').attr('id', id).appendTo('ul')
-        }
-        if (todo) {
-          var html = '<span onclick="clickTitle(this)">' + todo.title + '</span>'
-          html = '<input type="checkbox" onclick="clickCheck(this)" ' + (todo.done ? 'checked' : '') + '>' + html
-          html += '<img onclick="clickDelete(this)" src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-x.svg"/>'
-          li.html(html)
-        } else {
-          li.remove()
-        }
-      })
-      function clickTitle (element) {
-        element = $(element)
-        if (!element.find('input').get(0)) {
-          element.html('<input value="' + element.html() + '" onkeyup="keypressTitle(this)">')
-        }
-      }
-
-      function keypressTitle (element) {
-        if (event.keyCode === 13) {
-          todos.get($(element).parent().parent().attr('id')).put({title: $(element).val()})
-        }
-      }
-
-      function clickCheck (element) {
-        todos.get($(element).parent().attr('id')).put({done: $(element).prop('checked')})
-      }
-
-      function clickDelete (element) {
-        todos.get($(element).parent().attr('id')).put(null)
-      }
-    </script>
-
+  <head>
     <style>
-      ul { padding: 0; }
-      li { display: flex; }
-      li span { width: 150px; word-break: break-all; }
-      img { height: 20px; margin-left: 8px; cursor: pointer; }
-      input { width: 150px; margin-right: 8px; }
-      input[type='checkbox'] { width: auto; }
+      body {
+        padding: 0px;
+      }
     </style>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+
+  </head>
+  <body>
+    <h1>ToDo</h1>
+    <!-- Explanation html setup: 1. Create a form with a unique id/class 2. Create a input field(standard is text) with a unique id 3. add button and close form(nothing to edit) 4, create a ul with an unique id.-->
+    <form id="form1"> 
+        <input id="input1">
+        <button>Add</button>
+    </form>
+
+    <ul id="ul1"></ul>
+
+    <h1>ToDo version2.0</h1>
+    <form id="form2">
+        <input id="input2">
+        <button>Add</button>
+    </form>
+
+    <ul id="ul2"></ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
+    <script>
+      var gun = Gun();
+
+      var items1 = gun.get('items1');
+      var items2 = gun.get('items2');
+      
+      $('#form1').on('submit', function(e){
+          e.preventDefault();           // stop browser refresh
+          items1.set($('#input1').val()); // add to set/table
+          $('#input1').val("");           // empties form input
+      })
+
+      // copied and edited with difrent id
+      $('#form2').on('submit', function(e){
+          e.preventDefault();           
+          items2.set($('#input2').val()); 
+          $('#input2').val("");           
+      })
+
+      ///getting each items
+      //map has no transform func so returns data "as is:"
+      items1.map().on(function(item, id){  
+      //either get the existing id  or  create it; ideally replace this with vue:
+        var li1 = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul#ul1'); 
+        if(item){
+            $(li1).text(item);           //put the record text inside the list
+        } else {
+            $(li1).hide();                //create an empty li with display: hidden;
+        }
+      })
+
+      // copied and edited with difrent id, note that both items an li have been changed here
+      items2.map().on(function(item, id){  
+        var li2 = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul#ul2'); 
+        if(item){
+            $(li2).text(item);           
+        } else {
+            $(li2).hide();                
+        }
+      })
+
+
+    //remove items
+    $('body').on('dblclick', 'li', function(e){
+      items1.get(this.id).put(null);
+    })
+
+    </script>
+    
+
   </body>
-</html>
+</html> 
