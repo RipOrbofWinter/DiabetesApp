@@ -36,10 +36,12 @@
 
       var items1 = gun.get('items1');
       var items2 = gun.get('items2');
+      var dt = new Date();
       
       $('#form1').on('submit', function(e){
-          e.preventDefault();           // stop browser refresh
-          items1.set($('#input1').val()); // add to set/table
+          e.preventDefault();
+          var time = (dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes());            // stop browser refresh
+          items1.set($('#input1').val() + " (" + time + ")"); // add to set/table
           $('#input1').val("");           // empties form input
       })
 
