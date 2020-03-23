@@ -22,35 +22,47 @@
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
+
       //Gun connection
       var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
       var user = gun.user();
 
-      $('#up').on('click', function(e){
-          user.create($('#alias').val(), $('#pass').val());
+      //Create account from #alias and #pass fields.
+      $('#up').on('click', function(e)
+      {
+          user.create($('#alias').val(), $('#pass').val()); //Create account
       });
 
-      $('#sign').on('submit', function(e){
-          e.preventDefault();
-          user.auth($('#alias').val(), $('#pass').val());
+      //Sign in account from #alias and #pass fields.
+      $('#sign').on('submit', function(e)
+      {
+          e.preventDefault(); //Prevent default submit behaviour (refresh).
+          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.
       });
 
-      gun.on('auth', function(){
-          $('#sign').hide();
-          user.get('said').map().val(UI);
+      //When authorized
+      gun.on('auth', function()
+      {
+          $('#sign').hide();  //Hide sign-in/up form.
+          user.get('said').map().val(UI); //Loop through 'said' values and execute UI function.
       });
 
-      $('#said').on('submit', function(e){
-          e.preventDefault();
-          if(!user.is){ return }
-          user.get('said').set($('#say').val());
-          $('#say').val("");
+      //On #said form submit
+      $('#said').on('submit', function(e)
+      {
+          e.preventDefault();     //Prevent default submit behaviour (refresh).
+          if(!user.is){ return }  //Stop runing submit if user is not authorized/logged in
+          user.get('said').set($('#say').val()); //Add #say input value to 'said'
+          $('#say').val("");      //Clear #say value for next message
       });
 
-      function UI(say, id){
-          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
-          $(li).text(say);
+      //UI Function, responsible for appending to HTML (echo)
+      function UI(say, id)
+      {
+          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul'); //either get the existing id  or create it; ideally replace this with vue:
+          $(li).text(say); //put the record text inside the list
       }
+
     </script>
 
     <style>
