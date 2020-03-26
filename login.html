@@ -16,6 +16,10 @@
 
     <ul></ul>
 
+    <div id="chatbox">
+      
+    </div>
+
     <form id="said">
         <input id="say">
         <input id="speak" type="submit" value="speak">
@@ -30,6 +34,7 @@
       //Gun connection
       var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
       var user = gun.user();
+      var dt = new Date();
 
       //Create account from #alias and #pass fields.
       $('#up').on('click', function(e)
@@ -63,19 +68,40 @@
           {
             return;//Stop runing submit if user is not authorized/logged in
           }  
-          else
-          {
-            console.log("logged in hoppaaa (Debug)");
-          }
-          user.get('said').set($('#say').val()); //Add #say input value to 'said'
+          var messageJSON = CreateJSON(); //Create MessageJSON and call the function to fill the variable.
+          //console.log(messageJSON); //Debug - logs the JSON to console
+          user.get('said').set(messageJSON);
           $('#say').val("");      //Clear #say value for next message
       });
 
       //UI Function, responsible for appending to HTML (echo)
       function UI(say, id)
       {
-          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul'); //either get the existing id  or create it; ideally replace this with a js framework:
-          $(li).text(say); //put the record text inside the list
+        var chatMessage = '<div class="item ' + say.owner + '"><p class="message">' + say.message + '</p><div class="timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
+        $('#chatbox').append(chatMessage); // Appends the message to the div #chatbox
+      }
+
+      //Gets and returns Timestamp
+      function AddTimeStamp() {
+        var time = (dt.getHours() + ":" + 
+        (dt.getMinutes() < 10 ? '0' : '') + 
+        dt.getMinutes() + " " + 
+
+        (dt.getDate() < 10 ? '0' : '') +
+        dt.getDate() +"-" + 
+
+        ((dt.getMonth()+ 1) < 10 ? '0' : '') +
+        (dt.getMonth() + 1) + "-" +
+
+        dt.getFullYear());
+
+        return time;
+      }
+
+      //Creates JSON file
+      function CreateJSON()
+      {
+        return {"message":$('#say').val(), "timestamp":AddTimeStamp(), "owner": "patient"} ;
       }
 
     </script>
