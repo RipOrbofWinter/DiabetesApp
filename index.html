@@ -29,6 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
     <script>
     var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
@@ -59,13 +60,13 @@
           if(input == null ||input == ""){
             return;
           }
-          
+
           items2.set(AddTimeStamp(input)); 
           $('#input2').val("");           
       })
 
       function AddTimeStamp(intput) {
-        var time = (dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes());  
+        var time = (dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes());
         var result = intput + " (" + time + ")";
         return result;
       }
