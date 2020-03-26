@@ -1,16 +1,37 @@
+<!DOCTYPE html>
 <html>
   <head>
     <style>
       body {
         padding: 0px;
       }
+
+      .hidden{
+        display: none;
+      }
     </style>
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 
   </head>
   <body>
+    <h1>ToDo Login</h1>
+    <form id="login">
+        <input id="alias" placeholder="username">
+        <input id="pass" type="password" placeholder="passphrase">
+        <input id="in" type="submit" value="sign in">
+        <input id="up" type="button" value="sign up">
+    </form>
+
+    <ul></ul>
+
+     <form id="said">
+        <input id="say">
+        <input id="speak" type="submit" value="speak">
+    </form>
+
     <h1>ToDo</h1>
     <!-- Explanation html setup: 1. Create a form with a unique id/class 2. Create a input field(standard is text) with a unique id 3. add button and close form(nothing to edit) 4, create a ul with an unique id.-->
+
     <form id="form1"> 
         <input id="input1">
         <button>Add</button>
@@ -26,13 +47,58 @@
 
     <ul id="ul2"></ul>
 
-    <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
-    var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
+      
+      var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
+      var user = gun.user();
 
+      //
+      //ToDo Login System
+      //
+
+       $('#up').on('click', function(e)
+      {
+          user.create($('#alias').val(), $('#pass').val()); //Create account
+      });
+
+      //Sign in account from #alias and #pass fields.
+      $('#login').on('submit', function(e)
+      {
+          e.preventDefault(); //Prevent default submit behaviour (refresh).
+          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.
+      });
+
+      //When authorized
+      gun.on('auth', function()
+      {
+          $('#login').hide();  //Hide sign-in/up form.
+          user.get('said').map().val(UI); //Loop through 'said' values and execute UI function.
+      });
+
+      //On #said form submit
+      $('#said').on('submit', function(e)
+      {
+          e.preventDefault();     //Prevent default submit behaviour (refresh).
+          if(!user.is){ return }  //Stop runing submit if user is not authorized/logged in
+          user.get('said').set($('#say').val()); //Add #say input value to 'said'
+          $('#say').val("");      //Clear #say value for next message
+      });
+
+      //UI Function, responsible for appending to HTML (echo)
+      function UI(say, id)
+      {
+          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul'); //either get the existing id  or create it; ideally replace this with vue:
+          $(li).text(say); //put the record text inside the list
+      }
+
+      //
+      //ToDo Version 2.0
+      //
 
       var items1 = gun.get('items1');
       var items2 = gun.get('items2');
