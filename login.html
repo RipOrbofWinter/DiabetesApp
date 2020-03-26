@@ -8,6 +8,10 @@
         <input id="pass" type="password" placeholder="passphrase">
         <input id="in" type="submit" value="sign in">
         <input id="up" type="button" value="sign up">
+        <select id="owner" name="sign up">
+          <option value="patient">Patient</option>
+          <option value="doctor">Doctor</option>
+        </select>
     </form>
 
     <ul></ul>
@@ -47,6 +51,10 @@
           user.get('said').map().val(UI); //Loop through 'said' values and execute UI function.
       });
 
+
+      
+
+
       //On #said form submit
       $('#said').on('submit', function(e)
       {
@@ -66,7 +74,7 @@
       //UI Function, responsible for appending to HTML (echo)
       function UI(say, id)
       {
-          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul'); //either get the existing id  or create it; ideally replace this with vue:
+          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul'); //either get the existing id  or create it; ideally replace this with a js framework:
           $(li).text(say); //put the record text inside the list
       }
 
