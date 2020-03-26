@@ -40,17 +40,35 @@
       
       $('#form1').on('submit', function(e){
           e.preventDefault();
-          var time = (dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes());            // stop browser refresh
-          items1.set($('#input1').val() + " (" + time + ")"); // add to set/table
-          $('#input1').val("");           // empties form input
+          var input = $('#input1').val();
+
+          if(input == null ||input == ""){
+            return;
+          }
+
+          items1.set(AddTimeStamp(input));     // add to set/table + TimeStamp
+          $('#input1').val(""); // empties form input
+          
       })
 
       // copied and edited with difrent id
       $('#form2').on('submit', function(e){
           e.preventDefault();           
-          items2.set($('#input2').val()); 
+          var input = $('#input2').val();
+
+          if(input == null ||input == ""){
+            return;
+          }
+          
+          items2.set(AddTimeStamp(input)); 
           $('#input2').val("");           
       })
+
+      function AddTimeStamp(intput) {
+        var time = (dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes());  
+        var result = intput + " (" + time + ")";
+        return result;
+      }
 
       ///getting each items
       //map has no transform func so returns data "as is:"
