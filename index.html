@@ -61,40 +61,7 @@
       //ToDo Login System
       //
 
-       $('#up').on('click', function(e)
-      {
-          user.create($('#alias').val(), $('#pass').val()); //Create account
-      });
 
-      //Sign in account from #alias and #pass fields.
-      $('#login').on('submit', function(e)
-      {
-          e.preventDefault(); //Prevent default submit behaviour (refresh).
-          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.
-      });
-
-      //When authorized
-      gun.on('auth', function()
-      {
-          $('#login').hide();  //Hide sign-in/up form.
-          user.get('said').map().val(UI); //Loop through 'said' values and execute UI function.
-      });
-
-      //On #said form submit
-      $('#said').on('submit', function(e)
-      {
-          e.preventDefault();     //Prevent default submit behaviour (refresh).
-          if(!user.is){ return }  //Stop runing submit if user is not authorized/logged in
-          user.get('said').set($('#say').val()); //Add #say input value to 'said'
-          $('#say').val("");      //Clear #say value for next message
-      });
-
-      //UI Function, responsible for appending to HTML (echo)
-      function UI(say, id)
-      {
-          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul'); //either get the existing id  or create it; ideally replace this with vue:
-          $(li).text(say); //put the record text inside the list
-      }
 
       //
       //ToDo Version 2.0
@@ -107,11 +74,9 @@
       $('#form1').on('submit', function(e){
           e.preventDefault();
           var input = $('#input1').val();
-
           if(input == null ||input == ""){
             return;
           }
-
           items1.set(input +" "+ AddTimeStamp());     // add to set/table + TimeStamp
           $('#input1').val(""); // empties form input
           
@@ -148,7 +113,7 @@
 
 
       ///getting each items
-      //map has no transform func so returns data "as is:"
+      //map has no transform func so returns data "as is":
       items1.map().on(function(item, id){  
       //either get the existing id  or  create it; ideally replace this with vue:
         var li1 = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul#ul1'); 
