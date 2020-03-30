@@ -70,8 +70,10 @@
           if(!user.is)
           {
             return;//Stop runing submit if user is not authorized/logged in
-          }  
-          if(input == null ||input == ""){
+          }
+           
+          
+          if( $('#say').val()  == null || $('#say').val()  == ""){
             return;
           }
           var messageJSON = CreateJSON(); //Create MessageJSON and call the function to fill the variable.
