@@ -112,7 +112,7 @@
             return;
           }
 
-          items1.set(AddTimeStamp(input));     // add to set/table + TimeStamp
+          items1.set(input +" "+ AddTimeStamp());     // add to set/table + TimeStamp
           $('#input1').val(""); // empties form input
           
       })
@@ -125,16 +125,27 @@
           if(input == null ||input == ""){
             return;
           }
-          
-          items2.set(AddTimeStamp(input)); 
+
+          items2.set(input +" "+ AddTimeStamp()); 
           $('#input2').val("");           
       })
 
-      function AddTimeStamp(intput) {
-        var time = (dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes());  
-        var result = intput + " (" + time + ")";
-        return result;
+      function AddTimeStamp() {
+        var time = (dt.getHours() + ":" + 
+        (dt.getMinutes() < 10 ? '0' : '') + 
+        dt.getMinutes() + " " + 
+
+        (dt.getDate() < 10 ? '0' : '') +
+        dt.getDate() +"-" + 
+
+        ((dt.getMonth()+ 1) < 10 ? '0' : '') +
+        (dt.getMonth() + 1) + "-" +  
+
+        dt.getFullYear());
+
+        return time;
       }
+
 
       ///getting each items
       //map has no transform func so returns data "as is:"
