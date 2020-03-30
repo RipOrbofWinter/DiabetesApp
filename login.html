@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>User</h1>
+    <h1>Patient</h1>
 
     <form id="login">
         <input id="alias" placeholder="username">
         <input id="pass" type="password" placeholder="passphrase">
         <input id="in" type="submit" value="sign in">
         <input id="up" type="button" value="sign up">
+        <select id="owner" name="sign up">
+          <option value="patient">Patient</option>
+          <option value="doctor">Doctor</option>
+        </select>
     </form>
 
-    <ul></ul>
-
-    <form id="said">
-        <input id="say">
-        <input id="speak" type="submit" value="speak">
-    </form>
+    <div class="message-container">
+      <div class="message-block chatbox">
+        <div id="chatbox-left">
+        </div>
+      </div>
+      <div class="message-block chatbox">
+        <div id="chatbox-right">
+        </div>
+        <form id="said">
+          <input id="say">
+          <input id="speak" type="submit" value="speak">
+        </form>
+      </div>
+    </div>
+  </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
@@ -26,6 +39,8 @@
       //Gun connection
       var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
       var user = gun.user();
+      var dt = new Date();
+      var role = $('owner').get;
 
       //Create account from #alias and #pass fields.
       $('#up').on('click', function(e)
@@ -37,7 +52,8 @@
       $('#login').on('submit', function(e)
       {
           e.preventDefault(); //Prevent default submit behaviour (refresh).
-          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.
+          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.''
+          
       });
 
       //When authorized
@@ -55,30 +71,85 @@
           {
             return;//Stop runing submit if user is not authorized/logged in
           }  
-          else
-          {
-            console.log("logged in hoppaaa (Debug)");
+          if(input == null ||input == ""){
+            return;
           }
-          user.get('said').set($('#say').val()); //Add #say input value to 'said'
+          var messageJSON = CreateJSON(); //Create MessageJSON and call the function to fill the variable.
+          
+          //console.log(messageJSON); //Debug - logs the JSON to console
+
+          user.get('said').set(messageJSON);
           $('#say').val("");      //Clear #say value for next message
       });
 
       //UI Function, responsible for appending to HTML (echo)
       function UI(say, id)
       {
-          var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul'); //either get the existing id  or create it; ideally replace this with vue:
-          $(li).text(say); //put the record text inside the list
+        // var chatMessage = '<div class="message-block' + say.owner + '"><p class="item message-item">' + say.message + '</p><div class="item message-timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
+        if (say.owner == role){
+          var chatMessage = '<div ><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>'; //HTML Variable with all the JSON values and classes.
+        $('#chatbox-right').append(chatMessage); // Appends the message to the div #chatbox
+        } else if(say.owner != role){
+        // left/receiving messages
+        var chatMessage = '<div ><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>';
+        $('#chatbox-left').append(chatMessage); // Appends the message to the div #chatbox
+        }
+      }
+
+      //Gets and returns Timestamp
+      function AddTimeStamp() {
+        var time = (dt.getHours() + ":" + 
+        (dt.getMinutes() < 10 ? '0' : '') + 
+        dt.getMinutes() + " " + 
+
+        (dt.getDate() < 10 ? '0' : '') +
+        dt.getDate() +"-" + 
+
+        ((dt.getMonth()+ 1) < 10 ? '0' : '') +
+        (dt.getMonth() + 1) + "-" +
+
+        dt.getFullYear());
+
+        return time;
+      }
+
+      //Creates JSON file
+      function CreateJSON()
+      {
+        return {"message":$('#say').val(), "timestamp":AddTimeStamp(), "owner": "patient"} ;
       }
 
     </script>
 
     <style>
+      html, body{
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+      }
+      h1 { margin-left: 10%;}
       ul { padding: 0; }
       li { display: flex; }
       li span { width: 150px; word-break: break-all; }
       img { height: 20px; margin-left: 8px; cursor: pointer; }
       input { width: 150px; margin-right: 8px; }
       input[type='checkbox'] { width: auto; }
+      #login{
+        margin-left: 15vw;
+      }
+      .message-block{
+        display: inline-block;
+        width: 49vw;
+
+      }
+      .chatbox{
+        width: 30%;
+        margin-left: 15%;
+        margin-right: 5%;
+      }
+      .item{
+        display: inline-block;
+      }
     </style>
   </body>
 </html>
