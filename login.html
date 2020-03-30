@@ -20,7 +20,7 @@
       
     </div>
 
-    <form id="said">
+    <form class="message-block"id="said">
         <input id="say">
         <input id="speak" type="submit" value="speak">
     </form>
@@ -68,8 +68,13 @@
           {
             return;//Stop runing submit if user is not authorized/logged in
           }  
+          if(input == null ||input == ""){
+            return;
+          }
           var messageJSON = CreateJSON(); //Create MessageJSON and call the function to fill the variable.
+          
           //console.log(messageJSON); //Debug - logs the JSON to console
+
           user.get('said').set(messageJSON);
           $('#say').val("");      //Clear #say value for next message
       });
@@ -77,7 +82,8 @@
       //UI Function, responsible for appending to HTML (echo)
       function UI(say, id)
       {
-        var chatMessage = '<div class="item ' + say.owner + '"><p class="message">' + say.message + '</p><div class="timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
+        // var chatMessage = '<div class="message-block' + say.owner + '"><p class="item message-item">' + say.message + '</p><div class="item message-timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
+        var chatMessage = '<div class="message-block' + '"><p class="item message-item">' + say.message + '</p><div class="item message-timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
         $('#chatbox').append(chatMessage); // Appends the message to the div #chatbox
       }
 
@@ -107,12 +113,24 @@
     </script>
 
     <style>
+      h1 { margin-left: 10%;}
       ul { padding: 0; }
       li { display: flex; }
       li span { width: 150px; word-break: break-all; }
       img { height: 20px; margin-left: 8px; cursor: pointer; }
       input { width: 150px; margin-right: 8px; }
       input[type='checkbox'] { width: auto; }
+      .message-block{
+        width: 30%;
+        margin-left: 15%;
+        margin-right: 5%;
+      }
+      .item{
+        display: inline-block;
+      }
+      .message-item{
+        
+      }
     </style>
   </body>
 </html>
