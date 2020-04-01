@@ -3,6 +3,7 @@
   <body>
     <h1>Patient</h1>
 
+    <!-- form login -->
     <form id="login">
         <input id="alias" placeholder="username">
         <input id="pass" type="password" placeholder="passphrase">
@@ -13,6 +14,7 @@
           <option value="doctor">Doctor</option>
         </select>
     </form>
+    <!-- /form login -->
 
     <!-- <div class="message-container"> -->
       <div class="message-block chatbox">
@@ -30,16 +32,14 @@
     </div>
   <!-- </div> -->
 
-    <form id="remove-item">
-      <input id="itemToRemove"></form>
-      <input type="submit"></body>
-    </form>
-
+    <!-- CDN Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- /CDN Scripts -->
     <script>
+
 
       //Gun connection
       var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
@@ -47,12 +47,16 @@
       var dt = new Date();
       var role = "";
 
-      //Remove value with ID
-      $('#remove-item').on('submit', function(e)
-      {
-          e.preventDefault(); //Prevent default submit behaviour (refresh).
-          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.''
-          items1.get(this.id).put(null);
+      //Remove gun items on double click
+      $('body').on('dblclick', '.message-wrapper', function(e){
+
+        gun.get(this.id).put({deleted: true}); //Adds deleted property and puts it true
+        //console.log(gun.get(this.id));
+        if($(this).hasClass('message-wrapper'))  //Checks if the message-wrapper class exists
+        {
+          $(this).remove(); //removes this item from DOM
+        }
+
       });
 
       //Create account from #alias and #pass fields.
@@ -85,7 +89,6 @@
           {
             return;//Stop runing submit if user is not authorized/logged in
           }
-           
           
           if( $('#say').val()  == null || $('#say').val()  == ""){
             return;
@@ -102,14 +105,21 @@
       function UI(say, id)
       {
         // var chatMessage = '<div class="message-block' + say.owner + '"><p class="item message-item">' + say.message + '</p><div class="item message-timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
-        if (say.owner == role){
-          var chatMessage = '<div id="' + id + '"><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>'; //HTML Variable with all the JSON values and classes.
-        $('#chatbox-right').append(chatMessage); // Appends the message to the div #chatbox
-        } else if(say.owner != role){
-        // left/receiving messages
-        var chatMessage = '<div ><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>';
-        $('#chatbox-left').append(chatMessage); // Appends the message to the div #chatbox
+        if(!say.deleted) //Check if message has been deleted
+        {
+          if (say.owner == role)
+          {
+            var chatMessage = '<div class="message-wrapper" id="' + id + '"><p class="item message-content">' + say.message + " - id: " + id + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>'; //HTML Variable with all the JSON values and classes.
+          $('#chatbox-right').append(chatMessage); // Appends the message to the div #chatbox
+          } 
+          else if(say.owner != role)
+          {
+          // left/receiving messages
+          var chatMessage = '<div class="message-wrapper" id="' + id + '"><p class="item message-content">' + say.message + " - id: " + id + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>';
+          $('#chatbox-left').append(chatMessage); // Appends the message to the div #chatbox
+          }
         }
+        
       }
 
       //Gets and returns Timestamp
