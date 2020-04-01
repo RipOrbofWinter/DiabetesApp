@@ -30,6 +30,11 @@
     </div>
   <!-- </div> -->
 
+    <form id="remove-item">
+      <input id="itemToRemove"></form>
+      <input type="submit"></body>
+    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
@@ -41,6 +46,14 @@
       var user = gun.user();
       var dt = new Date();
       var role = "";
+
+      //Remove value with ID
+      $('#remove-item').on('submit', function(e)
+      {
+          e.preventDefault(); //Prevent default submit behaviour (refresh).
+          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.''
+          items1.get(this.id).put(null);
+      });
 
       //Create account from #alias and #pass fields.
       $('#up').on('click', function(e)
