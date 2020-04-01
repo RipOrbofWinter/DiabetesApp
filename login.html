@@ -14,7 +14,7 @@
         </select>
     </form>
 
-    <div class="message-container">
+    <!-- <div class="message-container"> -->
       <div class="message-block chatbox">
         <div id="chatbox-left">
         </div>
@@ -28,7 +28,12 @@
         </form>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
+
+    <form id="remove-item">
+      <input id="itemToRemove"></form>
+      <input type="submit"></body>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
@@ -40,7 +45,15 @@
       var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
       var user = gun.user();
       var dt = new Date();
-      var role = $('owner').get;
+      var role = "";
+
+      //Remove value with ID
+      $('#remove-item').on('submit', function(e)
+      {
+          e.preventDefault(); //Prevent default submit behaviour (refresh).
+          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.''
+          items1.get(this.id).put(null);
+      });
 
       //Create account from #alias and #pass fields.
       $('#up').on('click', function(e)
@@ -53,7 +66,8 @@
       {
           e.preventDefault(); //Prevent default submit behaviour (refresh).
           user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.''
-          
+          role = $('#owner').val();
+          console.log(role);
       });
 
       //When authorized
@@ -70,8 +84,10 @@
           if(!user.is)
           {
             return;//Stop runing submit if user is not authorized/logged in
-          }  
-          if(input == null ||input == ""){
+          }
+           
+          
+          if( $('#say').val()  == null || $('#say').val()  == ""){
             return;
           }
           var messageJSON = CreateJSON(); //Create MessageJSON and call the function to fill the variable.
@@ -87,7 +103,7 @@
       {
         // var chatMessage = '<div class="message-block' + say.owner + '"><p class="item message-item">' + say.message + '</p><div class="item message-timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
         if (say.owner == role){
-          var chatMessage = '<div ><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>'; //HTML Variable with all the JSON values and classes.
+          var chatMessage = '<div id="' + id + '"><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>'; //HTML Variable with all the JSON values and classes.
         $('#chatbox-right').append(chatMessage); // Appends the message to the div #chatbox
         } else if(say.owner != role){
         // left/receiving messages
@@ -116,15 +132,15 @@
       //Creates JSON file
       function CreateJSON()
       {
-        return {"message":$('#say').val(), "timestamp":AddTimeStamp(), "owner": "patient"} ;
+        return {"message":$('#say').val(), "timestamp":AddTimeStamp(), "owner": role} ;
       }
 
     </script>
 
     <style>
       html, body{
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         margin: 0;
       }
       h1 { margin-left: 10%;}
@@ -142,8 +158,12 @@
         width: 49vw;
 
       }
+      .message-content{
+        border-style: solid;
+        border-right: 1px;
+      }
       .chatbox{
-        width: 30%;
+        width: 29%;
         margin-left: 15%;
         margin-right: 5%;
       }
