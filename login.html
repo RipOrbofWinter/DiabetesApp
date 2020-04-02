@@ -16,21 +16,20 @@
     </form>
     <!-- /form login -->
 
-    <!-- <div class="message-container"> -->
-      <div class="message-block chatbox">
-        <div id="chatbox-left">
-        </div>
+    <div id="chatbox">
+      <div class="top">
+        <h2>chatbox</h2>
       </div>
-      <div class="message-block chatbox">
-        <div id="chatbox-right">
-        </div>
+      <div class="content">
+
+      </div>
+      <div class="bottom">
         <form id="said">
           <input id="say">
-          <input id="speak" type="submit" value="speak">
+          <button id="speak" type="submit" value="speak">></button>
         </form>
       </div>
     </div>
-  <!-- </div> -->
 
     <!-- CDN Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
@@ -104,20 +103,24 @@
       //UI Function, responsible for appending to HTML (echo)
       function UI(say, id)
       {
+
+        var side;
         // var chatMessage = '<div class="message-block' + say.owner + '"><p class="item message-item">' + say.message + '</p><div class="item message-timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
         if(!say.deleted) //Check if message has been deleted
         {
           if (say.owner == role)
           {
-            var chatMessage = '<div class="message-wrapper" id="' + id + '"><p class="item message-content">' + say.message + " - id: " + id + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>'; //HTML Variable with all the JSON values and classes.
-          $('#chatbox-right').append(chatMessage); // Appends the message to the div #chatbox
+            side = 'left';
           } 
           else if(say.owner != role)
           {
-          // left/receiving messages
-          var chatMessage = '<div class="message-wrapper" id="' + id + '"><p class="item message-content">' + say.message + " - id: " + id + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>';
-          $('#chatbox-left').append(chatMessage); // Appends the message to the div #chatbox
+            side = 'right';
           }
+          //Chatmessage to print
+          var chatMessage = '<div class="message-wrapper ' + side + '" id="' + id + '"><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>';
+
+          //print message
+          $('#chatbox .content').append(chatMessage);
         }
         
       }
@@ -166,20 +169,88 @@
       .message-block{
         display: inline-block;
         width: 49vw;
-
       }
       .message-content{
-        border-style: solid;
-        border-right: 1px;
+        /*border-style: solid;*/
+        /*border: 1px 1px 1px 1px;*/
       }
-      .chatbox{
-        width: 29%;
-        margin-left: 15%;
-        margin-right: 5%;
+
+      #chatbox{
+        position: fixed;
+        width: 400px;
+        height: 600px;
+        right: 25px;
+        bottom: 25px;
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        /*padding: 20px;*/
       }
+
+      #chatbox .top{
+        background-color: #1474A4;
+        color: white;
+        display: flex;
+        justify-content: center;
+      }
+
+      #chatbox .bottom{
+        /*padding: 20px 0 0px 0;*/
+        padding: 15px;
+        margin-top: auto
+      }
+
+      #chatbox form{
+        display: flex;
+      }
+
+      #chatbox input{
+        height: 50px;
+        background: #EDEDED;
+        color: black;
+        padding: 0 15px;
+        display: flex;
+        flex-grow: 1;
+      }
+
+      #chatbox button{
+        width: 50px;
+        height: 50px;
+        background: #176498;
+        border: 0;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+
+      .message-wrapper.right{
+        margin-left: auto;
+      }
+
+      #chatbox .content{
+        overflow-y: scroll;
+        padding: 0 15px;
+      }
+
+      .message-wrapper{
+        background: #1474A4;
+        width: 80%;
+      }
+
       .item{
-        display: inline-block;
+        display: flex;
+        color: white;
       }
+
+      .right{
+        margin-left: auto;
+      }
+
     </style>
   </body>
 </html>
