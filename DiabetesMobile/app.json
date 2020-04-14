@@ -1,9 +1,7 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "diabetesMobileApp",
-    "privacy": "public",
-    "sdkVersion": "36.0.0",
+    "name": "DiabetesMobile",
+    "slug": "DiabetesMobile",
     "platforms": [
       "ios",
       "android",
@@ -25,16 +23,6 @@
     ],
     "ios": {
       "supportsTablet": true
-    },
-    "packagerOpts": {
-      "config": "metro.config.js",
-      "sourceExts": [
-        "js",
-        "json",
-        "ts",
-        "tsx",
-        "vue"
-      ]
     }
   }
 }
