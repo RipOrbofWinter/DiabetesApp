@@ -6,7 +6,33 @@ var user = gun.user();
 //ToDo Login System
 //
 
+user().create('firstAuthor', 'somePassword')
+user().auth('firstAuthor', 'somePassword')
 
+var post = {
+    title: 'First post',
+    text: 'Hello world!'
+  }
+  
+  var author = user('~@firstAuthor')
+
+  user()
+  .get('posts')
+  .set(post)
+  .once(function() {
+    this.get('author').put(author) 
+    user('posts').set(this) 
+
+  user().leave()
+
+user().create('secondAuthor', 'somePassword')
+user().auth('secondAuthor', 'somePassword')
+
+gun
+  .get('posts') 
+  .once(function() {
+    this.get('text').put('Goodbye world!') 
+  })
 
 //
 //ToDo Version 2.0

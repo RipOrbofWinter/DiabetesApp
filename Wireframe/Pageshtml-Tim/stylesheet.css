@@ -17,7 +17,7 @@
     position: absolute;
     bottom:0;
     margin-right: 15vh;
-    margin-left: 15vh;
+    margin-left: 18.5vh;
     border-top:solid 4px black;
     border-left:solid 4px black;
     border-right:solid 4px black;
@@ -27,7 +27,7 @@
     float: right;
     font-weight: bold;
     text-align: right;
-    direction: rtl;      
+    direction: rtl;    
 }
 #ul1 li{
     border:solid 1px black;
