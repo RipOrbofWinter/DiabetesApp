@@ -1,0 +1,9 @@
+{
+  "name": "insulin_js",
+  "version": "0.0.0",
+  "description": "Insulin_JS",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}
