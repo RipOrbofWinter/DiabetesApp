@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Button, View, Text, TextInput  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as insulineFile from './insuline'
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation }) 
+{
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
@@ -19,11 +21,17 @@ function HomeScreen({ navigation }) {
         title="Go to Chat Login"
         onPress={() => navigation.navigate('ChatLogin')}
       />
+      <Button
+        title="Go to Insuline"
+        onPress={() => navigation.navigate('Insuline')}
+      />
+      <text>{ insulineFile.ReturnValue("Test value!") }</text>
     </View>
   );
 }
 
-function RegisterScreen({ navigation }) {
+function RegisterScreen({ navigation }) 
+{
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
@@ -35,7 +43,9 @@ function RegisterScreen({ navigation }) {
   );
 }
 
-function LoginScreen({ navigation }) {
+
+function LoginScreen({ navigation }) 
+{
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Login Screen Input enzo</Text>
@@ -61,7 +71,27 @@ function LoginScreen({ navigation }) {
   );
 }
 
-function ChatLoginScreen({ navigation }) {
+function InsulineScreen({ navigation }) 
+{
+  return (
+    
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Back to Home"
+        onPress={() => navigation.navigate('Home')}
+      />
+      <Button
+        title="External JS"
+        onPress={() => insulineFile.AlertBox('test')}
+      />
+      
+    </View>
+  );
+}
+
+function ChatLoginScreen({ navigation }) 
+{
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Login Screen Input enzo</Text>
@@ -84,7 +114,8 @@ function ChatLoginScreen({ navigation }) {
 
 const Stack = createStackNavigator();
 
-function App({ navigation }) {
+function App({ navigation }) 
+{
   return (
     <NavigationContainer>
       <Stack.Navigator 
@@ -119,6 +150,10 @@ function App({ navigation }) {
           options={{ 
             title: 'Chat Login'
           }}
+        />
+        <Stack.Screen 
+          name="Insuline" 
+          component={InsulineScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>
