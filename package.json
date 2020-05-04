@@ -1,0 +1,26 @@
+{
+  "name": "diabetesapp",
+  "version": "1.0.0",
+  "description": "Official fontys groep 3 app",
+  "main": "test.js",
+  "devDependencies": {
+    "jest": "^21.2.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RipOrbofWinter/DiabetesApp.git"
+  },
+  "author": "Mickey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RipOrbofWinter/DiabetesApp/issues"
+  },
+  "homepage": "https://github.com/RipOrbofWinter/DiabetesApp#readme",
+  "dependencies": {}
+}
