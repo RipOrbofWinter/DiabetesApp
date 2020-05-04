@@ -18,7 +18,6 @@ test("CarbohydrateCoverage_CorrectResult", ()=>{
 
             //assert
             expect(CHOInsulinDose).toBe(6);
-
 });
 
 test("CarbohydrateCoverage_NullInput", ()=>{
@@ -49,7 +48,7 @@ test("HighBloodSugarCorrection_CorrectResult", ()=>{
 
     //assert
     expect(correctionDose).toBe(2);
-
+    
 });
 
 test("HighBloodSugarCorrection_NullInput", ()=>{
