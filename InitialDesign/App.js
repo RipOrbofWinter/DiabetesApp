@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, View, Text, TextInput  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as insulineFile from './insuline'
 
 function HomeScreen({ navigation }) 
@@ -16,14 +17,6 @@ function HomeScreen({ navigation })
       <Button
         title="Go to Register"
         onPress={() => navigation.navigate('Register')}
-      />
-      <Button
-        title="Go to Chat Login"
-        onPress={() => navigation.navigate('ChatLogin')}
-      />
-      <Button
-        title="Go to Insuline"
-        onPress={() => navigation.navigate('Insuline')}
       />
       <text>{ insulineFile.ReturnValue("Test value!") }</text>
     </View>
@@ -90,7 +83,7 @@ function InsulineScreen({ navigation })
   );
 }
 
-function ChatLoginScreen({ navigation }) 
+function ChatScreen({ navigation }) 
 {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -103,6 +96,7 @@ function ChatLoginScreen({ navigation })
       />
       <Button
         title="Login"
+        onPress={() => navigation.navigate('Login')}
       />
       <Button
         title="Back to Home"
@@ -112,58 +106,62 @@ function ChatLoginScreen({ navigation })
   );
 }
 
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator(); //Home Stack
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeScreen} />             
+      <HomeStack.Screen name="Login" component={LoginScreen} />
+      <HomeStack.Screen name="Register" component={RegisterScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
+const InsulineStack = createStackNavigator(); //Insuline Stack
+
+function InsulineStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Insuline" component={InsulineScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
+const ChatStack = createStackNavigator(); //Chat Stack
+
+function ChatStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Chat" component={ChatScreen} />             
+      <HomeStack.Screen name="Login" component={LoginScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
+//Bottom Navigator
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeStackScreen} />
+      <Tab.Screen name="Insuline" component={InsulineStackScreen} />
+      <Tab.Screen name="Chat" component={ChatStackScreen} />
+    </Tab.Navigator>
+  );
+}
 
 function App({ navigation }) 
 {
   return (
     <NavigationContainer>
-      <Stack.Navigator 
-        initialRouteName="Home"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#1474a4"
-          },
-          headerTintColor: 'white',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          }
-        }}
-      >
-
-        <Stack.Screen 
-          name="Home" 
-          component={HomeScreen} 
-          
-        />
-        <Stack.Screen 
-          name="Login" 
-          component={LoginScreen} 
-        />
-        <Stack.Screen 
-          name="Register" 
-          component={RegisterScreen} 
-        />
-        <Stack.Screen 
-          name="ChatLogin" 
-          component={ChatLoginScreen} 
-          options={{ 
-            title: 'Chat Login'
-          }}
-        />
-        <Stack.Screen 
-          name="Insuline" 
-          component={InsulineScreen} 
-        />
-      </Stack.Navigator>
+      <MyTabs />
     </NavigationContainer>
   );
 }
 
 export default App;
-
-
-
 // import React from 'react';
 // import { SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 // import Constants from 'expo-constants';
