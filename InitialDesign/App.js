@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Button, View, Text, TextInput  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as insulineFile from './insuline'
+// import * as insulineFile from './insuline'
+import * as insulineFile from './InsulinFactory'
 
 function HomeScreen({ navigation }) 
 {
@@ -25,7 +26,7 @@ function HomeScreen({ navigation })
         title="Go to Insuline"
         onPress={() => navigation.navigate('Insuline')}
       />
-      <text>{ insulineFile.ReturnValue("Test value!") }</text>
+      {/* <Text>{ insulineFile.ReturnValue("Test value!") }</Text> */}
     </View>
   );
 }
@@ -76,16 +77,16 @@ function InsulineScreen({ navigation })
   return (
     
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+      <Text id="testImportFunction">{ insulineFile.CalculateDailyInsulinDoseRequirement(80) }</Text>
       <Button
         title="Back to Home"
         onPress={() => navigation.navigate('Home')}
       />
       <Button
         title="External JS"
-        onPress={() => insulineFile.AlertBox('test')}
+        // onPress={() => insulineFile.AlertBox("test")}
       />
-      
+
     </View>
   );
 }
