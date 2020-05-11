@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //import * as insulineFile from './insuline'
 import * as insulineFile from './InsulinFactory'
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 function HomeScreen({ navigation }) 
 {
@@ -84,6 +85,30 @@ function InsulineScreen({ navigation })
   );
 }
 
+function CalendarScreen({ navigation }) 
+{
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Calendar
+        // Collection of dates that have to be marked. Default = {}
+        markedDates={{
+          '2020-05-01': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-02': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-03': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-04': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-05': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-06': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-07': {marked: true, dotColor: 'red', activeOpacity: 0},
+          '2020-05-08': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-09': {marked: true, dotColor: 'green', activeOpacity: 0},
+          '2020-05-10': {marked: true, dotColor: 'red', activeOpacity: 0},
+          '2020-05-11': {marked: true, dotColor: 'red', activeOpacity: 0},
+        }}
+      />
+    </View>
+  );
+}
+
 function ChatScreen({ navigation }) 
 {
   return (
@@ -129,6 +154,16 @@ function InsulineStackScreen() {
   );
 }
 
+const CalendarStack = createStackNavigator(); //Calendar Stack
+
+function CalendarStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Calendar" component={CalendarScreen} />             
+    </HomeStack.Navigator>
+  );
+}
+
 const ChatStack = createStackNavigator(); //Chat Stack
 
 function ChatStackScreen() {
@@ -148,6 +183,7 @@ function MyTabs() {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeStackScreen} />
       <Tab.Screen name="Insuline" component={InsulineStackScreen} />
+      <Tab.Screen name="Calendar" component={CalendarStackScreen} />
       <Tab.Screen name="Chat" component={ChatStackScreen} />
     </Tab.Navigator>
   );
