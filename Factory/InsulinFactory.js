@@ -1,84 +1,92 @@
 
-        exports.CarbohydrateCoverage = (CHOMealGrams, CHORatio) =>
-        {       
-            if (CHOMealGrams == 0 || CHORatio == 0)
-                return 0;//error
+// Formule 1: Bereken hoeveel eenheden insuline je nodig hebt per gegeten koolhydraten.
+exports.CarbohydrateCoverage = (CHOMealGrams, UserTotalDailyInsulineDose) => {
+    if (UserTotalDailyInsulineDose == 0)
+        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
 
-            //CHO = Carbohydrate
-            var units = CHOMealGrams / CHORatio;
+    if (CHOMealGrams == 0)
+        throw new SyntaxError("CHOMealGrams was equal to 0");
 
-            //returns the units of rapid acting insulin to cover the carbohydrate.
-            return units;
-        };
-        
-        exports.CalculateHighBloodSugarCorrection = ( sugarCorrectionFactor, currentBloodSugar, bloodSugarTarget) =>
-        {
-            var bloodSugarDifference = exports.CalculateTargetBloodSugarDifference(currentBloodSugar, bloodSugarTarget);
+    //CHO = Carbohydrate
+    var units = CHOMealGrams / exports.CalculateCarbohydateRatio(UserTotalDailyInsulineDose);
 
-            if (sugarCorrectionFactor == 0 || bloodSugarDifference == 0)
-                return 0;//error
+    //returns the units of rapid acting insulin to cover the carbohydrate.
+    return units;
+}
 
-            var correctionDose = bloodSugarDifference / sugarCorrectionFactor;
+// Formule 1b: Bereken wat je CHORatio is. 
+exports.CalculateCarbohydateRatio = (UserTotalDailyInsulineDose) => {
+    //This can be calculated using the Rule of �500�: Carbohydrate Bolus Calculation
 
-            //returns the units of rapid acting insulin
-            return correctionDose;
-        };
+    if (UserTotalDailyInsulineDose == 0)
+        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
 
-        exports.CalculateTotalMealtimeDose = (carbohydrateCoverageDose,highBloodSugarCorrectionDose) =>
-        {
-            if (carbohydrateCoverageDose == 0 || highBloodSugarCorrectionDose == 0)
-                return 0;//error
+    var carbohydateCoverageRatio = Math.floor((500 / UserTotalDailyInsulineDose));
 
-            var totalMealDose = carbohydrateCoverageDose + highBloodSugarCorrectionDose;
-            return totalMealDose;
-        };
+    //returns the coverage ratio (1 unit insulin : carbohydateCoverageRatio)
+    return carbohydateCoverageRatio;
+}
 
-        exports.CalculateDailyInsulinDoseRequirement = ( TotalKilogramWeight, BasalBackgroundPercentage = 100) =>
-        {
-            if (TotalKilogramWeight == 0 || BasalBackgroundPercentage == 0)
-                return 0;//error
+// Formule 2: Hoge bloedsuiker correctie berekenen
+exports.CalculateHighBloodSugarCorrection = (UserTotalDailyInsulineDose, currentBloodSugar, bloodSugarTarget) => {
+    var bloodSugarDifference = exports.CalculateTargetBloodSugarDifference(currentBloodSugar, bloodSugarTarget);
 
-            var dailyInsulinRequirement = ((0.55 * TotalKilogramWeight) * BasalBackgroundPercentage)/100;
+    if (UserTotalDailyInsulineDose == 0)
+        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
 
-            return dailyInsulinRequirement;
-        };
+    if (bloodSugarDifference == 0)
+        throw new SyntaxError("BloodSugarDifference was equal to 0");
 
-        exports.CalculateCarbohydateRatio =(dailyInsulinDose) => 
-        {
-            //This can be calculated using the Rule of �500�: Carbohydrate Bolus Calculation
+    var correctionDose = Math.floor(bloodSugarDifference / exports.CalculateHighBloodSugarCorrectionFactor(UserTotalDailyInsulineDose));
 
-            if (dailyInsulinDose == 0)
-                return 0;//error
+    //returns the units of rapid acting insulin
+    return correctionDose;
+}
+// Formule 2b: Bloedsuiker verschill tussen doel en werkelijk berekenen.
+exports.CalculateTargetBloodSugarDifference = (currentBloodSugar, bloodSugarTarget) => {
+    if (currentBloodSugar == 0)
+        throw new SyntaxError("currentBloodSugar was equal to 0");
 
-            var carbohydateCoverageRatio =(500 / dailyInsulinDose);     
+    if (bloodSugarTarget == 0)
+        throw new SyntaxError("bloodSugarTarget was equal to 0");
 
-            var RoundedRatio = Math.floor(carbohydateCoverageRatio);
-            
-            //returns the coverage ratio (1 unit insulin : carbohydateCoverageRatio)
-            return RoundedRatio;
-        };
 
-        exports.CalculateHighBloodSugarCorrectionFactor =(dailyInsulinDose) =>
-        {
-            //This can be calculated using the Rule of �1800�.
+    var bloodSugarDifference = currentBloodSugar - bloodSugarTarget;
 
-            if (dailyInsulinDose == 0)
-                return 0;//error
+    return bloodSugarDifference;
+}
 
-            var correctionFactor = 1800 / dailyInsulinDose;
+// Formule 2c: Correctie factor berekenen.
+exports.CalculateHighBloodSugarCorrectionFactor = (UserTotalDailyInsulineDose) => {
+    //This can be calculated using the Rule of �1800�.
 
-            //returns the correctionFactor that will reduce the blood sugar level
-            return correctionFactor;
+    if (UserTotalDailyInsulineDose == 0)
+        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
 
-        };
+    var correctionFactor = 1800 / UserTotalDailyInsulineDose;
 
-        exports.CalculateTargetBloodSugarDifference = ( currentBloodSugar , bloodSugarTarget) =>
-        {
-            if (currentBloodSugar == 0 || bloodSugarTarget == 0)
-                return 0;//error
+    //returns the correctionFactor that will reduce the blood sugar level
+    return correctionFactor;
+}
 
-            var bloodSugarDifference = currentBloodSugar - bloodSugarTarget;
-            return bloodSugarDifference;
-        }
+//Formule 3: Totale hoeveelheid insuline berekenen Door formule 1 en 2 te combineren.
+exports.CalculateTotalMealtimeDose = (CHOMealGrams, UserTotalDailyInsulineDose, currentBloodSugar, bloodSugarTarget) => {
+    var totalMealDose = exports.CarbohydrateCoverage(CHOMealGrams, UserTotalDailyInsulineDose)
+        + exports.CalculateHighBloodSugarCorrection(UserTotalDailyInsulineDose, currentBloodSugar, bloodSugarTarget);
 
-    
+    return totalMealDose;
+}
+
+// Formule 4: Bereken wat je TDI(totale dagelijkse insuline dosering). 
+exports.CalculateDailyInsulinDoseRequirement = (UserTotalKilogramWeight, BasalBackgroundPercentage = 100) => {
+
+    if (UserTotalKilogramWeight == 0)
+        throw new SyntaxError("UserTotalKilogramWeight was equal to 0");
+    if (BasalBackgroundPercentage == 0)
+        throw new SyntaxError("BasalBackgroundPercentage was equal to 0");
+
+    var UserTotalDailyInsulineDose = ((0.55 * UserTotalKilogramWeight) * BasalBackgroundPercentage) / 100;
+
+    return UserTotalDailyInsulineDose;
+}
+
