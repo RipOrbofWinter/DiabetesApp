@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //import * as insulineFile from './insuline'
 import * as insulineFile from './InsulinFactory'
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import * as calendarFile from './calendar';
 
 function HomeScreen({ navigation }) 
 {
@@ -84,6 +86,31 @@ function InsulineScreen({ navigation })
   );
 }
 
+function CalendarScreen({ navigation }) 
+{
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Calendar
+        // Collection of dates that have to be marked. Default = {}
+        markedDates={calendarFile.ReturnValue()}
+        onDayPress={(day) => {CalendarDaySelectHandler(day) + console.log(calendarFile.ReturnValue)}}
+      />
+      <View>
+        <Text>Geselecteerde datum</Text>
+        <Text>Inname 1</Text>
+        <Text>Inname 2</Text>
+        <Text>Inname 3</Text>
+      </View>
+    </View>
+  );
+}
+
+function CalendarDaySelectHandler(day)
+{
+
+  console.log('selected day', day)
+}
+
 function ChatScreen({ navigation }) 
 {
   return (
@@ -112,7 +139,18 @@ const HomeStack = createStackNavigator(); //Home Stack
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen} />             
+      <HomeStack.Screen name="Home" component={HomeScreen}
+        options={{
+          headerRight: () =>
+          (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#fff"
+           /> 
+          ),
+        }}
+        />            
       <HomeStack.Screen name="Login" component={LoginScreen} />
       <HomeStack.Screen name="Register" component={RegisterScreen} />
     </HomeStack.Navigator>
@@ -123,9 +161,19 @@ const InsulineStack = createStackNavigator(); //Insuline Stack
 
 function InsulineStackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Insuline" component={InsulineScreen} />
-    </HomeStack.Navigator>
+    <InsulineStack.Navigator>
+      <InsulineStack.Screen name="Insuline" component={InsulineScreen} />
+    </InsulineStack.Navigator>
+  );
+}
+
+const CalendarStack = createStackNavigator(); //Calendar Stack
+
+function CalendarStackScreen() {
+  return (
+    <CalendarStack.Navigator>
+      <CalendarStack.Screen name="Calendar" component={CalendarScreen} />             
+    </CalendarStack.Navigator>
   );
 }
 
@@ -133,10 +181,10 @@ const ChatStack = createStackNavigator(); //Chat Stack
 
 function ChatStackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Chat" component={ChatScreen} />             
-      <HomeStack.Screen name="Login" component={LoginScreen} />
-    </HomeStack.Navigator>
+    <ChatStack.Navigator>
+      <ChatStack.Screen name="Chat" component={ChatScreen} />             
+      <ChatStack.Screen name="Login" component={LoginScreen} />
+    </ChatStack.Navigator>
   );
 }
 
@@ -148,11 +196,13 @@ function MyTabs() {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeStackScreen} />
       <Tab.Screen name="Insuline" component={InsulineStackScreen} />
+      <Tab.Screen name="Calendar" component={CalendarStackScreen} />
       <Tab.Screen name="Chat" component={ChatStackScreen} />
     </Tab.Navigator>
   );
 }
 
+//
 function App({ navigation }) 
 {
   return (
