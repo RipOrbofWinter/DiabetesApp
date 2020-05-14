@@ -161,9 +161,9 @@ const InsulineStack = createStackNavigator(); //Insuline Stack
 
 function InsulineStackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Insuline" component={InsulineScreen} />
-    </HomeStack.Navigator>
+    <InsulineStack.Navigator>
+      <InsulineStack.Screen name="Insuline" component={InsulineScreen} />
+    </InsulineStack.Navigator>
   );
 }
 
@@ -171,9 +171,9 @@ const CalendarStack = createStackNavigator(); //Calendar Stack
 
 function CalendarStackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Calendar" component={CalendarScreen} />             
-    </HomeStack.Navigator>
+    <CalendarStack.Navigator>
+      <CalendarStack.Screen name="Calendar" component={CalendarScreen} />             
+    </CalendarStack.Navigator>
   );
 }
 
@@ -181,10 +181,10 @@ const ChatStack = createStackNavigator(); //Chat Stack
 
 function ChatStackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Chat" component={ChatScreen} />             
-      <HomeStack.Screen name="Login" component={LoginScreen} />
-    </HomeStack.Navigator>
+    <ChatStack.Navigator>
+      <ChatStack.Screen name="Chat" component={ChatScreen} />             
+      <ChatStack.Screen name="Login" component={LoginScreen} />
+    </ChatStack.Navigator>
   );
 }
 
@@ -202,6 +202,7 @@ function MyTabs() {
   );
 }
 
+//
 function App({ navigation }) 
 {
   return (
