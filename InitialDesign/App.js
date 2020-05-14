@@ -139,7 +139,18 @@ const HomeStack = createStackNavigator(); //Home Stack
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen} />             
+      <HomeStack.Screen name="Home" component={HomeScreen}
+        options={{
+          headerRight: () =>
+          (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#fff"
+           /> 
+          ),
+        }}
+        />            
       <HomeStack.Screen name="Login" component={LoginScreen} />
       <HomeStack.Screen name="Register" component={RegisterScreen} />
     </HomeStack.Navigator>
