@@ -93,8 +93,14 @@ function CalendarScreen({ navigation })
       <Calendar
         // Collection of dates that have to be marked. Default = {}
         markedDates={calendarFile.ReturnValue()}
-        onDayPress={(day) => {CalendarDaySelectHandler(day)}}
+        onDayPress={(day) => {CalendarDaySelectHandler(day) + console.log(calendarFile.ReturnValue)}}
       />
+      <View>
+        <Text>Geselecteerde datum</Text>
+        <Text>Inname 1</Text>
+        <Text>Inname 2</Text>
+        <Text>Inname 3</Text>
+      </View>
     </View>
   );
 }
