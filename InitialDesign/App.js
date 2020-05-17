@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, View, Text, TextInput  } from 'react-native';
+import { Button, View, Text, TextInput, Image, TouchableHighlight  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -21,6 +21,12 @@ function HomeScreen({ navigation })
         title="Go to Register"
         onPress={() => navigation.navigate('Register')}
       />
+      <TouchableHighlight 
+        onPress={() => navigation.navigate('Login')}>
+        <Image 
+          source={ require('./assets/settings_icon.png')}
+          style={{ height:50, width:50}} />
+      </TouchableHighlight>
       {/* <Text>{ insulineFile.ReturnValue("Test value!") }</Text> */}
     </View>
   );
