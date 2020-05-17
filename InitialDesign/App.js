@@ -8,10 +8,13 @@ import * as insulineFile from './InsulinFactory'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import * as calendarFile from './calendar';
 
+import CustomCalendarComponent from "./customCalendarComponent";
+
 function HomeScreen({ navigation }) 
 {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      
       <Text>Home Screen</Text>
       <Button
         title="Go to Login"
@@ -96,17 +99,7 @@ function CalendarScreen({ navigation })
 {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Calendar
-        // Collection of dates that have to be marked. Default = {}
-        markedDates={calendarFile.ReturnValue()}
-        onDayPress={(day) => {CalendarDaySelectHandler(day) + console.log(calendarFile.ReturnValue)}}
-      />
-      <View>
-        <Text>Geselecteerde datum</Text>
-        <Text>Inname 1</Text>
-        <Text>Inname 2</Text>
-        <Text>Inname 3</Text>
-      </View>
+      <CustomCalendarComponent/>
     </View>
   );
 }
