@@ -25,6 +25,7 @@ export default class CustomComponent extends React.Component {
         </Text>
         <Calendar
           maxDate={'2020-05-17'}
+          minDate={'2020-04-25'}
           markedDates={this.state.markedDates}
           onDayPress={(day) => 
             this.setState({currentDay: day.day, currentMonth: day.month, currentYear: day.year, selectedDateString: day.dateString}) +
@@ -49,8 +50,10 @@ export default class CustomComponent extends React.Component {
 function UpdateCurrentDay(markedDates, day){
   
   markedDates = GetCurrentMonthData();
+  if(markedDates[day.dateString]){
+    markedDates[day.dateString].selected = true;
+  }
   
-  markedDates[day.dateString].selected = true;
 
   // Debugging for loop
   // for (let [key, value] of Object.entries(markedDates)) {
@@ -63,6 +66,12 @@ function UpdateCurrentDay(markedDates, day){
 //TODO: Replace hardcoded data with GUN.JS values
 function GetCurrentMonthData(){
   var markedDates = {
+    '2020-04-25': {marked: true, dotColor: 'green', activeOpacity: 0},
+    '2020-04-26': {marked: true, dotColor: 'green', activeOpacity: 0},
+    '2020-04-27': {marked: true, dotColor: 'green', activeOpacity: 0},
+    '2020-04-28': {marked: true, dotColor: 'green', activeOpacity: 0},
+    '2020-04-29': {marked: true, dotColor: 'green', activeOpacity: 0},
+    '2020-04-30': {marked: true, dotColor: 'green', activeOpacity: 0},
     '2020-05-01': {marked: true, dotColor: 'green', activeOpacity: 0},
     '2020-05-02': {marked: true, dotColor: 'green', activeOpacity: 0},
     '2020-05-03': {marked: true, dotColor: 'green', activeOpacity: 0},
