@@ -1,14 +1,22 @@
+var testSave = "Default"
+
 function AlertBox(message)
 {
-  alert( message );
+  testSave += message
+  alert( "Test save now holds this message: " + message );
 }
 
-function ReturnValue(testValue)
+function showData(){
+  alert(testSave);
+}
+
+function ReturnValue()
 {
-  return testValue;
+  return testSave;
 }
 
 module.exports = {
   AlertBox,
+  showData,
   ReturnValue
 }

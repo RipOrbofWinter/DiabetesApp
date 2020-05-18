@@ -1,15 +1,21 @@
-import * as React from 'react';
+/// File and component importing
+import React, { Compnent, useState } from 'react';
 import { Button, View, Text, TextInput, Image, TouchableHighlight  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-//import * as insulineFile from './insuline'
+// Insuline functions
 import * as insulineFile from './InsulinFactory'
+import * as testFile from './insuline'
+// Calendar functions
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import * as calendarFile from './calendar';
-
 import CustomCalendarComponent from "./customCalendarComponent";
+import { Value } from 'react-native-reanimated';
 
+///variables and constants
+
+/// Pages
 function HomeScreen({ navigation }) 
 {
   return (
@@ -25,7 +31,7 @@ function HomeScreen({ navigation })
         onPress={() => navigation.navigate('Register')}
       />
       <TouchableHighlight 
-        onPress={() => navigation.navigate('Login')}>
+        onPress={() => navigation.navigate('Settings')}>
         <Image 
           source={ require('./assets/settings_icon.png')}
           style={{ height:50, width:50}} />
@@ -133,25 +139,55 @@ function ChatScreen({ navigation })
   );
 }
 
+function SettingsScreen({ navigation }) 
+{
+  const [text, setText] = useState('');
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      
+      <Text>Instellingen</Text>
+      <Text>{ testFile.ReturnValue() }</Text>
+      <TextInput
+        style={{height: 40}}
+        placeholder={testFile.ReturnValue()}
+        onChangeText={text => setText(text)}
+        defaultValue={text}
+      />
+      <Button
+        title="Opslaan instellingen"
+        onPress={() => testFile.AlertBox(text)}
+      />
+      <Button
+        title="Show instellingen var test"
+        onPress={() => testFile.showData(text)}
+      />
+    </View>
+  );
+}
+
+
+/// Navigation/ route file
 const HomeStack = createStackNavigator(); //Home Stack
 
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeScreen}
-        options={{
-          headerRight: () =>
-          (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-           /> 
-          ),
-        }}
+        // options={{
+        //   headerRight: () =>
+        //   (
+        //     <Button
+        //       onPress={() => alert('This is a button!')}
+        //       title="Info"
+        //       color="#fff"
+        //    /> 
+        //   ),
+        // }}
         />            
       <HomeStack.Screen name="Login" component={LoginScreen} />
       <HomeStack.Screen name="Register" component={RegisterScreen} />
+      <HomeStack.Screen name="Settings" component={SettingsScreen} />
     </HomeStack.Navigator>
   );
 }
@@ -204,6 +240,7 @@ function MyTabs() {
 //
 function App({ navigation }) 
 {
+
   return (
     <NavigationContainer>
       <MyTabs />

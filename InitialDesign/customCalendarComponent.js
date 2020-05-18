@@ -24,7 +24,7 @@ export default class CustomComponent extends React.Component {
           Custom Component
         </Text>
         <Calendar
-          maxDate={'2020-05-17'}
+          maxDate={'2020-09-16'}
           minDate={'2020-04-25'}
           markedDates={this.state.markedDates}
           onDayPress={(day) => 
