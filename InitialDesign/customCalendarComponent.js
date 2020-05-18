@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
-export default class CustomComponent extends React.Component { 
+export default class CustomCalendar extends React.Component { 
 
   constructor(props) {
     super(props);
@@ -12,7 +12,8 @@ export default class CustomComponent extends React.Component {
       currentMonth: 5, //TODO: Get Current Month
       currentYear: 2020, //TODO: Get Current Year
       selectedDateString: '17-5-2020',
-      markedDates:  GetCurrentMonthData()
+      markedDates:  GetCurrentMonthData(),
+      currentDoses: 5 //Get Gun Data
     };
   }
 
@@ -35,17 +36,36 @@ export default class CustomComponent extends React.Component {
           
         />
         {/* TODO: Replace with Insulin component */}
-        <View>
-          <Text>Geselecteerde datum: { this.state.currentDay } - { this.state.currentMonth } - { this.state.currentYear }</Text>
-          <Text>Inname 1</Text>
-          <Text>Inname 2</Text>
-          <Text>Inname 3</Text>
+          <View>
+            <Text>Geselecteerde datum: { this.state.currentDay } - { this.state.currentMonth } - { this.state.currentYear }</Text>
+            <Text>Aantal innames: {this.state.currentDoses} </Text>
+            <Button
+              title="Innames inzien"
+              onPress={() => this.props.navigation.navigate('InsulinList', {
+                currentDay: this.state.currentDay,
+                currentMonth: this.state.currentMonth,
+                currentYear: this.state.currentYear,
+                dateString: this.state.dateString,
+                currentDoses: this.state.currentDoses
+              })}
+            />
+            <Button
+              title="Inname toevoegen"
+              onPress={() => this.props.navigation.navigate('Insuline', {
+                currentDay: this.state.currentDay,
+                currentMonth: this.state.currentMonth,
+                currentYear: this.state.currentYear,
+                dateString: this.state.dateString
+              })}
+            />
+          </View>
         </View>
-      </View>
        
     );
   }  
 }
+
+//export default withNavigation(CustomComponent);
 
 function UpdateCurrentDay(markedDates, day){
   
