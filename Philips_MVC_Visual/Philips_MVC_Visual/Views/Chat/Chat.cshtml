@@ -1,33 +1,41 @@
-﻿
+﻿@model IEnumerable<BusinessLogic.Models.ChatMessageModel>
+
 @{
-	ViewData["Title"] = "Chat";
+    ViewData["Title"] = "Chat";
 }
 
-<head>
-	<link rel="stylesheet" type="text/css" href="~/css/Chat.css">
-</head>
-<body>
-	<div id="UserList">
-		<form id="returnmenu">
-			<button>Return</button>
-		</form>
-		<ul id="listofrooms">
-			<li>Room1</li>
-			<li>Room2</li>
-			<li>Room3</li>
-			<li>Room4</li>
-		</ul>
-	</div>
-	<div id="Chat">
-		<form id="userinfo">
-			<button>filling</button>
-		</form>
-		<ul id="ul1"></ul>
-		<form id="form">
-			<input size="50" id="input1">
-			<button id="buttoninput">Add</button>
-			<button id="buttoninput">Share</button>
-		</form>
-	</div>
-</body>
+<h1>Chat</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

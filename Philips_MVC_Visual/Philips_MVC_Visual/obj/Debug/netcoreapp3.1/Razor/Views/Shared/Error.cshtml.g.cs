@@ -21,13 +21,13 @@ using Philips_MVC_Visual;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\Views\_ViewImports.cshtml"
-using Philips_MVC_Visual.Models;
+using BusinessLogic.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d6a5625cc8fb4476f348b0fe9041c550465d8bf9", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c0ff32e45ac4edc9006993749c7b1d7146a346e3", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c093c60f42c050737167a7da9fb3565630675d2f", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998

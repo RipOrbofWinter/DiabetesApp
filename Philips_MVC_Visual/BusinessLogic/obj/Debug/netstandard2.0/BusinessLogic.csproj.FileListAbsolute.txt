@@ -1,0 +1,9 @@
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\bin\Debug\netstandard2.0\BusinessLogic.deps.json
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\bin\Debug\netstandard2.0\BusinessLogic.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\bin\Debug\netstandard2.0\BusinessLogic.pdb
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.AssemblyInfo.cs
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.pdb

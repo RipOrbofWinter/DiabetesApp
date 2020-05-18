@@ -222,4 +222,6 @@ C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philip
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.dll
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.pdb
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.genruntimeconfig.cache
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\BusinessLogic.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\BusinessLogic.pdb
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Razor\Views\Chat\Chat.cshtml.g.cs

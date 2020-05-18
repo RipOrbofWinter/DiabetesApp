@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Bdr0NfUdxSsT5NwOWiPcUrnFN292hiVLdcPyauWfVO3hzuFKkQOgQCbNl+qQPwzDniXXnQnoqMHaumhiag2ozg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Pouki\\Source\\Repos\\RipOrbofWinter\\DiabetesApp\\Philips_MVC_Visual\\BusinessLogic\\BusinessLogic.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Pouki\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Pouki\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

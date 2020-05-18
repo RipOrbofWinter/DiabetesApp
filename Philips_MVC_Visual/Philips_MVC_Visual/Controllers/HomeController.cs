@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Philips_MVC_Visual.Models;
+using BusinessLogic.Models;
 
 namespace Philips_MVC_Visual.Controllers
 {
@@ -29,11 +29,6 @@ namespace Philips_MVC_Visual.Controllers
 		}
 
 		public IActionResult Calendar()
-		{
-			return View();
-		}
-
-		public IActionResult Chat()
 		{
 			return View();
 		}

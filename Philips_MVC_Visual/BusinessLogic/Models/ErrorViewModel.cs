@@ -1,6 +1,6 @@
 using System;
 
-namespace Philips_MVC_Visual.Models
+namespace BusinessLogic.Models
 {
 	public class ErrorViewModel
 	{
