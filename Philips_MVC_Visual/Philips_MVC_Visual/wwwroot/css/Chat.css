@@ -19,12 +19,11 @@
 	position: relative;
 }
 
-#form {
-	position: absolute;
-	bottom: 0;
-	width: 43.4rem;
-	margin-bottom: .5rem;
-	border-top: solid 4px black;
+#scrollBar {
+	background-color: transparent;
+	width: 43rem;
+	height: 30rem;
+	overflow: auto;
 }
 
 #ul1 {
@@ -43,7 +42,7 @@
 	text-align: left;
 }
 
-#ChatInput {
+#ButtonSend {
 	width: 5rem;
 	font-size: 20px;
 }

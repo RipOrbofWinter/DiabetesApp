@@ -14,16 +14,22 @@ namespace BusinessLogic.Facotry
 
 			foreach (var chatMessage in chatMessages)
 			{
-				ChatMessageModel model = new ChatMessageModel
-				{
-					Text = chatMessage.Text,
-					Date = chatMessage.Date,
-				};
-
+				var model = ConvertToModel(chatMessage);
 				models.Add(model);
 			}
 
 			return models;
+		}
+
+		public static ChatMessageModel ConvertToModel(ChatMessage chatMessage)
+		{
+			ChatMessageModel model = new ChatMessageModel
+			{
+				Text = chatMessage.Text,
+				Date = chatMessage.Date,
+			};
+
+			return model;
 		}
 	}
 }

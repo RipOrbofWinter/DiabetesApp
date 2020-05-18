@@ -1,41 +1,55 @@
 ﻿@model IEnumerable<BusinessLogic.Models.ChatMessageModel>
 
 @{
-    ViewData["Title"] = "Chat";
+	ViewData["Title"] = "Chat";
 }
 
-<h1>Chat</h1>
+<head>
+	<link rel="stylesheet" type="text/css" href="~/css/Chat.css">
+</head>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Text)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<body>
+	<div id="UserList">
+		<form id="returnmenu">
+			<button>Return</button>
+		</form>
+		<ul id="listofrooms">
+			<li>jan</li>
+			<li>klaas</li>
+		</ul>
+	</div>
+
+	<div id="Chat">
+		<form id="userinfo">
+			<button>filling</button>
+		</form>
+		<ul id="ul1"></ul>
+		<div id="scrollBar">
+			@foreach (var item in Model)
+			{
+				<br />
+				<div>
+					<p>
+						@Html.DisplayFor(modelItem => item.Text)
+					</p>
+					<p>
+						@Html.DisplayFor(modelItem => item.Date)
+					</p>
+				</div>
+			}
+		</div>
+		<form id="form">
+			@using (Html.BeginForm("ChatSend", "Chat", FormMethod.Post))
+			{
+				@Html.TextBox("message")
+				<input type="submit" name="Submit" />
+			}
+		</form>
+	</div>
+
+</body>
+
+<script>
+	var objDiv = document.getElementById("scrollBar");
+	objDiv.scrollTop = objDiv.scrollHeight;
+</script>

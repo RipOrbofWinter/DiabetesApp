@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic.Facotry;
+using BusinessLogic.Models;
 using BusinessLogic.TemporaryData;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,11 @@ namespace Philips_MVC_Visual.Controllers
             var messages = builder.messages;
             var messageModels = MessageFactory.ConvertToModel(messages);
             return View(messageModels);
+        }
+
+        public IActionResult ChatSend(string message)
+        {
+            return RedirectToAction("Chat");
         }
 
         public IActionResult CreateChat()
