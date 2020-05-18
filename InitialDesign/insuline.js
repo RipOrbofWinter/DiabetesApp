@@ -1,22 +1,28 @@
-var testSave = "Default"
+var weight = 0;
+var sugar = 0;
 
-function AlertBox(message)
+function setWeight(data)
 {
-  testSave += message
-  alert( "Test save now holds this message: " + message );
+  weight = data
 }
 
-function showData(){
-  alert(testSave);
+function setSugar(data)
+{
+  sugar = data
 }
 
-function ReturnValue()
+function getWeight()
 {
-  return testSave;
+  return weight;
+}
+function getSugar()
+{
+  return sugar;
 }
 
 module.exports = {
-  AlertBox,
-  showData,
-  ReturnValue
+  setWeight,
+  setSugar,
+  getWeight,
+  getSugar
 }

@@ -1,12 +1,12 @@
 /// File and component importing
-import React, { Compnent, useState } from 'react';
+import React, { Component, useState } from 'react';
 import { Button, View, Text, TextInput, Image, TouchableHighlight  } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Insuline functions
 import * as insulineFile from './InsulinFactory'
-import * as testFile from './insuline'
+// import * as testFile from './insuline'
 // Calendar functions
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import * as calendarFile from './calendar';
@@ -84,21 +84,11 @@ function LoginScreen({ navigation })
 
 function InsulineScreen({ navigation }) 
 {
+  const [text, setText] = useState('');
   return (
-    
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text id="testImportFunction">{ insulineFile.CalculateDailyInsulinDoseRequirement(80) }</Text>
-      <Button
-        title="Back to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
-      <Button
-        title="External JS"
-        // onPress={() => insulineFile.AlertBox("test")}
-      />
-
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
     </View>
-  );
+    );
 }
 
 function CalendarScreen({ navigation }) 
@@ -141,30 +131,44 @@ function ChatScreen({ navigation })
 
 function SettingsScreen({ navigation }) 
 {
-  const [text, setText] = useState('');
+  const [weightVar, setWeightVar] = useState('');
+  const [sugarVar, setSugarVar] = useState('');
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      
-      <Text>Instellingen</Text>
-      <Text>{ testFile.ReturnValue() }</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder={testFile.ReturnValue()}
-        onChangeText={text => setText(text)}
-        defaultValue={text}
-      />
-      <Button
-        title="Opslaan instellingen"
-        onPress={() => testFile.AlertBox(text)}
-      />
-      <Button
-        title="Show instellingen var test"
-        onPress={() => testFile.showData(text)}
-      />
-    </View>
+        
+    <Text>Instellingen</Text>
+    <br></br> 
+    <br></br>
+    <Text>Gewicht instellen</Text>
+    <TextInput
+      style={{height: 40}}
+      placeholder={insulineFile.getWeight()}
+      onChangeText={weightVar => setWeightVar(weightVar)}
+      defaultValue={weightVar}
+    />
+    <br></br>
+
+    <Text>Bloedsuikerspiegel doel</Text>
+    <TextInput
+      style={{height: 40}}
+      placeholder={insulineFile.getSugar()}
+      onChangeText={sugarVar => setSugarVar(sugarVar)}
+      defaultValue={sugarVar}
+    />
+        <br></br>
+    <Button
+      title="Opslaan instellingen"
+      onPress={() => { insulineFile.setWeight(weightVar); insulineFile.setSugar(sugarVar); navigation.navigate('Home') }} 
+    />
+    <Button
+      title="Annuleren"
+      onPress={() => navigation.navigate('Home')}
+    />
+  </View>
   );
 }
+
 
 
 /// Navigation/ route file
