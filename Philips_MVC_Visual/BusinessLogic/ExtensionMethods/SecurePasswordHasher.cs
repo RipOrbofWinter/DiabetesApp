@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.ExtensionMethods
+namespace BusinessLogic.ExtensionMethods
 {
     public static class SecurePasswordHasher
     {
@@ -13,6 +13,15 @@ namespace Common.ExtensionMethods
         private const int SaltSize = 16;
 
         private const int HashSize = 20;
+
+        private static Random random = new Random();
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
         public static string Hash(string password, int iterations)
         {
