@@ -11,7 +11,7 @@ import * as insulineFile from './InsulinFactory'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import * as calendarFile from './calendar';
 import CustomCalendarComponent from "./customCalendarComponent";
-import { Value } from 'react-native-reanimated';
+//import { Value } from 'react-native-reanimated';
 
 ///variables and constants
 
@@ -95,17 +95,33 @@ function CalendarScreen({ navigation })
 {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <CustomCalendarComponent/>
+      <CustomCalendarComponent navigation={navigation}/>
     </View>
   );
 }
 
-function CalendarDaySelectHandler(day)
+function InsulinListScreen({ route, navigation }) 
 {
+  const { currentDay } = route.params;
+  const { currentMonth } = route.params;
+  const { currentYear } = route.params;
+  const { currentDoses } = route.params;
 
-  console.log('selected day', day)
+  var InsulinList = [];
+
+  for(var i=0; i < currentDoses; i++)
+  {
+    var title = "inname " + (i + 1);
+    InsulinList[i] = <Button title={title} onPress= {() => navigation.navigate("Insuline", i)}/>;
+  }
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Date: {currentDay}-{currentMonth}-{currentYear}</Text>
+      {InsulinList}
+    </View>
+  );
 }
-
 function ChatScreen({ navigation }) 
 {
   return (
@@ -211,7 +227,8 @@ const CalendarStack = createStackNavigator(); //Calendar Stack
 function CalendarStackScreen() {
   return (
     <CalendarStack.Navigator>
-      <CalendarStack.Screen name="Calendar" component={CalendarScreen} />             
+      <CalendarStack.Screen name="Calendar" component={CalendarScreen} /> 
+      <ChatStack.Screen name="InsulinList" component={InsulinListScreen} />            
     </CalendarStack.Navigator>
   );
 }
