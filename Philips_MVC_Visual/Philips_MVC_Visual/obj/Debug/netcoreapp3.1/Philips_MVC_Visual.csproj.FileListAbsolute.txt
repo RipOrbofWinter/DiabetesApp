@@ -196,8 +196,6 @@ C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philip
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.csprojAssemblyReference.cache
-C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.csproj.CoreCompileInputs.cache
-C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.RazorAssemblyInfo.cache
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.RazorAssemblyInfo.cs
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.AssemblyInfoInputs.cache
@@ -226,3 +224,13 @@ C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philip
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\BusinessLogic.pdb
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Razor\Views\Chat\Chat.cshtml.g.cs
 C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Razor\Views\Chat\CreateChat.cshtml.g.cs
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.csproj.CoreCompileInputs.cache
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Philips_MVC_Visual.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Pouki\Source\Repos\RipOrbofWinter\DiabetesApp\Philips_MVC_Visual\Philips_MVC_Visual\obj\Debug\netcoreapp3.1\Razor\Views\Calendar\Calendar.cshtml.g.cs

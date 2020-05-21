@@ -10,10 +10,11 @@ namespace BusinessLogic.TemporaryData
 	{
 		public List<ChatMessage> messages;
 		public List<IntakeData> intakeData;
+		public List<CalendarEvent> calendarEvents;
 
 		public TemporaryDataBuilder()
 		{
-			BuildMessages(10);
+			BuildMessages(40);
 			BuildIntakeData(10);
 		}
 
@@ -25,7 +26,7 @@ namespace BusinessLogic.TemporaryData
 				ChatMessage message = new ChatMessage
 				{
 					Id = Guid.NewGuid(),
-					Text = $"message {i}",				
+					Text = $"message {i}",
 				};
 				messages.Add(message);
 			}
@@ -36,6 +37,8 @@ namespace BusinessLogic.TemporaryData
 			Random rnd = new Random();
 
 			intakeData = new List<IntakeData>();
+			calendarEvents = new List<CalendarEvent>();
+
 			for (int i = 0; i < amount; i++)
 			{
 				IntakeData data = new IntakeData
@@ -43,9 +46,22 @@ namespace BusinessLogic.TemporaryData
 					Id = Guid.NewGuid(),
 					DateOfIntake = DateTime.Now,
 					CalorieIntake = i * 10,
-					CHORatio = rnd.Next(1,12),
-					InsulinUnitsTaken = rnd.Next(1,7),
+					CHORatio = rnd.Next(1, 12),
+					InsulinUnitsTaken = rnd.Next(1, 7),
 				};
+
+
+				CalendarEvent cEvent = new CalendarEvent
+				{
+					Subject = $"Intake {i}:{data.DateOfIntake.Day}",
+					Description = $"CHO ratio: {data.CHORatio}, Calories: {data.CalorieIntake}, Units: {data.InsulinUnitsTaken}",
+					StartDate = data.DateOfIntake,
+					EndDate = data.DateOfIntake,
+					Theme = "green",
+					IsFullDay = false,
+				};
+
+				calendarEvents.Add(cEvent);
 				intakeData.Add(data);
 			}
 		}
