@@ -50,10 +50,10 @@
       //On #said form submit
       $('#said').on('submit', function(e)
       {
-          e.preventDefault();     //Prevent default submit behaviour (refresh).
-          if(!user.is){ return }  //Stop runing submit if user is not authorized/logged in
+          e.preventDefault();                     //Prevent default submit behaviour (refresh).
+          if(!user.is){ return }                  //Stop runing submit if user is not authorized/logged in
           user.get('said').set($('#say').val()); //Add #say input value to 'said'
-          $('#say').val("");      //Clear #say value for next message
+          $('#say').val("");                     //Clear #say value for next message
       });
 
       //UI Function, responsible for appending to HTML (echo)
