@@ -10,17 +10,16 @@ import * as insulineFile from './InsulinFactory'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import * as calendarFile from './calendar';
 import CustomCalendarComponent from "./customCalendarComponent";
+import CustomGun from "./gunComponent";
 // Gun Import
-import Gun from 'gun/gun.js' // or use the minified version 'gun/gun.min.js'
-//import { Value } from 'react-native-reanimated';
+ import Gun from 'gun/gun.js' // or use the minified version 'gun/gun.min.js'
 
 ///variables and constants
-var gun = new Gun('http://gunjs.herokuapp.com/gun')
+// var gun = new Gun('http://gunjs.herokuapp.com/gun')
 
 //Gun Code
-
-const gun = new Gun('http://gunjs.herokuapp.com/gun')
-Component.prototype.$gun = gun
+ const gun = new Gun('http://gunjs.herokuapp.com/gun')
+ Component.prototype.$gun = gun
 
 /// Pages
 function HomeScreen({ navigation }) 
@@ -133,21 +132,7 @@ function ChatScreen({ navigation })
 {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login Screen Input enzo</Text>
-      <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-      />
-      <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-      />
-      <Button
-        title="Login"
-        onPress={() => navigation.navigate('Login')}
-      />
-      <Button
-        title="Back to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+      <CustomGun/>
     </View>
   );
 }
