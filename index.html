@@ -1,16 +1,37 @@
+<!DOCTYPE html>
 <html>
   <head>
     <style>
       body {
         padding: 0px;
       }
+
+      .hidden{
+        display: none;
+      }
     </style>
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 
   </head>
   <body>
+    <h1>ToDo Login</h1>
+    <form id="login">
+        <input id="alias" placeholder="username">
+        <input id="pass" type="password" placeholder="passphrase">
+        <input id="in" type="submit" value="sign in">
+        <input id="up" type="button" value="sign up">
+    </form>
+
+    <ul></ul>
+
+     <form id="said">
+        <input id="say">
+        <input id="speak" type="submit" value="speak">
+    </form>
+
     <h1>ToDo</h1>
     <!-- Explanation html setup: 1. Create a form with a unique id/class 2. Create a input field(standard is text) with a unique id 3. add button and close form(nothing to edit) 4, create a ul with an unique id.-->
+
     <form id="form1"> 
         <input id="input1">
         <button>Add</button>
@@ -26,33 +47,59 @@
 
     <ul id="ul2"></ul>
 
-  
-
-    <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
     var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
-    
       var items1 = gun.get('items1');
       var items2 = gun.get('items2');
+      var dt = new Date();
       
       $('#form1').on('submit', function(e){
-          e.preventDefault();           // stop browser refresh
-          items1.set($('#input1').val()); // add to set/table
-          $('#input1').val("");           // empties form input
+          e.preventDefault();
+          var input = $('#input1').val();
+          if(input == null ||input == ""){
+            return;
+          }
+          items1.set(input +" "+ AddTimeStamp());     // add to set/table + TimeStamp
+          $('#input1').val(""); // empties form input
+          
       })
 
       // copied and edited with difrent id
       $('#form2').on('submit', function(e){
           e.preventDefault();           
-          items2.set($('#input2').val()); 
+          var input = $('#input2').val();
+
+          if(input == null ||input == ""){
+            return;
+          }
+
+          items2.set(input +" "+ AddTimeStamp()); 
           $('#input2').val("");           
       })
 
+      function AddTimeStamp() {
+        var time = (dt.getHours() + ":" + 
+        (dt.getMinutes() < 10 ? '0' : '') + 
+        dt.getMinutes() + " " + 
+
+        (dt.getDate() < 10 ? '0' : '') +
+        dt.getDate() +"-" + 
+
+        ((dt.getMonth()+ 1) < 10 ? '0' : '') +
+        (dt.getMonth() + 1) + "-" +  
+
+        dt.getFullYear());
+
+        return time;
+      }
+
+
       ///getting each items
-      //map has no transform func so returns data "as is:"
+      //map has no transform func so returns data "as is":
       items1.map().on(function(item, id){  
       //either get the existing id  or  create it; ideally replace this with vue:
         var li1 = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul#ul1'); 

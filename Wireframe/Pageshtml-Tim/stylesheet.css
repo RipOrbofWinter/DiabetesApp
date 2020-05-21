@@ -1,0 +1,64 @@
+#divroomlist{
+    width:35%;
+    float: left;
+    border:solid 4px black;
+    height:97vh;
+    background-color: azure;
+}
+#divchat{
+    width:63%;
+    float: right;
+    height: 97vh;
+    border:solid 4px black;
+    background-color: azure;
+    position: relative;
+}
+#form1{
+    position: absolute;
+    bottom:0;
+    margin-right: 15vh;
+    margin-left: 15vh;
+    border-top:solid 4px black;
+    border-left:solid 4px black;
+    border-right:solid 4px black;
+    background-color: blue;
+}
+#ul1{
+    float: right;
+    font-weight: bold;
+    text-align: right;
+    direction: rtl;      
+}
+#ul1 li{
+    border:solid 1px black;
+    margin:7px;
+    padding:5px;
+    list-style-image: url(list-style-icon.png);
+    width: 40vh;
+    text-align: left;
+}
+#input1{
+    font-size:20px;
+}
+body{   
+    background-color:blue;
+}
+#listofrooms li{
+    border:solid 2px black;
+    cursor: pointer;
+    padding:5px;
+    margin:5px;
+}
+#listofrooms{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#returnmenu, #userinfo{
+    border:solid 2px black;
+    padding:10px;
+    margin:5px;
+}
+button{
+    cursor: pointer;
+}

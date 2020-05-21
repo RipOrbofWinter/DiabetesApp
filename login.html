@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Patient</h1>
+
+    <!-- form login -->
+    <form id="login">
+        <input id="alias" placeholder="username">
+        <input id="pass" type="password" placeholder="passphrase">
+        <input id="in" type="submit" value="sign in">
+        <input id="up" type="button" value="sign up">
+        <select id="owner" name="sign up">
+          <option value="patient">Patient</option>
+          <option value="doctor">Doctor</option>
+        </select>
+    </form>
+    <!-- /form login -->
+
+    <div id="chatbox">
+      <div class="top">
+        <h2>chatbox</h2>
+      </div>
+      <div class="content">
+
+      </div>
+      <div class="bottom">
+        <form id="said">
+          <input id="say">
+          <button id="speak" type="submit" value="speak">></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- CDN Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- /CDN Scripts -->
+    <script>
+
+
+      //Gun connection
+      var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
+      var user = gun.user();
+      var dt = new Date();
+      var role = "";
+
+      //Remove gun items on double click
+      $('body').on('dblclick', '.message-wrapper', function(e){
+
+        gun.get(this.id).put({deleted: true}); //Adds deleted property and puts it true
+        //console.log(gun.get(this.id));
+        if($(this).hasClass('message-wrapper'))  //Checks if the message-wrapper class exists
+        {
+          $(this).remove(); //removes this item from DOM
+        }
+
+      });
+
+      //Create account from #alias and #pass fields.
+      $('#up').on('click', function(e)
+      {
+          user.create($('#alias').val(), $('#pass').val()); //Create account
+      });
+
+      //Sign in account from #alias and #pass fields.
+      $('#login').on('submit', function(e)
+      {
+          e.preventDefault(); //Prevent default submit behaviour (refresh).
+          user.auth($('#alias').val(), $('#pass').val()); //Check if #alias and #pass fields are correct and logs in.''
+          role = $('#owner').val();
+          console.log(role);
+      });
+
+      //When authorized
+      gun.on('auth', function()
+      {
+          $('#login').hide();  //Hide sign-in/up form.
+          user.get('said').map().val(UI); //Loop through 'said' values and execute UI function.
+      });
+
+      //On #said form submit
+      $('#said').on('submit', function(e)
+      {
+          e.preventDefault();     //Prevent default submit behaviour (refresh).
+          if(!user.is)
+          {
+            return;//Stop runing submit if user is not authorized/logged in
+          }
+          
+          if( $('#say').val()  == null || $('#say').val()  == ""){
+            return;
+          }
+          var messageJSON = CreateJSON(); //Create MessageJSON and call the function to fill the variable.
+          
+          //console.log(messageJSON); //Debug - logs the JSON to console
+
+          user.get('said').set(messageJSON);
+          $('#say').val("");      //Clear #say value for next message
+      });
+
+      //UI Function, responsible for appending to HTML (echo)
+      function UI(say, id)
+      {
+
+        var side;
+        // var chatMessage = '<div class="message-block' + say.owner + '"><p class="item message-item">' + say.message + '</p><div class="item message-timestamp">' + say.timestamp + '</div></div>'; //HTML Variable with all the JSON values and classes.
+        if(!say.deleted) //Check if message has been deleted
+        {
+          if (say.owner == role)
+          {
+            side = 'left';
+          } 
+          else if(say.owner != role)
+          {
+            side = 'right';
+          }
+          //Chatmessage to print
+          var chatMessage = '<div class="message-wrapper ' + side + '" id="' + id + '"><p class="item message-content">' + say.message + '</p><div class="item message-timestamp">' + " "+ say.timestamp + '</div><div hidden>' + say.owner + '</div>';
+
+          //print message
+          $('#chatbox .content').append(chatMessage);
+        }
+        
+      }
+
+      //Gets and returns Timestamp
+      function AddTimeStamp() {
+        var time = (dt.getHours() + ":" + 
+        (dt.getMinutes() < 10 ? '0' : '') + 
+        dt.getMinutes() + " " + 
+
+        (dt.getDate() < 10 ? '0' : '') +
+        dt.getDate() +"-" + 
+
+        ((dt.getMonth()+ 1) < 10 ? '0' : '') +
+        (dt.getMonth() + 1) + "-" +
+
+        dt.getFullYear());
+
+        return time;
+      }
+
+      //Creates JSON file
+      function CreateJSON()
+      {
+        return {"message":$('#say').val(), "timestamp":AddTimeStamp(), "owner": role} ;
+      }
+
+    </script>
+
+    <style>
+      html, body{
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+      h1 { margin-left: 10%;}
+      ul { padding: 0; }
+      li { display: flex; }
+      li span { width: 150px; word-break: break-all; }
+      img { height: 20px; margin-left: 8px; cursor: pointer; }
+      input { width: 150px; margin-right: 8px; }
+      input[type='checkbox'] { width: auto; }
+      #login{
+        margin-left: 15vw;
+      }
+      .message-block{
+        display: inline-block;
+        width: 49vw;
+      }
+      .message-content{
+        /*border-style: solid;*/
+        /*border: 1px 1px 1px 1px;*/
+      }
+
+      #chatbox{
+        position: fixed;
+        width: 400px;
+        height: 600px;
+        right: 25px;
+        bottom: 25px;
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        /*padding: 20px;*/
+      }
+
+      #chatbox .top{
+        background-color: #1474A4;
+        color: white;
+        display: flex;
+        justify-content: center;
+      }
+
+      #chatbox .bottom{
+        /*padding: 20px 0 0px 0;*/
+        padding: 15px;
+        margin-top: auto
+      }
+
+      #chatbox form{
+        display: flex;
+      }
+
+      #chatbox input{
+        height: 50px;
+        background: #EDEDED;
+        color: black;
+        padding: 0 15px;
+        display: flex;
+        flex-grow: 1;
+      }
+
+      #chatbox button{
+        width: 50px;
+        height: 50px;
+        background: #176498;
+        border: 0;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+
+      .message-wrapper.right{
+        margin-left: auto;
+      }
+
+      #chatbox .content{
+        overflow-y: scroll;
+        padding: 0 15px;
+      }
+
+      .message-wrapper{
+        background: #1474A4;
+        width: 80%;
+      }
+
+      .item{
+        display: flex;
+        color: white;
+      }
+
+      .right{
+        margin-left: auto;
+      }
+
+    </style>
+  </body>
+</html>
