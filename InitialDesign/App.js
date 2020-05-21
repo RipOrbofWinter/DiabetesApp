@@ -6,14 +6,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Insuline functions
 import * as insulineFile from './InsulinFactory'
-// import * as testFile from './insuline'
 // Calendar functions
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import * as calendarFile from './calendar';
 import CustomCalendarComponent from "./customCalendarComponent";
+// Gun Import
+import Gun from 'gun/gun.js' // or use the minified version 'gun/gun.min.js'
 //import { Value } from 'react-native-reanimated';
 
 ///variables and constants
+var gun = new Gun('http://gunjs.herokuapp.com/gun')
+
+//Gun Code
+
+const gun = new Gun('http://gunjs.herokuapp.com/gun')
+Component.prototype.$gun = gun
 
 /// Pages
 function HomeScreen({ navigation }) 
