@@ -27,7 +27,9 @@ export default class CustomGun extends React.Component {
         <Text>
           Hello {this.state.name}
         </Text>
-        <TextInput value={this.state.text}
+        <TextInput 
+          style={{ border: "1px solid black", padding: '5px' }}
+        value={this.state.text}
           onChangeText={(text) => this.setState({text})} 
         />
         <Button title='Update' 
