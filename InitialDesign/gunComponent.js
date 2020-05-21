@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput, Button } from "react-native";
 import Gun from 'gun/gun.js' // or use the minified version 'gun/gun.min.js'
-const gun = new Gun('http://gunjs.herokuapp.com/gun') // or use your own GUN server
+const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun') // or use your own GUN server
 //Component.prototype.$gun = gun
 
 export default class CustomGun extends React.Component { 

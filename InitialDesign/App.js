@@ -18,7 +18,7 @@ import CustomGun from "./gunComponent";
 // var gun = new Gun('http://gunjs.herokuapp.com/gun')
 
 //Gun Code
- const gun = new Gun('http://gunjs.herokuapp.com/gun')
+ const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
  Component.prototype.$gun = gun
 
 /// Pages
