@@ -5,12 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Insuline functions
-import * as insulineFile from './InsulinFactory'
+// import * as insulineFile from './components/insulinComponent'
+import SettingsComponent from './components/settingsComponent'
 // Calendar functions
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import * as calendarFile from './calendar';
-import CustomCalendarComponent from "./customCalendarComponent";
-import CustomGun from "./gunComponent";
+import CustomCalendarComponent from "./components/customCalendarComponent";
+import CustomGun from "./components/gunComponent";
 // Gun Import
  import Gun from 'gun/gun.js' // or use the minified version 'gun/gun.min.js'
 
@@ -108,7 +107,7 @@ function InsulineScreen({ navigation })
           <Text style={{ fontSize: '14pt'}}>Koolhydraten bij eetmoment:</Text>
           <TextInput
             style={{height: 40, fontSize: '12pt'}}
-            placeholder={insulineFile.getWeight()}
+            // placeholder={insulineFile.getWeight()}
             onChangeText={khValue => setKhValueVar(khValue)}
             defaultValue={khValue}
           />
@@ -126,7 +125,7 @@ function InsulineScreen({ navigation })
           <Text style={{ fontSize: '14pt'}}>Huidige Bloedsuikerspiegel</Text>
           <TextInput
             style={{height: 40, fontSize: '12pt'}}
-            placeholder={insulineFile.getSugar()}
+            // placeholder={insulineFile.getSugar()}
             onChangeText={currentBloodSugar => setCurrentBloodSugar(currentBloodSugar)}
             defaultValue={currentBloodSugar}
           />
@@ -202,41 +201,10 @@ function ChatScreen({ navigation })
 
 function SettingsScreen({ navigation }) 
 {
-  const [weightVar, setWeightVar] = useState('');
-  const [sugarVar, setSugarVar] = useState('');
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        
-    <Text>Instellingen</Text>
-    <br></br> 
-    <br></br>
-    <Text>Gewicht instellen</Text>
-    <TextInput
-      style={{height: 40}}
-      placeholder={insulineFile.getWeight()}
-      onChangeText={weightVar => setWeightVar(weightVar)}
-      defaultValue={weightVar}
-    />
-    <br></br>
-
-    <Text>Bloedsuikerspiegel doel</Text>
-    <TextInput
-      style={{height: 40}}
-      placeholder={insulineFile.getSugar()}
-      onChangeText={sugarVar => setSugarVar(sugarVar)}
-      defaultValue={sugarVar}
-    />
-        <br></br>
-    <Button
-      title="Opslaan instellingen"
-      onPress={() => { insulineFile.setWeight(weightVar); insulineFile.setSugar(sugarVar); navigation.navigate('Home') }} 
-    />
-    <Button
-      title="Annuleren"
-      onPress={() => navigation.navigate('Home')}
-    />
-  </View>
+      <SettingsComponent navigation={navigation}/>
+    </View>
   );
 }
 
@@ -325,64 +293,3 @@ function App({ navigation })
 }
 
 export default App;
-// import React from 'react';
-// import { SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
-// import Constants from 'expo-constants';
-
-// const DATA = [  { id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba', title: 'JoJo', Author: 'Doctor' },
-//                 { id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63', title: 'Bier', Author: 'Patient'},
-//                 { id: '58694a0f-3da1-471f-bd96-145571e29d72', title: 'Third Item', Author: 'Doctor'},
-//                 { id: '58694a0f-3da1-471f-bd96-145571e29d72', title: '4de Item', Author: 'Doctor'},
-//                 { id: '58694a0f-3da1-471f-bd96-145571e29d72', title: 'Wat een lang bericht zeg, zo hé Item', Author: 'Doctor'}
-// ];
-
-// function Item({ title, Author, id}) {
-//   return (
-//     <View style={styles.item}>
-//       <Text style={styles.title + styles.Author}>{title}</Text>
-//       <Text style={styles.Author}>{Author}</Text>
-//       <Text style={styles.id}>{id}</Text>
-//     </View>
-//   );
-// }
-
-// export default function App() {
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       <FlatList
-//         data={DATA}
-//         renderItem = {
-//           ({ item }) => <Item 
-//                           title={item.title}
-//                           Author={item.Author}
-//                           id={item.id}
-//                         /> 
-//         }
-//         keyExtractor={item => item.id}
-//       />
-//     </SafeAreaView>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     marginTop: Constants.statusBarHeight,
-//   },
-//   item: {
-//     backgroundColor: '#f9c2ff',
-//     padding: 20,
-//     marginVertical: 8,
-//     marginHorizontal: 16,
-//   },
-//   title: {
-//     fontSize: 32,
-//     backgroundColor: 'black',
-//   },
-//   Author: {
-//     fontSize: 14,
-//   },
-//   id: {
-//     fontSize: 8,
-//   },
-// });

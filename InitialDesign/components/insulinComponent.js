@@ -1,26 +1,3 @@
-        ///Get and set methods from the settings screen
-        var weight = 0;
-        var sugar = 0;
-        
-        function setWeight(data)
-        {
-          weight = data
-        }
-        function setSugar(data)
-        {
-          sugar = data
-        }
-        
-        function getWeight()
-        {
-          return weight;
-        }
-        function getSugar()
-        {
-          return sugar;
-        }
-        
-            
         ///Declaring diffrent methods that are required for calculating insuline dosage.
         // Formule 1: Bereken hoeveel eenheden insuline je nodig hebt per gegeten koolhydraten.
         function CarbohydrateCoverage( CHOMealGrams, UserTotalDailyInsulineDose)
@@ -106,9 +83,5 @@
         }
 
         module.exports = {
-            CalculateDailyInsulinDoseRequirement,
-            setWeight,
-            setSugar,
-            getWeight,
-            getSugar
+            CalculateDailyInsulinDoseRequirement
           }
