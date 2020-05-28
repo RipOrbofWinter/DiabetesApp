@@ -19,15 +19,15 @@ export default class SettingsComponent extends React.Component {
         return (
             <View>            
                 <Text>Instellingen</Text>
-                <br></br> 
-                <br></br>
+                {/* <Text>{ "\n \n" }</Text>  */}
+                
                 <Text>Gewicht instellen</Text>
                 <TextInput
                     style={{height: 40}}
                     placeholder={getWeight()}
                     onChangeText={(weightState) => this.setState({weightState})}
                 />
-                <br></br>
+                {/* <Text>{ "\n " } </Text> */}
                 <Text>Bloedsuikerspiegel doel</Text>
                 <TextInput
                     style={{height: 40}}
@@ -35,7 +35,7 @@ export default class SettingsComponent extends React.Component {
                     onChangeText={(sugarState) => this.setState({sugarState})}
                     
                 />
-                    <br></br>
+                {/* <Text>{ "\n " } </Text> */}
                 <Button
                     title="Opslaan instellingen"
                     onPress={() => {setWeight(this.state.weightState); setSugar(this.state.sugarState); this.props.navigation.navigate('Home') }} 
@@ -51,7 +51,6 @@ export default class SettingsComponent extends React.Component {
 
 ///Get and set methods from the settings screen
 var sugar = 0;
-
 var weight = 0;
 
 function setWeight(data)
