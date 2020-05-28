@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button } from "react-native";
 import Gun from 'gun/gun.js' 
 const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun') 
 var weightSetting = gun.get('weight');
+var sugarSetting = gun.get('sugar');
 
 export default class SettingsComponent extends React.Component { 
 
@@ -51,23 +52,35 @@ export default class SettingsComponent extends React.Component {
 
 ///Get and set methods from the settings screen
 var sugar = 0;
+var weight = '';
 
 function setWeight(data)
 {
-    weightSetting.set(data);
-    console.log(weightSetting)
+    if(data != ''){
+        weightSetting.set(data);
+        console.log(weightSetting)
+    }
 }
 function setSugar(data)
 {
-    sugar = data
+    if(data != ''){
+        sugarSetting.set(data);
+        console.log(sugarSetting)
+    }
 }
 
 function getWeight()
 {
-    // gun.get('weight').get('weight')
-    return "test";
+    weightSetting.on(function(item, id){
+        weight = item[Object.keys(item)[Object.keys(item).length - 1]]
+    })
+    return weight
+
 }
 function getSugar()
 {
-    return sugar;
+    sugarSetting.on(function(item, id){
+        sugar = item[Object.keys(item)[Object.keys(item).length - 1]]
+    })
+    return sugar
 }
