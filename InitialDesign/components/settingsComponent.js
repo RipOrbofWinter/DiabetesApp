@@ -69,14 +69,14 @@ function setSugar(data)
 
 function getWeight()
 {
-    weightSetting.on(function(item, id){
+    gun.get('weight').on(function(item, id){
         weight = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
     return weight
 }
 function getSugar()
 {
-    sugarSetting.on(function(item, id){
+    gun.get('sugar').on(function(item, id){
         sugar = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
     return sugar;
