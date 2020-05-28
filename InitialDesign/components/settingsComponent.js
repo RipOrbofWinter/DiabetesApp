@@ -10,8 +10,8 @@ export default class SettingsComponent extends React.Component {
     constructor(){
         super();
         this.state = {
-            weightState: '',
-            sugarState: ''
+            weightState: getWeight(),
+            sugarState: getSugar()
         };
     }
 
@@ -26,7 +26,6 @@ export default class SettingsComponent extends React.Component {
                     style={{height: 40}}
                     placeholder={getWeight()}
                     onChangeText={(weightState) => this.setState({weightState})}
-                    defaultValue={this.state.weightState}
                 />
                 <br></br>
                 <Text>Bloedsuikerspiegel doel</Text>
@@ -34,7 +33,7 @@ export default class SettingsComponent extends React.Component {
                     style={{height: 40}}
                     placeholder={getSugar()}
                     onChangeText={(sugarState) => this.setState({sugarState})}
-                    defaultValue={this.state.sugarState}
+                    
                 />
                     <br></br>
                 <Button
@@ -43,7 +42,7 @@ export default class SettingsComponent extends React.Component {
                 />
                 <Button
                     title="Annuleren"
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => this.props.navigation.navigate('Home')}
                 />
             </View>
         )
@@ -52,20 +51,19 @@ export default class SettingsComponent extends React.Component {
 
 ///Get and set methods from the settings screen
 var sugar = 0;
-var weight = '';
+
+var weight = 0;
 
 function setWeight(data)
 {
-    if(data != ''){
+    if(data){
         weightSetting.set(data);
-        console.log(weightSetting)
     }
 }
 function setSugar(data)
 {
-    if(data != ''){
+    if(data){
         sugarSetting.set(data);
-        console.log(sugarSetting)
     }
 }
 
@@ -75,12 +73,11 @@ function getWeight()
         weight = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
     return weight
-
 }
 function getSugar()
 {
     sugarSetting.on(function(item, id){
         sugar = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
-    return sugar
+    return sugar;
 }
