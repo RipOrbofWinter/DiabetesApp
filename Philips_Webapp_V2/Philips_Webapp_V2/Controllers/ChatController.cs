@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogic.ExtensionMethods;
-using BusinessLogic.Facotry;
+using BusinessLogic.Factory;
 using BusinessLogic.Models;
 using BusinessLogic.TemporaryData;
 using System.Web.Mvc;

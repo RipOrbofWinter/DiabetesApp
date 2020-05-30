@@ -10,19 +10,20 @@ namespace Philips_MVC_Visual.Controllers
 {
 	public class HomeController : Controller
 	{
+		public class Data
+		{
+			public string Name { get; set; }
+		}
+
 		public ActionResult Index()
 		{
 			return View();
 		}
-
-		public ActionResult Privacy()
+		
+		[HttpPost]
+		public JsonResult GetData(Data data)
 		{
-			return View();
-		}
-
-		public ActionResult Calendar()
-		{
-			return View();
+			return Json(data.Name , JsonRequestBehavior.AllowGet);
 		}
 	}
 }

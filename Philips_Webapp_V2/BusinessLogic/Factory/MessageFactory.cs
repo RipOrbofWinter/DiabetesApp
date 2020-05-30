@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLogic.Facotry
+namespace BusinessLogic.Factory
 {
 	public static class MessageFactory
 	{

@@ -1,7 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html>
+<body>
 
-<div class="text-center">
-    <h1 class="display-4">Insuline</h1>
-</div>
+	<div align="center">
+		<input type="button" id="btnSend" value="Send" />
+	</div>
+
+	<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#btnSend').click(function () {
+				var product = { Name : 'Mickey' }
+				$.ajax({ 
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					data: JSON.stringify(product),
+					url: "/Home/GetData",
+					success: function (data) {
+						alert(data);
+					},
+					error: function (result) {
+						alert("Something went wrong");
+					}
+				})
+			})
+		})
+	</script>
+</body>
+</html>
