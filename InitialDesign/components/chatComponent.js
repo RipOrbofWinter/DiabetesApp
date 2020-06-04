@@ -9,13 +9,21 @@ export default class ChatComponent extends React.Component {
     super(props);
     this.state = {
       text: 'What is your name?',
-      name: ''
+      textBoxMessage: 'Typ jouw bericht hier',
+      name: '',
+      message: getMessage()
     }
     this.$hello = this.$gun.get('hello')
     let _this = this
     this.$hello.on(function(data, key) {
-      let name=data.name
+      let name = data.name
       _this.setState({name:name})
+    })
+
+    this.$message = this.$gun.get('user').get('chat').get('message')
+    this.$message.on(function(data, key) {
+      let message = data.message
+      _this.setState({message:message})
     })
   }
 
@@ -26,20 +34,46 @@ export default class ChatComponent extends React.Component {
         <Text>
           Hello {this.state.name}
         </Text>
-        <Text>
-          Message {getMessage()}
-        </Text>
         <TextInput 
-          style={{ border: "1px solid black", padding: '5px' }}
-        value={this.state.text}
+          style={{ 
+            borderLeftWidth: 1,
+            borderRightWidth: 1, 
+            borderTopWidth: 1, 
+            borderBottomWidth: 1, 
+            paddingLeft: 15,
+            paddingRight: 15,
+            paddingTop: 5,
+            paddingBottom: 5
+          }}
           onChangeText={(text) => this.setState({text})} 
         />
         <Button title='Update' 
           onPress={()=>{
             this.$hello.put({name:this.state.text})
             this.setState({text:''})
-            setMessage(this.state.text);
-          
+          }}
+        />
+        
+        <Text>
+          Message {this.state.message}
+        </Text>
+        <TextInput 
+          style={{ 
+            borderLeftWidth: 1,
+            borderRightWidth: 1, 
+            borderTopWidth: 1, 
+            borderBottomWidth: 1, 
+            paddingLeft: 15,
+            paddingRight: 15,
+            paddingTop: 5,
+            paddingBottom: 5
+          }}
+          onChangeText={(textBoxMessage) => this.setState({textBoxMessage})} 
+        />
+        <Button title='Update' 
+          onPress={()=>{
+            this.$message.put({message:this.state.textBoxMessage})
+            this.setState({textBoxMessage:''})
           }}
         />
       </View>
