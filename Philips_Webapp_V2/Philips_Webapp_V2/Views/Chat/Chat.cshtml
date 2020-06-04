@@ -59,10 +59,51 @@
 			}
 		</form>
 	</div>
-
 </body>
 
 <script>
 	var objDiv = document.getElementById("scrollBar");
 	objDiv.scrollTop = objDiv.scrollHeight;
+</script>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript">
+	var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
+	var gunItems = gun.get('Test');
+
+	var kaas = "";
+
+	gun.get('Test').on(function (item, id) {
+		kaas = item[Object.keys(item)[Object.keys(item).length - 1]]
+	})
+
+	console.log(kaas);
+
+	let prod = new Array();
+	prod.push(kaas);
+	var product = { Name: prod }
+
+	$(document).ready(function () {
+		$('#btnSend').click(function () {
+			$.ajax({
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify(prod),
+				url: "/Home/GetData",
+
+				success: function (data) {
+					alert(data);
+				},
+				error: function (result) {
+					alert("Something went wrong");
+				}
+			})
+		})
+	})
 </script>
