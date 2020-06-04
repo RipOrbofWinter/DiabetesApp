@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput, Button, FlatList } from "react-native";
 import Gun from 'gun/gun.js' 
+import { ScrollView } from "react-native-gesture-handler";
 const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun') 
 
 export default class ChatComponent extends React.Component { 
@@ -10,8 +11,8 @@ export default class ChatComponent extends React.Component {
     this.state = {
       text: 'What is your name?',
       textBoxMessage: 'Typ jouw bericht hier',
-      name: '',
-      message: getMessage(),
+      name: 'test',
+      message: '',
       messagesObject: getMessages()
     }
 
@@ -33,7 +34,7 @@ export default class ChatComponent extends React.Component {
   render() { 
     return (
        
-      <View>
+      <ScrollView>
         <Text>
           Hello {this.state.name}
         </Text>
@@ -76,7 +77,7 @@ export default class ChatComponent extends React.Component {
         <Button title='Update' 
           onPress={()=>{
             //this.$message.put({message:this.state.textBoxMessage})
-            setMessage(this.state.textBoxMessage);
+            setMessage(this.state.textBoxMessage, GetTimeStamp());
             this.setState({textBoxMessage:''})
           }}
         />
@@ -86,7 +87,7 @@ export default class ChatComponent extends React.Component {
           renderItem={({ item }) => <Item title={item.title + "  -  " + item.id} />}
           keyExtractor={item => item.id}
         />
-      </View>
+      </ScrollView>
     );
   }  
 }
@@ -108,14 +109,19 @@ var DATA = [
 
 var message;
 
-function setMessage(data)
+function setMessage(message, timestamp)
 {
-  console.log(data);
+  var messageObject = {
+      title: message,
+      timestamp: timestamp
+  }
 
-    if(data){
-        //sugarSetting.set(data);
-        gun.get('user').get('chat').get('message').set(data);
-    }
+  if(message){
+      //sugarSetting.set(data);
+      gun.get('user').get('chat').get('message').set(messageObject);
+  }
+
+  console.log(gun.get('user').get('chat').get('message'));
 }
 
 function getMessage()
@@ -129,17 +135,20 @@ function getMessage()
 function getMessages()
 {
   DATA = [];
+  
   gun.get('user').get('chat').get('message').map().on(function(item, id){
-    
-
     var messageObject  = {
       id: id,
-      title: item,
+      title: item.title,
+      timestamp: item.timestamp
     }
-      
       DATA.push(messageObject);
   })
-  //console.log(gun.get('user').get('chat').get('message'));
   //console.log(DATA);
-  return DATA
+  return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
+}
+
+function GetTimeStamp(){
+  var d = new Date();
+  return d.getTime();
 }
