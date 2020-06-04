@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingsComponent from './components/settingsComponent'
 // Calendar functions
 import CustomCalendarComponent from "./components/customCalendarComponent";
-import CustomGun from "./components/gunComponent";
+import ChatComponent from "./components/chatComponent";
 // Gun Import
  import Gun from 'gun/gun.js' // or use the minified version 'gun/gun.min.js'
 
@@ -194,7 +194,7 @@ function ChatScreen({ navigation })
 {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <CustomGun/>
+      <ChatComponent />
     </View>
   );
 }
