@@ -122,7 +122,7 @@ function getMessages(functionOrigin)
   DATA = [];
   
   
-  gun.get('user').get('chat').get('message2').map().once(function(item, id){
+  gun.get('user').get('chat').get('message7').map().on(function(item, id){
     var messageObject  = {
       id: id,
       title: item.title,
