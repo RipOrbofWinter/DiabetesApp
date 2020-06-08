@@ -18,6 +18,7 @@ namespace Philips_Webapp_V2.Controllers
 		[HttpPost]
 		public JsonResult GetChatMessages(Data[] gunData)
 		{
+			TempData.Remove("GetMessages");
 			TempData["GetMessages"] = gunData;
 			return Json(new { redirectTo = Url.Action("Chat", "Chat") });
 		}

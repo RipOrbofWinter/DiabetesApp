@@ -15,7 +15,7 @@
 
     <script type="text/javascript">
 
-        const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
+        var gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
 
         function getMessages() {
            var DATA = [];
@@ -26,6 +26,7 @@
                     title: item.title,
                     timestamp: item.timestamp
                 }
+
                 DATA.push(messageObject);
             })
             return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
@@ -33,10 +34,10 @@
 
 		var messages = getMessages();
 
-        console.log(messages);
+        document.addEventListener("DOMContentLoaded", getMessages);
 
 
-		$(document).ready(function () {
+        window.addEventListener('DOMContentLoaded', function () {
 			$.ajax({
 				type: "POST",
 				contentType: "application/json; charset=utf-8",

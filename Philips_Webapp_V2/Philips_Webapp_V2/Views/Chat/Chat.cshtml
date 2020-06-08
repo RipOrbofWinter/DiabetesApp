@@ -58,7 +58,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <script type="text/javascript">
-    const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
+
+    var gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
 
     $('#said').on('click', function () {
         var timestamp = GetTimeStamp();
@@ -78,7 +79,8 @@
         setTimeout(function () {
             location.reload();
         }, 1000)
-    });
+	});
+
     function GetTimeStamp() {
         var d = new Date();
         return d.getTime();
