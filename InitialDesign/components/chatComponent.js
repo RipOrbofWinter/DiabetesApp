@@ -4,6 +4,20 @@ import Gun from 'gun/gun.js'
 import { ScrollView } from "react-native-gesture-handler";
 const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun') 
 
+// Meerdere keren berichten ontvangen bug:
+/// 1. te veel ontvangen is gelijk aan aantal berichten sinds laatste refresh
+// 1.1 Als verzender 2x een bericht ontvangt ontstaat de bug
+// 1.1.1 2x versturen van een bericht removed de bug
+// 1.2 Na 2x bericht te ontvangen krijg je 3x hetzelfde bericht of na 3x bericht ontvangen krijg je 5 keer? of na 6 berichten krijg je 8 keer zelfde bericht?
+/// !!! 2. laatste bericht te veel ontvangen wordt vervangen met nieuw berict van beide kanten?
+/// 3. Als this.textBoxMessage wordt aangepast verdwijnt de bug... :thinking: 
+/// 4. Refresh reset alles
+// 5. .on wordt meerdere keren uitgevoerd, 
+// Warning: Can't call setState on a component that is not yet mounted.
+//  This is a no-op, but it might indicate a bug in your application. Instead, assign to `this.state` directly or define a `state = {};`
+//  class property with the desired state in the ChatComponent component.
+
+
 export default class ChatComponent extends React.Component { 
 
   constructor(props) {
@@ -13,53 +27,25 @@ export default class ChatComponent extends React.Component {
       textBoxMessage: 'Typ jouw bericht hier',
       name: 'test',
       message: '',
-      messagesObject: getMessages()
+      messagesObject: ''
     }
 
-    this.$hello = this.$gun.get('hello')
+    this.$message = this.$gun.get('user').get('chat').get('message2')
     let _this = this
-    this.$hello.on(function(data, key) {
-      let name = data.name
-      _this.setState({name:name})
-    })
-
-    this.$message = this.$gun.get('user').get('chat').get('message')
     this.$message.on(function(data, key) {
-      let message = data.message
-      _this.setState({message:message})
-      _this.setState({messagesObject:getMessages()})
+      // let message = data.message
+      // _this.setState({message:message})
+      _this.setState({messagesObject:getMessages("This.message.on")})
     })
   }
 
   render() { 
     return (
        
-      <ScrollView>
+      <ScrollView> 
+             
         <Text>
-          Hello {this.state.name}
-        </Text>
-        <TextInput 
-          style={{ 
-            borderLeftWidth: 1,
-            borderRightWidth: 1, 
-            borderTopWidth: 1, 
-            borderBottomWidth: 1, 
-            paddingLeft: 15,
-            paddingRight: 15,
-            paddingTop: 5,
-            paddingBottom: 5
-          }}
-          onChangeText={(text) => this.setState({text})} 
-        />
-        <Button title='Update' 
-          onPress={()=>{
-            this.$hello.put({name:this.state.text})
-            this.setState({text:''})
-          }}
-        />
-        
-        <Text>
-          Message {this.state.message}
+        {"\n\n\n"} Message
         </Text>
         <TextInput 
           style={{ 
@@ -118,31 +104,34 @@ function setMessage(message, timestamp)
 
   if(message){
       //sugarSetting.set(data);
-      gun.get('user').get('chat').get('message').set(messageObject);
+      gun.get('user').get('chat').get('message2').set(messageObject);
   }
 
-  console.log(gun.get('user').get('chat').get('message'));
+  console.log(gun.get('user').get('chat').get('message2'));
 }
 
 function getMessage()
 {
-    gun.get('user').get('chat').get('message').on(function(item, id){
+    gun.get('user').get('chat').get('message2').on(function(item, id){
         message = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
     return message
 }
 
-function getMessages()
+function getMessages(functionOrigin)
 {
+
   DATA = [];
   
-  gun.get('user').get('chat').get('message').map().on(function(item, id){
+  
+  gun.get('user').get('chat').get('message2').map().once(function(item, id){
     var messageObject  = {
       id: id,
       title: item.title,
       timestamp: item.timestamp
     }
       DATA.push(messageObject);
+      console.log("Function Called: "+functionOrigin+" Message: "+DATA[DATA.length-1].title);
   })
   //console.log(DATA);
   return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
