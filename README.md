@@ -3,8 +3,10 @@ Official fontys groep 3 app
 
 Gun example docs:
 https://gun.eco/docs/Todo-Dapp
+
 Gun SEA docs:
 https://gun.eco/docs/SEA
+
 Gun SEA Server?:
 https://github.com/shaqarava/superPeer
 

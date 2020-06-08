@@ -47,26 +47,12 @@
 
     <ul id="ul2"></ul>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
-      
-      var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
-      var user = gun.user();
-
-      //
-      //ToDo Login System
-      //
-
-
-
-      //
-      //ToDo Version 2.0
-      //
-
+    var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
       var items1 = gun.get('items1');
       var items2 = gun.get('items2');
       var dt = new Date();
