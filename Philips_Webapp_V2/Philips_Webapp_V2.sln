@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Philips_Webapp_V2", "Philips_Webapp_V2\Philips_Webapp_V2.csproj", "{0074A190-4BB4-433F-9525-7CE263E6ED85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{9244F307-6BB2-4869-93DC-266584E7FD0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0074A190-4BB4-433F-9525-7CE263E6ED85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0074A190-4BB4-433F-9525-7CE263E6ED85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0074A190-4BB4-433F-9525-7CE263E6ED85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0074A190-4BB4-433F-9525-7CE263E6ED85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9244F307-6BB2-4869-93DC-266584E7FD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9244F307-6BB2-4869-93DC-266584E7FD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9244F307-6BB2-4869-93DC-266584E7FD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9244F307-6BB2-4869-93DC-266584E7FD0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCCB7F62-F586-4584-B8A2-122B3D793D93}
+	EndGlobalSection
+EndGlobal

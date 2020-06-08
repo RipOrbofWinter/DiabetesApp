@@ -1,0 +1,88 @@
+﻿@model IEnumerable<BusinessLogic.Models.ChatMessageModel>
+@{
+	ViewData["Title"] = "Chat";
+}
+
+<head>
+	<link rel="stylesheet" type="text/css" href="~/Content/Chat.css">
+</head>
+
+<body>
+	<div id="UserList">
+		<form id="returnmenu">
+			<button>Return</button>
+		</form>
+		<ul id="listofrooms">
+			<li>jan</li>
+			<li>klaas</li>
+		</ul>
+	</div>
+
+	<div id="Chat">
+		<form id="userinfo">
+			<button>filling</button>
+		</form>
+		<ul id="ul1"></ul>
+		<div id="scrollBar">
+			@foreach (var item in Model)
+			{
+			
+					<div>
+						<p>
+							@Html.DisplayFor(modelItem => item.Text)
+						</p>
+						<p>
+							@Html.DisplayFor(modelItem => item.Date)
+						</p>
+					</div>
+				
+			}
+		</div>
+        <form id="form">
+            <input id="chatinput">
+			<input id="said" type="button" value="send"/>
+        </form>
+	</div>
+</body>
+
+<script>
+	var objDiv = document.getElementById("scrollBar");
+	objDiv.scrollTop = objDiv.scrollHeight;
+</script>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript">
+
+    var gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
+
+    $('#said').on('click', function () {
+        var timestamp = GetTimeStamp();
+        var message = document.getElementById("chatinput").value;
+
+        var messageObject = {
+            title: message,
+            timestamp: timestamp
+		}
+        console.log(message);
+        if (message) {
+            gun.get('user').get('chat').get('message7').set(messageObject);
+		}
+	});
+
+    $("#said").on("click", function (e) {
+        setTimeout(function () {
+            location.reload();
+        }, 1000)
+	});
+
+    function GetTimeStamp() {
+        var d = new Date();
+        return d.getTime();
+    }
+</script>
