@@ -38,10 +38,10 @@
 				
 			}
 		</div>
-		<form id="form">
-				@Html.TextBox("message")
-				<input id="said" type="submit" name="Submit" />
-		</form>
+        <form id="form">
+            <input id="chatinput">
+			<input id="said" type="button" value="send"/>
+        </form>
 	</div>
 </body>
 
@@ -58,9 +58,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <script type="text/javascript">
-    $('#said').on('submit', function () {
+    const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
+
+    $('#said').on('click', function () {
         var timestamp = GetTimeStamp();
-        var message = document.getElementById("say").value;
+        var message = document.getElementById("chatinput").value;
 
         var messageObject = {
             title: message,
@@ -68,9 +70,15 @@
 		}
         console.log(message);
         if (message) {
-            gun.get('user').get('chat').get('message').set(messageObject);
-        }
+			gun.get('user').get('chat').get('message').set(messageObject);
+		}
 	});
+
+    $("#said").on("click", function (e) {
+        setTimeout(function () {
+            location.reload();
+        }, 1000)
+    });
     function GetTimeStamp() {
         var d = new Date();
         return d.getTime();
