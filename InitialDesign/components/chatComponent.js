@@ -121,18 +121,25 @@ function getMessages(functionOrigin)
 
   DATA = [];
   
-  
-  gun.get('user').get('chat').get('message2').map().once(function(item, id){
+  var counter = 0;
+  gun.get('user').get('chat').get('message7').map().on(function(item, id){
     var messageObject  = {
       id: id,
       title: item.title,
       timestamp: item.timestamp
     }
-    if(DATA != undefined && DATA[DATA.length - 1] != messageObject.id){
+    if (counter == 0){
+      console.log("message id: " + messageObject.id)
       DATA.push(messageObject);
     }
-      
-      console.log("Function Called: "+functionOrigin+" Message: "+DATA[DATA.length-1].title);
+    else if(DATA[DATA.length - 1] != undefined && DATA[DATA.length - 1].id != messageObject.id){
+      console.log("message id: " + messageObject.id + " past id: " + DATA[DATA.length - 1].id)
+      DATA.push(messageObject);
+    }
+    else{
+      console.log("Duplicate: " + messageObject.id + " Stopped")
+    }
+    counter++;
   })
   //console.log(DATA);
   return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
