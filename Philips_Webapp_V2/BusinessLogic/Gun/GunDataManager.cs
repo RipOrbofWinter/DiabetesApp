@@ -10,7 +10,10 @@ namespace BusinessLogic.Gun
 
 		public static void AddToList(Data data)
 		{
-			DataList.Add(data);
+			if (data == null)
+				return;
+
+			//DataList.Add(data);
 		}
 	}
 }

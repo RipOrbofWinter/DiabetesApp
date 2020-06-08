@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using BusinessLogic.Models;
 using BusinessLogic.Gun;
+using System.Web.Routing;
 
 namespace Philips_MVC_Visual.Controllers
 {
@@ -16,16 +17,16 @@ namespace Philips_MVC_Visual.Controllers
 			return View();
 		}
 
-		public ActionResult Index2(Data data2)
+		public ActionResult Index2()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		public JsonResult GetData(Data data1)
+		public JsonResult GetData(Data[] gunData)
 		{
-			GunDataManager.AddToList(data1);
-			return Json(new { redirectTo = Url.Action("Index2", "Home", new { Name = data1.Name }, null) });
+			TempData["GunData"] = gunData;
+			return Json(new { redirectTo = Url.Action("Chat", "Chat") });
 		}
 	}
 }

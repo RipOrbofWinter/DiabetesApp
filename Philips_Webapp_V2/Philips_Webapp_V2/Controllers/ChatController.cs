@@ -7,6 +7,7 @@ using BusinessLogic.Factory;
 using BusinessLogic.Models;
 using BusinessLogic.TemporaryData;
 using System.Web.Mvc;
+using BusinessLogic.Gun;
 
 namespace Philips_MVC_Visual.Controllers
 {
@@ -16,8 +17,9 @@ namespace Philips_MVC_Visual.Controllers
 
         public ActionResult Chat()
         {
-            var messages = builder.messages;
-            var messageModels = MessageFactory.ConvertToModel(messages);
+            var gun = TempData["GunData"] as Data[];
+
+            var messageModels = MessageFactory.ConvertToModel(gun);
             return View(messageModels);
         }
 

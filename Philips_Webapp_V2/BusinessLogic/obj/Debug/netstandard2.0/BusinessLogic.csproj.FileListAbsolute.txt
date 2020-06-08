@@ -32,3 +32,12 @@ C:\Users\Pouki\source\repos\RipOrbofWinter\DiabetesApp\Philips_Webapp_V2\Busines
 C:\Users\Pouki\source\repos\RipOrbofWinter\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.AssemblyInfo.cs
 C:\Users\Pouki\source\repos\RipOrbofWinter\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.dll
 C:\Users\Pouki\source\repos\RipOrbofWinter\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.pdb
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\bin\Debug\netstandard2.0\BusinessLogic.deps.json
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\bin\Debug\netstandard2.0\BusinessLogic.dll
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\bin\Debug\netstandard2.0\BusinessLogic.pdb
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.AssemblyInfo.cs
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.dll
+C:\Users\micke\Source\Repos\DiabetesApp\Philips_Webapp_V2\BusinessLogic\obj\Debug\netstandard2.0\BusinessLogic.pdb

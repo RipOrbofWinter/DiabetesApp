@@ -14,29 +14,37 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 	<script type="text/javascript">
-		var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
-		var gunItems = gun.get('Test');
 
-		var kaas = "";
+        const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun') 
 
-		gun.get('Test').on(function (item, id) {
-			kaas = item[Object.keys(item)[Object.keys(item).length - 1]]
-		})
+        function getMessages() {
+           var DATA = [];
 
-		console.log(kaas);
+            gun.get('user').get('chat').get('message').map().on(function (item, id) {
+                var messageObject = {
+                    id: id,
+                    title: item.title,
+                    timestamp: item.timestamp
+                }
+                DATA.push(messageObject);
+            })
+            return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
+		}
 
-		let prod = new Array();
-		var product = { Name: kaas }
-		prod.push(product);
+		var messages = getMessages();
+
+        console.log(messages);
+
 
 		$(document).ready(function () {
 			$.ajax({
 				type: "POST",
 				contentType: "application/json; charset=utf-8",
-				data: JSON.stringify(product),
+                data: JSON.stringify(messages),
 				url: "/Home/GetData",
 
-				success: function (result) {
+                success: function (result) {
+                    console.log(result);
 					window.location.href = result.redirectTo;
 				}
 			})

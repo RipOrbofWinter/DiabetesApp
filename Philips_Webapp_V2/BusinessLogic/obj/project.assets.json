@@ -180,25 +180,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pouki\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\micke\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pouki\\source\\repos\\RipOrbofWinter\\DiabetesApp\\Philips_Webapp_V2\\BusinessLogic\\BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\micke\\Source\\Repos\\DiabetesApp\\Philips_Webapp_V2\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
-      "projectPath": "C:\\Users\\Pouki\\source\\repos\\RipOrbofWinter\\DiabetesApp\\Philips_Webapp_V2\\BusinessLogic\\BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\Pouki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pouki\\source\\repos\\RipOrbofWinter\\DiabetesApp\\Philips_Webapp_V2\\BusinessLogic\\obj\\",
+      "projectPath": "C:\\Users\\micke\\Source\\Repos\\DiabetesApp\\Philips_Webapp_V2\\BusinessLogic\\BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\micke\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\micke\\Source\\Repos\\DiabetesApp\\Philips_Webapp_V2\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Pouki\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\micke\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"

@@ -26,10 +26,8 @@
 		<div id="scrollBar">
 			@foreach (var item in Model)
 			{
-				<br />
-				if (item.IsSent)
-				{
-					<div id="sent">
+			
+					<div>
 						<p>
 							@Html.DisplayFor(modelItem => item.Text)
 						</p>
@@ -37,18 +35,7 @@
 							@Html.DisplayFor(modelItem => item.Date)
 						</p>
 					</div>
-				}
-				else
-				{
-					<div id="notsent">
-						<p>
-							@Html.DisplayFor(modelItem => item.Text)
-						</p>
-						<p>
-							@Html.DisplayFor(modelItem => item.Date)
-						</p>
-					</div>
-				}
+				
 			}
 		</div>
 		<form id="form">
