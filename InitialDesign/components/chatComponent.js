@@ -68,7 +68,7 @@ export default class ChatComponent extends React.Component {
 
         <FlatList
           data={DATA}
-          renderItem={({ item }) => <Item title={item.title + "  -  " + item.id} />}
+          renderItem={({ item }) => <Item title={item.title + "  -  " + ConvertTimeStampToDateTime(item.timestamp) } />}
           keyExtractor={item => item.id}
         />
       </ScrollView>
@@ -146,4 +146,16 @@ function getMessages(functionOrigin)
 function GetTimeStamp(){
   var d = new Date();
   return d.getTime();
+}
+
+function ConvertTimeStampToDateTime(timestamp){
+  var date = new Date(timestamp);
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var day = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var formattedTime = year + "-" + month + "-" + day + " " + hours + ':' + minutes;
+  return formattedTime;
 }
