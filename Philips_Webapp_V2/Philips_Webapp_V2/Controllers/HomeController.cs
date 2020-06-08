@@ -17,16 +17,5 @@ namespace Philips_MVC_Visual.Controllers
 			return View();
 		}
 
-		public ActionResult Index2()
-		{
-			return View();
-		}
-
-		[HttpPost]
-		public JsonResult GetData(Data[] gunData)
-		{
-			TempData["GunData"] = gunData;
-			return Json(new { redirectTo = Url.Action("Chat", "Chat") });
-		}
 	}
 }

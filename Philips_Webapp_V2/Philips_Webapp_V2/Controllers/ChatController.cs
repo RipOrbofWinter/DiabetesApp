@@ -13,11 +13,13 @@ namespace Philips_MVC_Visual.Controllers
 {
     public class ChatController : Controller
     {
-        public TemporaryDataBuilder builder = new TemporaryDataBuilder();
 
         public ActionResult Chat()
         {
-            var gun = TempData["GunData"] as Data[];
+            var gun = TempData["GetMessages"] as Data[];
+
+            if (gun == null)
+                return RedirectToAction("GetMessages","Gun");
 
             var messageModels = MessageFactory.ConvertToModel(gun);
             return View(messageModels);

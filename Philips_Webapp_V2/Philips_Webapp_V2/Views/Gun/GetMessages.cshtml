@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+
+    <div align="center">
+        <h1>Loading chat</h1>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+    <script type="text/javascript">
+
+        const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
+
+        function getMessages() {
+           var DATA = [];
+
+            gun.get('user').get('chat').get('message').map().on(function (item, id) {
+                var messageObject = {
+                    id: id,
+                    title: item.title,
+                    timestamp: item.timestamp
+                }
+                DATA.push(messageObject);
+            })
+            return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
+		}
+
+		var messages = getMessages();
+
+        console.log(messages);
+
+
+		$(document).ready(function () {
+			$.ajax({
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(messages),
+                url: "/Gun/GetChatMessages",
+
+                success: function (result) {
+                    console.log(result);
+					window.location.href = result.redirectTo;
+				}
+			})
+		})
+    </script>
+</body>
+</html>

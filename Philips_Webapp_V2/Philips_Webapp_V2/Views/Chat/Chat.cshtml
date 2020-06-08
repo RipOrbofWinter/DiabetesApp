@@ -39,11 +39,8 @@
 			}
 		</div>
 		<form id="form">
-			@using (Html.BeginForm("ChatSend", "Chat", FormMethod.Post))
-			{
 				@Html.TextBox("message")
-				<input type="submit" name="Submit" />
-			}
+				<input id="said" type="submit" name="Submit" />
 		</form>
 	</div>
 </body>
@@ -61,36 +58,21 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <script type="text/javascript">
-	var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
-	var gunItems = gun.get('Test');
+    $('#said').on('submit', function () {
+        var timestamp = GetTimeStamp();
+        var message = document.getElementById("say").value;
 
-	var kaas = "";
-
-	gun.get('Test').on(function (item, id) {
-		kaas = item[Object.keys(item)[Object.keys(item).length - 1]]
-	})
-
-	console.log(kaas);
-
-	let prod = new Array();
-	prod.push(kaas);
-	var product = { Name: prod }
-
-	$(document).ready(function () {
-		$('#btnSend').click(function () {
-			$.ajax({
-				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				data: JSON.stringify(prod),
-				url: "/Home/GetData",
-
-				success: function (data) {
-					alert(data);
-				},
-				error: function (result) {
-					alert("Something went wrong");
-				}
-			})
-		})
-	})
+        var messageObject = {
+            title: message,
+            timestamp: timestamp
+		}
+        console.log(message);
+        if (message) {
+            gun.get('user').get('chat').get('message').set(messageObject);
+        }
+	});
+    function GetTimeStamp() {
+        var d = new Date();
+        return d.getTime();
+    }
 </script>
