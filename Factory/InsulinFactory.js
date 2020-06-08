@@ -2,10 +2,10 @@
 // Formule 1: Bereken hoeveel eenheden insuline je nodig hebt per gegeten koolhydraten.
 exports.CarbohydrateCoverage = (CHOMealGrams, UserTotalDailyInsulineDose) => {
     if (UserTotalDailyInsulineDose == 0)
-        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
+        throw new TypeError("UserTotalDailyInsulineDose was equal to 0");
 
     if (CHOMealGrams == 0)
-        throw new SyntaxError("CHOMealGrams was equal to 0");
+        throw new TypeError("CHOMealGrams was equal to 0");
 
     //CHO = Carbohydrate
     var units = CHOMealGrams / exports.CalculateCarbohydateRatio(UserTotalDailyInsulineDose);
@@ -19,7 +19,7 @@ exports.CalculateCarbohydateRatio = (UserTotalDailyInsulineDose) => {
     //This can be calculated using the Rule of �500�: Carbohydrate Bolus Calculation
 
     if (UserTotalDailyInsulineDose == 0)
-        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
+        throw new TypeError("UserTotalDailyInsulineDose was equal to 0");
 
     var carbohydateCoverageRatio = Math.floor((500 / UserTotalDailyInsulineDose));
 
@@ -32,10 +32,10 @@ exports.CalculateHighBloodSugarCorrection = (UserTotalDailyInsulineDose, current
     var bloodSugarDifference = exports.CalculateTargetBloodSugarDifference(currentBloodSugar, bloodSugarTarget);
 
     if (UserTotalDailyInsulineDose == 0)
-        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
+        throw new TypeError("UserTotalDailyInsulineDose was equal to 0");
 
     if (bloodSugarDifference == 0)
-        throw new SyntaxError("BloodSugarDifference was equal to 0");
+        throw new TypeError("BloodSugarDifference was equal to 0");
 
     var correctionDose = Math.floor(bloodSugarDifference / exports.CalculateHighBloodSugarCorrectionFactor(UserTotalDailyInsulineDose));
 
@@ -45,10 +45,10 @@ exports.CalculateHighBloodSugarCorrection = (UserTotalDailyInsulineDose, current
 // Formule 2b: Bloedsuiker verschill tussen doel en werkelijk berekenen.
 exports.CalculateTargetBloodSugarDifference = (currentBloodSugar, bloodSugarTarget) => {
     if (currentBloodSugar == 0)
-        throw new SyntaxError("currentBloodSugar was equal to 0");
+        throw new TypeError("currentBloodSugar was equal to 0");
 
     if (bloodSugarTarget == 0)
-        throw new SyntaxError("bloodSugarTarget was equal to 0");
+        throw new TypeError("bloodSugarTarget was equal to 0");
 
 
     var bloodSugarDifference = currentBloodSugar - bloodSugarTarget;
@@ -61,7 +61,7 @@ exports.CalculateHighBloodSugarCorrectionFactor = (UserTotalDailyInsulineDose) =
     //This can be calculated using the Rule of �1800�.
 
     if (UserTotalDailyInsulineDose == 0)
-        throw new SyntaxError("UserTotalDailyInsulineDose was equal to 0");
+        throw new TypeError("UserTotalDailyInsulineDose was equal to 0");
 
     var correctionFactor = 1800 / UserTotalDailyInsulineDose;
 
@@ -81,9 +81,9 @@ exports.CalculateTotalMealtimeDose = (CHOMealGrams, UserTotalDailyInsulineDose, 
 exports.CalculateDailyInsulinDoseRequirement = (UserTotalKilogramWeight, BasalBackgroundPercentage = 100) => {
 
     if (UserTotalKilogramWeight == 0)
-        throw new SyntaxError("UserTotalKilogramWeight was equal to 0");
+        throw new TypeError("UserTotalKilogramWeight was equal to 0");
     if (BasalBackgroundPercentage == 0)
-        throw new SyntaxError("BasalBackgroundPercentage was equal to 0");
+        throw new TypeError("BasalBackgroundPercentage was equal to 0");
 
     var UserTotalDailyInsulineDose = ((0.55 * UserTotalKilogramWeight) * BasalBackgroundPercentage) / 100;
 

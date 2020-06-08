@@ -29,13 +29,13 @@ test("CarbohydrateCoverage_NullInput", () => {
     //assert
     expect(() => {
         CarbohydrateCoverage(CHOMeal, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CarbohydrateCoverage(CHOMeal, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CarbohydrateCoverage(CHOMeal, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
 
 });
 
@@ -62,16 +62,16 @@ test("HighBloodSugarCorrection_NullInput", () => {
     //assert
     expect(() => {
         CalculateHighBloodSugarCorrection(UserTotalDailyInsulineDose, 0, bloodSugarTarget);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateHighBloodSugarCorrection(UserTotalDailyInsulineDose, currentBloodSugar, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateHighBloodSugarCorrection(0, currentBloodSugar, bloodSugarTarget);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateHighBloodSugarCorrection(0, 0, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
 
 });
 
@@ -95,13 +95,13 @@ test("CalculateTargetBloodSugarDifference_NullInput", () => {
     //assert 
     expect(() => {
         CalculateTargetBloodSugarDifference(0, bloodSugarTarget);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateTargetBloodSugarDifference(currentBloodSugar, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateTargetBloodSugarDifference(0, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
 });
 
 test("TotalMealtimeDose_CorrectResult", () => {
@@ -127,13 +127,13 @@ test("TotalMealtimeDose_NullInput", () => {
     //assert 
     expect(() => {
         CalculateTotalMealtimeDose(0, highBloodSugarCorrectionDose);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateTotalMealtimeDose(carbohydrateCoverageDose, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateTotalMealtimeDose(0, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
 });
 test("DailyInsulinDoseRequirement_CorrectResult", () => {
 
@@ -159,13 +159,13 @@ test("DailyInsulinDoseRequirement_NullInput", () => {
     //assert  
     expect(() => {
         CalculateDailyInsulinDoseRequirement(TotalKilogramWeight, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateDailyInsulinDoseRequirement(0, BasalBackgroundPercentage);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
     expect(() => {
         CalculateDailyInsulinDoseRequirement(0, 0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
 });
 
 test("CarbohydrateRatio_CorrectResult", () => {
@@ -183,7 +183,7 @@ test("CarbohydrateRatio_NullInput", () => {
     //assert 
     expect(() => {
         CalculateCarbohydateRatio(0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
 });
 
 test("HighBloodSugarCorrectionFactor_CorrectResult", () => {
@@ -201,6 +201,6 @@ test("HighBloodSugarCorrectionFactor_NullInput", () => {
     //assert 
     expect(() => {
         CalculateHighBloodSugarCorrectionFactor(0);
-    }).toThrowError(SyntaxError);
+    }).toThrowError(TypeError);
 });
 
