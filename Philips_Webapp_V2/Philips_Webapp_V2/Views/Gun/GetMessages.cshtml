@@ -20,7 +20,7 @@
         function getMessages() {
            var DATA = [];
 
-            gun.get('user').get('chat').get('message7').map().on(function (item, id) {
+            gun.get('user').get('chat').get('Message10').map().on(function (item, id) {
                 var messageObject = {
                     id: id,
                     title: item.title,
@@ -41,7 +41,7 @@
 			$.ajax({
 				type: "POST",
 				contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(messages),
+                data: JSON.stringify(getMessages()),
                 url: "/Gun/GetChatMessages",
 
                 success: function (result) {

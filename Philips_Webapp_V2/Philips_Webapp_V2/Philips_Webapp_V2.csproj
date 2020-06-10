@@ -209,6 +209,7 @@
     <Content Include="Views\Chat\Chat.cshtml" />
     <Content Include="Views\Gun\GetMessages.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Chat\ChatV2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "ChatV2";
+}
+
+<h2>ChatV2</h2>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/Chat.css">
+</head>
+
+<body>
+    <div id="UserList">
+        <form id="returnmenu">
+            <button>Return</button>
+        </form>
+        <ul id="listofrooms">
+            <li>jan</li>
+            <li>klaas</li>
+        </ul>
+    </div>
+        <div id="Chat">
+            <form id="userinfo">
+                <button>Refresh</button>
+            </form>
+            <ul id="ul1"></ul>
+            <div id="scrollBar">
+                <p>
+                    <ul id="chatroom">
+                    </ul>
+                </p>
+            </div>
+            <form id="form">
+                <input id="chatinput">
+                <input id="said" type="button" value="send" />
+            </form>
+        </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script>
+    var objDiv = document.getElementById("scrollBar");
+    objDiv.scrollTop = objDiv.scrollHeight;
+</script>
+
+<script type="text/javascript">
+    var objDiv = document.getElementById("scrollBar");
+    objDiv.scrollTop = objDiv.scrollHeight;
+
+
+    var gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
+
+    function getMessages() {
+        var DATA = [];
+
+        gun.get('user').get('chat').get('Message10').map().on(function (item, id) {
+            var messageObject = {
+                id: id,
+                title: item.title,
+                timestamp: item.timestamp
+            }
+            DATA.push(messageObject);
+        })
+        console.log(DATA);
+        return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
+    }
+
+    var messages = getMessages();
+
+    DisplayMessages();
+
+    function DisplayMessages() {
+        for (var i = 0; i < messages.length; i++) {
+            if (typeof messages[i].title !== 'undefined') {
+                var node = document.createElement("LI");
+                var textnode = document.createTextNode(messages[i].title);
+                node.appendChild(textnode);
+                document.getElementById("chatroom").appendChild(node);
+            }
+        }
+    }
+
+
+    $('#said').on('click', function () {
+        var timestamp = GetTimeStamp();
+        var message = document.getElementById("chatinput").value;
+
+        var messageObject = {
+            title: message,
+            timestamp: timestamp
+        }
+        console.log(message);
+        if (message) {
+            gun.get('user').get('chat').get('Message10').set(messageObject);
+        }
+    });
+
+    function GetTimeStamp() {
+        var d = new Date();
+        return d.getTime();
+    }
+
+    $("#said").on("click", function (e) {
+        setTimeout(function () {
+            location.reload();
+        }, 500)
+    });
+
+    function UI(say, id) {
+        var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('#chatroom'); //either get the existing id  or create it; ideally replace this with vue:
+        $(li).text(say); //put the record text inside the list
+    }
+
+
+</script>
+
+<style>
+    ul {
+        padding: 0;
+    }
+
+    li {
+        display: flex;
+    }
+
+        li span {
+            width: 150px;
+            word-break: break-all;
+        }
+
+    img {
+        height: 20px;
+        margin-left: 8px;
+        cursor: pointer;
+    }
+
+    input {
+        width: 150px;
+        margin-right: 8px;
+    }
+
+        input[type='checkbox'] {
+            width: auto;
+        }
+</style>

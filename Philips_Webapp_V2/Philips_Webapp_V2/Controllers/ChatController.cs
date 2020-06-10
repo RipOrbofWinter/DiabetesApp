@@ -25,6 +25,11 @@ namespace Philips_MVC_Visual.Controllers
             return View(messageModels);
         }
 
+        public ActionResult ChatV2()
+        {
+            return View();
+        }
+
         public ActionResult ChatSend(string message)
         {
             return RedirectToAction("Chat");
