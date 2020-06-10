@@ -4,26 +4,26 @@
 
 <body>
 	<h1>Login</h1>
-	<div>
-		<br>
-		<label for="UserName"><b>Username</b></label>
-		<br>
-		<input type="text" placeholder="Enter Username" name="UserName" required>
-		<br><br>
+    <div>
+        <br>
+        <label for="UserName"><b>Username</b></label>
+        <br>
+        <input type="text" placeholder="Enter Username" name="UserName" required>
+        <br><br>
 
-		<label for="Password"><b>Password</b></label>
-		<br>
-		<input type="password" placeholder="Enter Password" name="Password" required>
-		<br><br>
+        <label for="Password"><b>Password</b></label>
+        <br>
+        <input type="password" placeholder="Enter Password" name="Password" required>
+        <br><br>
 
-		<button type="submit">Login</button>
-		<br><br>
+        <button type="submit">Login</button>
+        <br><br>
 
-		<label>
-			<input type="checkbox" checked="checked" name="remember"> Remember me
-		</label>
-		<br>
-		<a asp-controller="Account" asp-action="Register">Or register here!</a>
-	</div>
+        <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+        <br>
+        @Html.ActionLink("Or register here!", "Register", "Account")
+    </div>
 </body>
 

@@ -18,15 +18,17 @@
 				</button>
 				@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 			</div>
-			<div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Calendar", "Calendar", "Calendar")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     <li>@Html.ActionLink("Chat 1", "Chat", "Chat")</li>
                     <li>@Html.ActionLink("Chat 2", "ChatV2", "Chat")</li>
                 </ul>
-			</div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                </ul>
+            </div>
 		</div>
 	</div>
 	<br />
