@@ -6,9 +6,9 @@ namespace BusinessLogic.Gun
 {
 	public static class GunDataManager
 	{
-		public static List<Data> DataList { get; set; }
+		public static List<MessageData> DataList { get; set; }
 
-		public static void AddToList(Data data)
+		public static void AddToList(MessageData data)
 		{
 			if (data == null)
 				return;

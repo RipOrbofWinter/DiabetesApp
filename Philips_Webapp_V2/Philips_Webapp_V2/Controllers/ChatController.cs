@@ -16,7 +16,7 @@ namespace Philips_MVC_Visual.Controllers
 
         public ActionResult Chat()
         {
-            var gun = TempData["GetMessages"] as Data[];
+            var gun = TempData["GetMessages"] as MessageData[];
 
             if (gun == null)
                 return RedirectToAction("GetMessages","Gun");

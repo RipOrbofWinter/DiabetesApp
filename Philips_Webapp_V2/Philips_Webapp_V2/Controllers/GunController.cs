@@ -16,11 +16,23 @@ namespace Philips_Webapp_V2.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult GetChatMessages(Data[] gunData)
+		public JsonResult GetChatMessages(MessageData[] gunData)
 		{
 			TempData.Remove("GetMessages");
 			TempData["GetMessages"] = gunData;
 			return Json(new { redirectTo = Url.Action("Chat", "Chat") });
+		}
+
+		public ActionResult GetIntakes()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public JsonResult GetUserIntakes(IntakeData[] gunData)
+		{
+			TempData["GetIntakes"] = gunData;
+			return Json(new { redirectTo = Url.Action("Calendar", "Calendar") });
 		}
 	}
 }

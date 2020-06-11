@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BusinessLogic.Gun
 {
-	public class Data
+	public class MessageData
 	{
 		public string title { get; set; }
 		public string id { get; set; }
