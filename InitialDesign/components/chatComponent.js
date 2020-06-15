@@ -85,12 +85,12 @@ function Item({ title }) {
 }
 
 var messageObject  = {
-  title: 'message wordt getest',
+  title: 'message wordt getest 2',
   timestamp: ''
 }
 
-var user1 = "peterjan"
-var user2 = "klaas"
+var user1 = "mickey"
+var user2 = "luuk"
 var date = "2020:06:03"
 // var intakeId = "1"
 
@@ -99,25 +99,23 @@ function capitalizeFirstLetter(string) {
 }
 
 
-// var newUser = gun.get(user).get(manualObject.dateOfIntake).put({date: manualObject.dateOfIntake});
-// gun.get('users2').set(newUser);
-// var newUser = gun.get(user).get(manualObject.dateOfIntake).get('intake').put({manualObject});
-// gun.get('users2').set(newUser);
+// var connectedUsername = gun.get(user2).put({name: capitalizeFirstLetter(user2)});
+//   gun.get('user').get(user1).set(connectedUsername);
+// var message = gun.get(user2).put({messageObject});
+//   gun.get('user').get(user1).get(user2).get('chat').set(message);
 
+// var connectedUsername = gun.get(user1).put({name: capitalizeFirstLetter(user1)});
+//   gun.get('user').get(user2).set(connectedUsername);
+// var message = gun.get(user1).put({messageObject});
+//   gun.get('user').get(user2).get(user2).get('chat').set(message);
 
-// var connectedUsername = gun.put({name: capitalizeFirstLetter(user2)});
-//   gun.get('user').get(user1).get('name').set(connectedUsername);
-
-// gun.get('user').get(user1).get('name').get('chat').set(messageObject);
-
-// var connectedUsername = gun.put({name: capitalizeFirstLetter(user1)});
-//   gun.get('user').get(user1).get('name').set(connectedUsername);
-
+// var connectedUsername = gun.get(user1).put({name: capitalizeFirstLetter(user1)});
+//   gun.get('user').get(user2).set(connectedUsername);
 // gun.get('user').get(user2).get('name').get('chat').set(messageObject);
 
-gun.get('user').get(user1).get('name').get('chat').map().on(function(item, id){
+gun.get('user').get(user1).get('luuk').map().on(function(item, id){
 
-  console.log(item.title)
+  console.log(item)
   })
 
 var DATA = [
