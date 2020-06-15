@@ -30,7 +30,7 @@ export default class ChatComponent extends React.Component {
       messagesObject: ''
     }
 
-    this.$message = this.$gun.get('user').get('chat').get('message7')
+    this.$message = this.$gun.get('user').get('chat').get('message11')
     let _this = this
     this.$message.on(function(data, key) {
       _this.setState({messagesObject:getMessages("This.message.on")})
@@ -68,7 +68,7 @@ export default class ChatComponent extends React.Component {
 
         <FlatList
           data={DATA}
-          renderItem={({ item }) => <Item title={item.title + "  -  " + ConvertTimeStampToDateTime(item.timestamp) } />}
+          renderItem={({ item }) => <Item title={item.title + "  -  " + item.id} />}
           keyExtractor={item => item.id}
         />
       </ScrollView>
@@ -83,6 +83,42 @@ function Item({ title }) {
     </View>
   );
 }
+
+var messageObject  = {
+  title: 'message wordt getest',
+  timestamp: ''
+}
+
+var user1 = "peterjan"
+var user2 = "klaas"
+var date = "2020:06:03"
+// var intakeId = "1"
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+// var newUser = gun.get(user).get(manualObject.dateOfIntake).put({date: manualObject.dateOfIntake});
+// gun.get('users2').set(newUser);
+// var newUser = gun.get(user).get(manualObject.dateOfIntake).get('intake').put({manualObject});
+// gun.get('users2').set(newUser);
+
+
+// var connectedUsername = gun.put({name: capitalizeFirstLetter(user2)});
+//   gun.get('user').get(user1).get('name').set(connectedUsername);
+
+// gun.get('user').get(user1).get('name').get('chat').set(messageObject);
+
+// var connectedUsername = gun.put({name: capitalizeFirstLetter(user1)});
+//   gun.get('user').get(user1).get('name').set(connectedUsername);
+
+// gun.get('user').get(user2).get('name').get('chat').set(messageObject);
+
+gun.get('user').get(user1).get('name').get('chat').map().on(function(item, id){
+
+  console.log(item.title)
+  })
 
 var DATA = [
   {
@@ -102,15 +138,15 @@ function setMessage(message, timestamp)
 
   if(message){
       //sugarSetting.set(data);
-      gun.get('user').get('chat').get('message7').set(messageObject);
+      gun.get('user').get('chat').get('message11').set(messageObject);
   }
 
-  console.log(gun.get('user').get('chat').get('message7'));
+  console.log(gun.get('user').get('chat').get('message11'));
 }
 
 function getMessage()
 {
-    gun.get('user').get('chat').get('message7').on(function(item, id){
+    gun.get('user').get('chat').get('message11').on(function(item, id){
         message = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
     return message
@@ -120,18 +156,18 @@ function getMessages(functionOrigin)
 {
   DATA = [];
   var counter = 0;
-  gun.get('user').get('chat').get('message7').map().on(function(item, id){
+  gun.get('user').get('chat').get('message11').map().on(function(item, id){
     var messageObject  = {
       id: id,
       title: item.title,
       timestamp: item.timestamp
     }
     if (counter == 0){
-      console.log("message id: " + messageObject.id)
+      // console.log("message id: " + messageObject.id)
       DATA.push(messageObject);
     }
     else if(DATA[DATA.length - 1] != undefined && DATA[DATA.length - 1].id != messageObject.id){
-      console.log("message id: " + messageObject.id + " past id: " + DATA[DATA.length - 1].id)
+      // console.log("message id: " + messageObject.id + " past id: " + DATA[DATA.length - 1].id)
       DATA.push(messageObject);
     }
     else{
