@@ -7,6 +7,7 @@
     <h1>Loading Intakes</h1>
 </div>
 
+
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
@@ -18,34 +19,49 @@
 
     var gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
 
+    function IntakeCount() {
+        var counter = [];
+        gun.get('users5').map().on(function (item, id) {
+            if (item.id != undefined) {
+                counter.push(item.id);
+            }
+        })
+        return counter;
+    }
+
+    var count = IntakeCount();
+
     function getIntakes() {
         var DATA = [];
+        for (i = 0; i < count.length; i++) {
+            console.log(count[i]);
+            gun.get('users5').get(count[i]).get('intake').map().on(function (item, id) {
 
-        gun.get('user').get('date').get('intake').map().on(function (item, id) {
+                var manualObject = {
+                    dateOfIntake: item.dateOfIntake,
+                    intakeDayId: item.intakeDayId,
+                    weight: item.weight,
+                    CHORatio: item.CHORatio,
+                    bloodSugar: item.bloodSugar,
+                    InsulinUnits: item.InsulinUnits,
+                }
+                DATA.push(manualObject);
+            })
+        }
 
-            var manualObject = {
-                dateOfIntake: item.dateOfIntake,
-                intakeDayId: item.intakeDayId,
-                weight: item.weight,
-                CHORatio: item.CHORatio,
-                bloodSugar: item.bloodSugar,
-                InsulinUnits: item.InsulinUnits,
-            }
+        console.log(DATA)
 
-            DATA.push(manualObject);
-        })
         return DATA;
     }
 
     var intakes = getIntakes();
 
-    console.log(intakes);
 
     $(document).ready(function () {
         $.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(getIntakes()),
+            data: JSON.stringify(intakes),
             url: "/Gun/GetUserIntakes",
 
             success: function (result) {

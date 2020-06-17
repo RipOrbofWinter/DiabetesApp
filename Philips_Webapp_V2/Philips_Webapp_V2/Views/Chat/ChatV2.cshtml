@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ChatV2";
 }
 
@@ -19,22 +18,22 @@
             <li>klaas</li>
         </ul>
     </div>
-        <div id="Chat">
-            <form id="userinfo">
-                <button>Refresh</button>
-            </form>
-            <ul id="ul1"></ul>
-            <div id="scrollBar">
-                <p>
-                    <ul id="chatroom">
-                    </ul>
-                </p>
-            </div>
-            <form id="form">
-                <input id="chatinput">
-                <input id="said" type="button" value="send" />
-            </form>
+    <div id="Chat">
+        <form id="userinfo">
+            <button>Refresh</button>
+        </form>
+        <ul id="ul1"></ul>
+        <div id="scrollBar">
+            <p>
+                <ul id="chatroom">
+                </ul>
+            </p>
         </div>
+        <form id="form">
+            <input id="chatinput">
+            <input id="said" type="button" value="send" />
+        </form>
+    </div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
@@ -42,16 +41,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-<script>
-    var objDiv = document.getElementById("scrollBar");
-    objDiv.scrollTop = objDiv.scrollHeight;
-</script>
-
 <script type="text/javascript">
-    var objDiv = document.getElementById("scrollBar");
-    objDiv.scrollTop = objDiv.scrollHeight;
-
-
     const gun = Gun("https://diabetesappfontysgroep3.herokuapp.com/gun");
 
     function getMessages() {
@@ -70,20 +60,34 @@
     }
 
     var messages = getMessages();
-
     DisplayMessages();
+    ScrollToBottom();
+
+    function ScrollToBottom() {
+        var objDiv = document.getElementById("scrollBar");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
 
     function DisplayMessages() {
         for (var i = 0; i < messages.length; i++) {
+            var rand = Boolean(Math.round(Math.random()));
+
             if (typeof messages[i].title !== 'undefined') {
                 var node = document.createElement("LI");
+
+                if (rand) {
+                    node.setAttribute("id", "sent");
+                } else {
+                    node.setAttribute("id", "received");
+                }
+
+
                 var textnode = document.createTextNode(messages[i].title);
                 node.appendChild(textnode);
                 document.getElementById("chatroom").appendChild(node);
             }
         }
     }
-
 
     $('#said').on('click', function () {
         var timestamp = GetTimeStamp();

@@ -1,5 +1,4 @@
 ﻿body {
-	
 }
 
 #UserList {
@@ -33,14 +32,14 @@
 	direction: rtl;
 }
 
-#ul1 li {
-	border: solid 1px black;
-	margin: 7px;
-	padding: 5px;
-	list-style-image: url(list-style-icon.png);
-	width: 40vh;
-	text-align: left;
-}
+	#ul1 li {
+		border: solid 1px black;
+		margin: 7px;
+		padding: 5px;
+		list-style-image: url(list-style-icon.png);
+		width: 40vh;
+		text-align: left;
+	}
 
 #ButtonSend {
 	width: 5rem;
@@ -73,25 +72,27 @@ button {
 
 #buttoninput {
 	margin-top: .2rem;
-	width: 20rem;	
+	width: 20rem;
 }
 
-#form{
+#form {
 	margin-top: 10px;
 	margin-left: 10px;
 }
 
 #sent {
+	margin-bottom: .5rem;
 	margin-left: 30rem;
-	border-radius: 25px;
+	border-radius: 15rem;
 	border: 2px solid black;
 	padding: 1rem;
 }
 
-#notsent {
+#received {
+	margin-bottom: .5rem;
 	margin-left: 2rem;
 	margin-right: 25rem;
-	border-radius: 25px;
+	border-radius: 15rem;
 	border: 2px solid black;
 	padding: 1rem;
 }

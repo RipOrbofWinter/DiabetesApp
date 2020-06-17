@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Helpers;
-using BusinessLogic.TemporaryData;
 using System.Web.Mvc;
 using BusinessLogic.Gun;
 using BusinessLogic.Factory;
+using BusinessLogic.Entities;
 
 namespace Philips_MVC_Visual.Controllers
 {
@@ -22,12 +22,14 @@ namespace Philips_MVC_Visual.Controllers
         {
             var gun = TempData["GetIntakes"] as IntakeData[];
 
-            if (gun == null)
+            List<CalendarEvent> events = new List<CalendarEvent>();
+
+            if (gun != null)
             {
-                //gun not loaded 
+                //gun loaded 
+                events = IntakeDataFactory.ConvertToCalendarEvents(gun.ToList());
             }
 
-            //var events = IntakeDataFactory.fuctionToModel;
             return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
