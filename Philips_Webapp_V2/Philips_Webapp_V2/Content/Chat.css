@@ -83,16 +83,16 @@ button {
 #sent {
 	margin-bottom: .5rem;
 	margin-left: 30rem;
-	border-radius: 15rem;
-	border: 2px solid black;
+	border: solid black;
 	padding: 1rem;
+	word-break: break-all;
 }
 
 #received {
 	margin-bottom: .5rem;
 	margin-left: 2rem;
 	margin-right: 25rem;
-	border-radius: 15rem;
-	border: 2px solid black;
+	border: solid black;
 	padding: 1rem;
+	word-break: break-all;
 }

@@ -13,5 +13,6 @@ namespace BusinessLogic.Gun
         public string bloodSugar { get; set; }
         public string InsulinUnits { get; set; }
         public string CHOMealGrams { get; set; }
+        public string user { get; set; }
     }
 }

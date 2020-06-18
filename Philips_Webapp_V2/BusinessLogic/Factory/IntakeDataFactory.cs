@@ -32,6 +32,7 @@ namespace BusinessLogic.Factory
                 InsulinUnitsTaken = intakeData.InsulinUnits,
                 bloodSugar = intakeData.bloodSugar,
                 weight = intakeData.weight,
+                user = intakeData.user,
             };
 
             return data;
@@ -62,9 +63,10 @@ namespace BusinessLogic.Factory
                 Subject = "Intake: " + intakedata.dateOfIntake,
                 Description =
                 " CHOMealGrams: " + intakedata.CHOMealGrams +
-                " CHORatio:" + intakedata.CHORatio +
-                " InsulinUnits:" + intakedata.InsulinUnits +
-                " weight:" + intakedata.weight,
+                " CHORatio: " + intakedata.CHORatio +
+                " InsulinUnits: " + intakedata.InsulinUnits +
+                " weight:" + intakedata.weight + 
+                " User: " + intakedata.user,
                 Theme = "green",
                 IsFullDay = true,
             };

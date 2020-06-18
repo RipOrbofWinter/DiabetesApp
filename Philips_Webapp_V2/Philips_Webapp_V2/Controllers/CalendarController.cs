@@ -15,6 +15,13 @@ namespace Philips_MVC_Visual.Controllers
 
         public ActionResult Calendar()
         {
+            var gun = TempData["GetIntakes"] as IntakeData[];
+
+            if (gun == null)
+                return RedirectToAction("GetIntakes", "Gun");
+
+            TempData["GetIntakes"] = gun;
+
             return View();
         }
 

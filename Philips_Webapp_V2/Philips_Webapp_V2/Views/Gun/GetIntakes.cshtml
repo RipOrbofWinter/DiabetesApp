@@ -30,13 +30,13 @@
     }
 
     var count = IntakeCount();
+    console.log(count);
+
 
     function getIntakes() {
         var DATA = [];
         for (i = 0; i < count.length; i++) {
-            console.log(count[i]);
             gun.get('users5').get(count[i]).get('intake').map().on(function (item, id) {
-
                 var manualObject = {
                     dateOfIntake: item.dateOfIntake,
                     intakeDayId: item.intakeDayId,
@@ -44,7 +44,10 @@
                     CHORatio: item.CHORatio,
                     bloodSugar: item.bloodSugar,
                     InsulinUnits: item.InsulinUnits,
+                    CHOMealGrams: item.CHOMealGrams,
+                    user: item.user,
                 }
+
                 DATA.push(manualObject);
             })
         }

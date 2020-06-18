@@ -12,5 +12,6 @@ namespace BusinessLogic.Models
 		public string InsulinUnitsTaken { get; set; }
 		public string weight { get; set; }
 		public string bloodSugar { get; set; }
+		public string user { get; set; }
 	}
 }
