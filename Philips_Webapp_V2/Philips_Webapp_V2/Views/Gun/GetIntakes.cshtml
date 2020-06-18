@@ -51,8 +51,11 @@
                 DATA.push(manualObject);
             })
         }
-
         console.log(DATA)
+
+        if (DATA.length != count.length) {
+            getIntakes();
+        }
 
         return DATA;
     }
@@ -72,6 +75,6 @@
                 window.location.href = result.redirectTo;
             }
         })
-    })
+    }) 
 </script>
 
