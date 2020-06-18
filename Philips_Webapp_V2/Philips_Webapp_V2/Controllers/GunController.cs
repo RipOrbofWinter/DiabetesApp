@@ -31,7 +31,6 @@ namespace Philips_Webapp_V2.Controllers
 		[HttpPost]
 		public JsonResult GetUserIntakes(IntakeData[] gunData)
 		{
-			TempData.Remove("GetIntakes");
 			TempData["GetIntakes"] = gunData;
 			return Json(new { redirectTo = Url.Action("Calendar", "Calendar") });
 		}

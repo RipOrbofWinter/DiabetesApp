@@ -60,7 +60,9 @@ namespace BusinessLogic.Factory
             {
                 Start = date,
                 End = date,
-                Subject = "Intake: " + intakedata.dateOfIntake,
+                Subject = intakedata.user +
+                " " +
+                intakedata.dateOfIntake,
                 Description =
                 " CHOMealGrams: " + intakedata.CHOMealGrams +
                 " CHORatio: " + intakedata.CHORatio +

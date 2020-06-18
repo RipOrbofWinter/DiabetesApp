@@ -6,6 +6,7 @@ namespace BusinessLogic.Gun
 {
     public class IntakeData
     {
+        public string id { get; set; }
         public string dateOfIntake { get; set; }
         public string intakeDayId { get; set; }
         public string weight { get; set; }

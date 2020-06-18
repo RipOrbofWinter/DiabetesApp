@@ -37,7 +37,9 @@
         var DATA = [];
         for (i = 0; i < count.length; i++) {
             gun.get('users5').get(count[i]).get('intake').map().on(function (item, id) {
+
                 var manualObject = {
+                    id: count[i],
                     dateOfIntake: item.dateOfIntake,
                     intakeDayId: item.intakeDayId,
                     weight: item.weight,
@@ -51,7 +53,7 @@
                 DATA.push(manualObject);
             })
         }
-        console.log(DATA)
+
 
         if (DATA.length != count.length) {
             getIntakes();

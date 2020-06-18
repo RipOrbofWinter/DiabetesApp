@@ -1,0 +1,80 @@
+﻿@model BusinessLogic.Gun.IntakeData
+
+@{
+    ViewBag.Title = "IntakeDetails";
+}
+
+<h2>Intake Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateOfIntake)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateOfIntake)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.intakeDayId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.intakeDayId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHORatio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHORatio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bloodSugar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bloodSugar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsulinUnits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsulinUnits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHOMealGrams)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHOMealGrams)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "DisplayCurrentDay")
+</p>
