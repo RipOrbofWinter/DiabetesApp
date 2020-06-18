@@ -40,38 +40,43 @@ export default class ChatComponent extends React.Component {
   render() { 
     return (
        
-      <ScrollView> 
-             
-        <Text>
-        {"\n\n\n"} Message
-        </Text>
-        <TextInput 
-          style={{ 
-            borderLeftWidth: 1,
-            borderRightWidth: 1, 
-            borderTopWidth: 1, 
-            borderBottomWidth: 1, 
-            paddingLeft: 15,
-            paddingRight: 15,
-            paddingTop: 5,
-            paddingBottom: 5
-          }}
-          onChangeText={(textBoxMessage) => this.setState({textBoxMessage})} 
-        />
-        <Button title='Update' 
-          onPress={()=>{
-            //this.$message.put({message:this.state.textBoxMessage})
-            setMessage(this.state.textBoxMessage, GetTimeStamp());
-            this.setState({textBoxMessage:''})
-          }}
-        />
-
         <FlatList
           data={DATA}
-          renderItem={({ item }) => <Item title={item.title + "  -  " + item.id} />}
+          renderItem={({item, index, separators}) => (
+            <View style={{backgroundColor: 'white', flex: 1}}>
+              <Text style={{lineHeight: 25}}>{item.title} - { ConvertTimeStampToDateTime(item.timestamp) }</Text>
+            </View>
+          )}
           keyExtractor={item => item.id}
+          ListFooterComponent={
+            <View 
+            style={{flex: 0.1}}
+            contentContainerStyle={{flexGrow: 1}}
+            >
+              <TextInput 
+                style={{ 
+                  borderLeftWidth: 1,
+                  borderRightWidth: 1, 
+                  borderTopWidth: 1, 
+                  borderBottomWidth: 1, 
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  paddingTop: 5,
+                  paddingBottom: 5
+                }}
+                onChangeText={(textBoxMessage) => this.setState({textBoxMessage})} 
+              />
+              <Button title='Stuur Bericht' 
+                onPress={()=>{
+                  //this.$message.put({message:this.state.textBoxMessage})
+                  setMessage(this.state.textBoxMessage, GetTimeStamp());
+                  this.setState({textBoxMessage:''})
+                }}
+                style={{bottom: 1000, position: 'absolute'}}
+              />
+            </View>
+          }
         />
-      </ScrollView>
     );
   }  
 }
