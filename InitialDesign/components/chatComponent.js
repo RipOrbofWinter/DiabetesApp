@@ -99,25 +99,6 @@ function capitalizeFirstLetter(string) {
 }
 
 
-// var connectedUsername = gun.get(user2).put({name: capitalizeFirstLetter(user2)});
-//   gun.get('user').get(user1).set(connectedUsername);
-// var message = gun.get(user2).put({messageObject});
-//   gun.get('user').get(user1).get(user2).get('chat').set(message);
-
-// var connectedUsername = gun.get(user1).put({name: capitalizeFirstLetter(user1)});
-//   gun.get('user').get(user2).set(connectedUsername);
-// var message = gun.get(user1).put({messageObject});
-//   gun.get('user').get(user2).get(user2).get('chat').set(message);
-
-// var connectedUsername = gun.get(user1).put({name: capitalizeFirstLetter(user1)});
-//   gun.get('user').get(user2).set(connectedUsername);
-// gun.get('user').get(user2).get('name').get('chat').set(messageObject);
-
-gun.get('user').get(user1).get('luuk').map().on(function(item, id){
-
-  console.log(item)
-  })
-
 var DATA = [
   {
     id: 'test',
