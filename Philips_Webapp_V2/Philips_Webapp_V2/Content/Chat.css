@@ -80,7 +80,7 @@ button {
 	margin-left: 10px;
 }
 
-#sent {
+.sent {
 	margin-bottom: .5rem;
 	margin-left: 30rem;
 	border: solid black;
@@ -88,7 +88,7 @@ button {
 	word-break: break-all;
 }
 
-#received {
+.received {
 	margin-bottom: .5rem;
 	margin-left: 2rem;
 	margin-right: 25rem;

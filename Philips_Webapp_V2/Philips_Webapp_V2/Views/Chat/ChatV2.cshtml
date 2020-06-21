@@ -54,63 +54,85 @@
             }
             DATA.push(messageObject);
         })
-        console.log(DATA);
         return DATA.sort((a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp));
     }
 
     function GetChatRooms() {
-        var Rooms = [];
+        var ChatRooms = [];
         gun.get('user').get('chat').map().on(function (item, id) {
-            Rooms.push(id);
+            ChatRooms.push(id);
         })
-        return Rooms
+        return ChatRooms
     }
-
-    function DisplayChatRooms() {
-        for (var i = 0; i < Rooms.length; i++) {
-            var node = document.createElement("LI");
-            node.setAttribute("id", Rooms[i]);
-            var textnode = document.createTextNode(Rooms[i]);
-            node.appendChild(textnode);
-            document.getElementById("listofrooms").appendChild(node);
-		}
-	}
 
     function ScrollToBottom() {
         var objDiv = document.getElementById("scrollBar");
         objDiv.scrollTop = objDiv.scrollHeight;
     }
 
+    function DisplayChatRooms() {
+        for (var i = 0; i < Rooms.length; i++) {
+            if (document.getElementById(Rooms[i]) == null) {
+
+                var node = document.createElement("LI");
+                node.setAttribute("id", Rooms[i]);
+                var textnode = document.createTextNode(Rooms[i]);
+                node.appendChild(textnode);
+                document.getElementById("listofrooms").appendChild(node);
+            }
+		}
+	}
+
     function DisplayMessages() {
         for (var i = 0; i < messages.length; i++) {
-            var rand = Boolean(Math.round(Math.random()));
-
             if (typeof messages[i].title !== 'undefined') {
-                var node = document.createElement("LI");
+                if (document.getElementById(messages[i].id) == null) {
+                    var node = document.createElement("LI");
 
-                if (rand) {
-                    node.setAttribute("id", "sent");
-                } else {
-                    node.setAttribute("id", "received");
+                    node.setAttribute("id", messages[i].id);
+                    if (messages[i].title.length > 5) {
+                        node.setAttribute("class", "sent")
+                    } else {
+                        node.setAttribute("class", "received");
+                    }
+
+                    var textnode = document.createTextNode(messages[i].title);
+                    node.appendChild(textnode);
+                    document.getElementById("chatroom").appendChild(node);
                 }
-
-
-                var textnode = document.createTextNode(messages[i].title);
-                node.appendChild(textnode);
-                document.getElementById("chatroom").appendChild(node);
             }
         }
     }
 
-    var Rooms = GetChatRooms();
-    DisplayChatRooms();
+    function LoadChat() {
 
-    var messages = getMessages();
-    DisplayMessages();
+        Rooms = [];
+        messages = [];
 
+        Rooms = GetChatRooms();
+        DisplayChatRooms();
+
+        messages = getMessages();
+        DisplayMessages();
+
+        ScrollToBottom();
+        console.log(messages);
+    }
+
+    var Rooms = [];
+    var messages = [];
+    LoadChat();
     ScrollToBottom();
+
+    window.setInterval(function () {
+        LoadChat();
+    }, 2000);
+
     $("li").click(function () {
         var r = $(this).attr('id');
+        var c = $(this).attr('class')
+        if (c != null)
+            return;
 		if (r == 'sent' || r == 'received' || r == 'navItem')
             return;
 		console.log(r);
@@ -140,18 +162,14 @@
         if (message) {
 			gun.get('user').get('chat').get(chatroom).set(messageObject);
         }
+
+        document.getElementById("chatinput").value = "";
     });
 
     function GetTimeStamp() {
         var d = new Date();
         return d.getTime();
     }
-
-    $("#said").on("click", function (e) {
-        setTimeout(function () {
-            location.reload();
-        }, 1000)
-    });
 
     function UI(say, id) {
         var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('#chatroom'); //either get the existing id  or create it; ideally replace this with vue:
