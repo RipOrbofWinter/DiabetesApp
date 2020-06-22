@@ -12,9 +12,14 @@
     <div id="UserList">
         <form id="returnmenu">
             <button>Return</button>
+            <input type="button" value="Generate Room key" onclick="location.href='@Url.Action("CreateChat", "Chat")'" />
+
         </form>
-        <ul id="listofrooms">
-        </ul>
+        <div id="scrollBarRoom">
+         <ul id="listofrooms">
+     
+         </ul>
+        </div>
     </div>
     <div id="Chat">
         <form id="userinfo">
@@ -60,6 +65,8 @@
     function GetChatRooms() {
         var ChatRooms = [];
         gun.get('user').get('chat').map().on(function (item, id) {
+            if (typeof item == 'string' || item == null)
+                return;
             ChatRooms.push(id);
         })
         return ChatRooms
@@ -99,6 +106,8 @@
                     var textnode = document.createTextNode(messages[i].title);
                     node.appendChild(textnode);
                     document.getElementById("chatroom").appendChild(node);
+
+                    ScrollToBottom();
                 }
             }
         }
@@ -115,8 +124,6 @@
         messages = getMessages();
         DisplayMessages();
 
-        ScrollToBottom();
-        console.log(messages);
     }
 
     var Rooms = [];

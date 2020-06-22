@@ -2,97 +2,105 @@
 }
 
 #UserList {
-	width: 35%;
-	float: left;
-	border: solid 4px black;
-	height: 40rem;
-	background-color: aliceblue;
+    width: 35%;
+    float: left;
+    border: solid 4px black;
+    height: 40rem;
+    background-color: aliceblue;
 }
 
 #Chat {
-	width: 63%;
-	float: right;
-	height: 40rem;
-	border: solid 4px black;
-	background-color: aliceblue;
-	position: relative;
+    width: 63%;
+    float: right;
+    height: 40rem;
+    border: solid 4px black;
+    background-color: aliceblue;
+    position: relative;
 }
 
 #scrollBar {
-	background-color: transparent;
-	width: 43rem;
-	height: 30rem;
-	overflow: auto;
+    background-color: transparent;
+    width: 43rem;
+    height: 30rem;
+    overflow: auto;
+}
+
+#scrollBarRoom {
+    background-color: transparent;
+    width: 24rem;
+    height: 35rem;
+    overflow: auto;
 }
 
 #ul1 {
-	float: right;
-	font-weight: bold;
-	text-align: right;
-	direction: rtl;
+    float: right;
+    font-weight: bold;
+    text-align: right;
+    direction: rtl;
 }
 
-	#ul1 li {
-		border: solid 1px black;
-		margin: 7px;
-		padding: 5px;
-		list-style-image: url(list-style-icon.png);
-		width: 40vh;
-		text-align: left;
-	}
+    #ul1 li {
+        border: solid 1px black;
+        margin: 7px;
+        padding: 5px;
+        list-style-image: url(list-style-icon.png);
+        width: 40vh;
+        text-align: left;
+    }
 
 #ButtonSend {
-	width: 5rem;
-	font-size: 20px;
+    width: 5rem;
+    font-size: 20px;
 }
 
 
 #listofrooms li {
-	border: solid 2px black;
-	cursor: pointer;
-	padding: 5px;
-	margin: 5px;
+    border: solid 2px black;
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+    width: 22rem;
 }
 
 #listofrooms {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 #returnmenu, #userinfo {
-	border: solid 2px black;
-	padding: 10px;
-	margin: 5px;
+    border: solid 2px black;
+    padding: 10px;
+    margin: 5px;
 }
 
 button {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 #buttoninput {
-	margin-top: .2rem;
-	width: 20rem;
+    margin-top: .2rem;
+    width: 20rem;
 }
 
 #form {
-	margin-top: 10px;
-	margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .sent {
-	margin-bottom: .5rem;
-	margin-left: 30rem;
-	border: solid black;
-	padding: 1rem;
-	word-break: break-all;
+    margin-bottom: .5rem;
+    margin-left: 30rem;
+    border: solid black;
+    padding: 1rem;
+    word-break: break-all;
 }
 
 .received {
-	margin-bottom: .5rem;
-	margin-left: 2rem;
-	margin-right: 25rem;
-	border: solid black;
-	padding: 1rem;
-	word-break: break-all;
+    margin-bottom: .5rem;
+    margin-left: 2rem;
+    margin-right: 25rem;
+    border: solid black;
+    padding: 1rem;
+    word-break: break-all;
 }
