@@ -92,8 +92,8 @@ function saveIntake(khValue, currentBloodsugar, dateOfIntake){
     var manualObject = {
         user: "Mickey", 
         dateOfIntake:(dateOfIntake.replace("/", ":")).replace("/", ":"),
-        // intakeDayId: 1,
-        intakeDayId: Math.floor(Math.random() * 10) + 1,
+        intakeDayId: 1,
+        // intakeDayId: Math.floor(Math.random() * 10) + 1,
         weight: getWeight(),
         CHOMealGrams: khValue,
         CHORatio: "1:" + CalculateCarbohydateRatio(CalculateDailyInsulinDoseRequirement(getWeight())),
@@ -110,9 +110,9 @@ function saveIntake(khValue, currentBloodsugar, dateOfIntake){
         }
     }
     var newUser = gun.get('id' + manualObject.intakeDayId).put({id: manualObject.intakeDayId});
-    gun.get('users5').set(newUser);
+    gun.get('users7').set(newUser);
     var newUser = gun.get('id' + manualObject.intakeDayId).get('intake').put({manualObject});
-    gun.get('users5').set(newUser);
+    gun.get('users7').set(newUser);
     alert('Your data has been saved, your recommended insulin dossage is: ' + manualObject.InsulinUnits)  
 }
 function getWeight()

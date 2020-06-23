@@ -77,7 +77,7 @@ var d = new Date();
 var gunDates = {};
 function GetCurrentMonthData(){
   var loopLength = 0;
-  gun.get('users5').map().on(function(item, id){
+  gun.get('users7').map().on(function(item, id){
     if(item.id != null){
       loopLength++
     }
@@ -85,7 +85,7 @@ function GetCurrentMonthData(){
   
   for(var x = 1; x < loopLength; x++){
     var id = 'id' + x
-    gun.get('users5').get(id).get('intake').map().on(function(item, id){
+    gun.get('users7').get(id).get('intake').map().on(function(item, id){
       var itemDateDash = item.dateOfIntake.replace(/:/g, '-')
       if(gunDates[itemDateDash] == null){
         gunDates[itemDateDash] = {marked: true, dotColor: 'green', activeOpacity: 0}
@@ -110,7 +110,7 @@ function GetCurrentMonthData(){
 function GetAmountOfDoses(datestring){
   var counter = 0;
   var loopLength = 0;
-  gun.get('users5').map().on(function(item, id){
+  gun.get('users7').map().on(function(item, id){
     if(item.id != null){
       loopLength++
     }
@@ -118,7 +118,7 @@ function GetAmountOfDoses(datestring){
   
   for(var x = 1; x < loopLength; x++){
     var id = 'id' + x
-    gun.get('users5').get(id).get('intake').map().on(function(item, id){
+    gun.get('users7').get(id).get('intake').map().on(function(item, id){
       var itemDateDash = item.dateOfIntake.replace(/:/g, '-')
       if(itemDateDash == datestring){
         counter++
@@ -138,7 +138,7 @@ function GetCurrentDate(){
 //#region Debug loop
 function LoopThroughGunIntakes(){
   var loopLength = 0;
-  gun.get('users5').map().on(function(item, id){
+  gun.get('users7').map().on(function(item, id){
     if(item.id != null){
       loopLength++
     }
@@ -146,7 +146,7 @@ function LoopThroughGunIntakes(){
   
   for(var x = 1; x < loopLength; x++){
     var id = 'id' + x
-    gun.get('users5').get(id).get('intake').map().on(function(item, id){
+    gun.get('users7').get(id).get('intake').map().on(function(item, id){
       console.log(item);
     })
   }

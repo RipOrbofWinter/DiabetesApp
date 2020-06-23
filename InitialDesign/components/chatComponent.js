@@ -30,7 +30,7 @@ export default class ChatComponent extends React.Component {
       messagesObject: ''
     }
 
-    this.$message = this.$gun.get('user').get('chat').get('message11')
+    this.$message = this.$gun.get('user').get('chat').get('message21')
     let _this = this
     this.$message.on(function(data, key) {
       _this.setState({messagesObject:getMessages("This.message.on")})
@@ -122,15 +122,15 @@ function setMessage(message, timestamp)
 
   if(message){
       //sugarSetting.set(data);
-      gun.get('user').get('chat').get('message11').set(messageObject);
+      gun.get('user').get('chat').get('message21').set(messageObject);
   }
 
-  console.log(gun.get('user').get('chat').get('message11'));
+  console.log(gun.get('user').get('chat').get('message21'));
 }
 
 function getMessage()
 {
-    gun.get('user').get('chat').get('message11').on(function(item, id){
+    gun.get('user').get('chat').get('message21').on(function(item, id){
         message = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
     return message
@@ -140,7 +140,7 @@ function getMessages(functionOrigin)
 {
   DATA = [];
   var counter = 0;
-  gun.get('user').get('chat').get('message11').map().on(function(item, id){
+  gun.get('user').get('chat').get('message21').map().on(function(item, id){
     var messageObject  = {
       id: id,
       title: item.title,
