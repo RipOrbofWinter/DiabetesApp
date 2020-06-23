@@ -2,8 +2,6 @@ import React from "react";
 import { View, Text, ScrollView, Picker, TextInput, Button } from "react-native";
 import Gun from 'gun/gun.js' 
 const gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun') 
-var weightSetting = gun.get('weight');
-var sugarSetting = gun.get('sugar');
 // get current date
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
