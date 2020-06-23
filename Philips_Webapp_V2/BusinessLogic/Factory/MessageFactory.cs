@@ -9,7 +9,7 @@ namespace BusinessLogic.Factory
 {
 	public static class MessageFactory
 	{
-		public static List<ChatMessageModel> ConvertToModel(Data[] data)
+		public static List<ChatMessageModel> ConvertToModel(MessageData[] data)
 		{
 			List<ChatMessageModel> models = new List<ChatMessageModel>();
 
@@ -25,7 +25,7 @@ namespace BusinessLogic.Factory
 			return models;
 		}
 
-		public static ChatMessageModel ConvertToModel(Data data)
+		public static ChatMessageModel ConvertToModel(MessageData data)
 		{
 
 			if (data.title == null)

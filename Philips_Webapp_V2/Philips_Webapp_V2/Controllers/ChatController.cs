@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using BusinessLogic.ExtensionMethods;
 using BusinessLogic.Factory;
 using BusinessLogic.Models;
-using BusinessLogic.TemporaryData;
 using System.Web.Mvc;
 using BusinessLogic.Gun;
 
@@ -13,17 +12,27 @@ namespace Philips_MVC_Visual.Controllers
 {
     public class ChatController : Controller
     {
-
         public ActionResult Chat()
         {
-            var gun = TempData["GetMessages"] as Data[];
+            var gun = TempData["GetMessages"] as MessageData[];
 
             if (gun == null)
-                return RedirectToAction("GetMessages","Gun");
+                return RedirectToAction("GetMessages", "Gun");
 
             var messageModels = MessageFactory.ConvertToModel(gun);
             return View(messageModels);
         }
+
+        public ActionResult ChatV2(string chatroom = "messageTest")
+        {
+            return View((object)chatroom);
+        }
+
+        public JsonResult ChatV3(string room)
+        {
+            return Json(new { redirectTo = Url.Action("ChatV2", "Chat", new { chatroom = room }) });
+        }
+
 
         public ActionResult ChatSend(string message)
         {

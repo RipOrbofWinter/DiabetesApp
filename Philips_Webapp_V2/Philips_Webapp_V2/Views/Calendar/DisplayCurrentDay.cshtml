@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BusinessLogic.Gun.IntakeData>
+
+@{
+    ViewBag.Title = "DisplayCurrentDay";
+}
+
+<h2>Display CurrentDay</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateOfIntake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsulinUnits)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateOfIntake)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsulinUnits)
+        </td>
+        <td>
+            @Html.ActionLink("Intake details", "IntakeDetails", new { id =item.id})
+        </td>
+    </tr>
+}
+
+</table>

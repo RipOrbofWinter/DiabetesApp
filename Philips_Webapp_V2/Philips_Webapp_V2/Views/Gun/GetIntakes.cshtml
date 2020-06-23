@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "GetIntakes";
+}
+
+<div align="center">
+    <h1>Loading Intakes</h1>
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/lib/cryptomodules.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript">
+
+    var gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
+
+    function IntakeCount() {
+        var counter = [];
+        gun.get('users5').map().on(function (item, id) {
+            if (item.id != undefined) {
+                counter.push(item.id);
+            }
+        })
+        return counter;
+    }
+
+    var count = IntakeCount();
+    console.log(count);
+
+
+    function getIntakes() {
+        var DATA = [];
+        for (i = 0; i < count.length; i++) {
+            gun.get('users5').get(count[i]).get('intake').map().on(function (item, id) {
+
+                var manualObject = {
+                    id: count[i],
+                    dateOfIntake: item.dateOfIntake,
+                    intakeDayId: item.intakeDayId,
+                    weight: item.weight,
+                    CHORatio: item.CHORatio,
+                    bloodSugar: item.bloodSugar,
+                    InsulinUnits: item.InsulinUnits,
+                    CHOMealGrams: item.CHOMealGrams,
+                    user: item.user,
+                }
+
+                DATA.push(manualObject);
+            })
+        }
+
+
+        if (DATA.length != count.length) {
+            getIntakes();
+        }
+
+        return DATA;
+    }
+
+    var intakes = getIntakes();
+
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(intakes),
+            url: "/Gun/GetUserIntakes",
+
+            success: function (result) {
+                console.log(result);
+                window.location.href = result.redirectTo;
+            }
+        })
+    }) 
+</script>
+

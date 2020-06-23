@@ -209,6 +209,10 @@
     <Content Include="Views\Chat\Chat.cshtml" />
     <Content Include="Views\Gun\GetMessages.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Chat\ChatV2.cshtml" />
+    <Content Include="Views\Gun\GetIntakes.cshtml" />
+    <Content Include="Views\Calendar\DisplayCurrentDay.cshtml" />
+    <Content Include="Views\Calendar\IntakeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
