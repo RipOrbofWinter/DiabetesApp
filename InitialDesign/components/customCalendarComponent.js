@@ -11,29 +11,32 @@ export default class CustomCalendar extends React.Component {
     super(props);
     this.state = {
       count: 0,
-      currentDay: 17, //TODO: Get Current Day
-      currentMonth: 5, //TODO: Get Current Month
-      currentYear: 2020, //TODO: Get Current Year
-      selectedDateString: '17-5-2020',
+      currentDay: new Date().getDate(),
+      currentMonth: (new Date().getMonth() + 1), 
+      currentYear: new Date().getFullYear(),
+      selectedDateString: '2020-6-6',
       markedDates:  GetCurrentMonthData(),
-      currentDoses: 5 //Get Gun Data
+      currentDoses: GetAmountOfDoses(GetCurrentDate()), //Get Gun Data
+      minDate: '2020-04-01',
+      maxDate: '2021-04-01'
     };
   }
 
   render() { 
     return (
-       
       <View>
         <Text>
           Custom Component
         </Text>
         <Calendar
-          maxDate={'2020-09-16'}
-          minDate={'2020-04-25'}
+          maxDate={this.state.maxDate}
+          minDate={this.state.minDate}
           markedDates={this.state.markedDates}
           onDayPress={(day) => 
             this.setState({currentDay: day.day, currentMonth: day.month, currentYear: day.year, selectedDateString: day.dateString}) +
-            this.setState({markedDates: UpdateCurrentDay(day, this.state.markedDates)})
+            //this.setState({markedDates: UpdateCurrentDay(day, this.state.markedDates)}) +
+            this.setState({currentDoses: GetAmountOfDoses(day.dateString)})
+            
           }
           
         />
@@ -71,77 +74,86 @@ export default class CustomCalendar extends React.Component {
 
 var d = new Date();
 
-function UpdateCurrentDay(day, markedDates){
-  if(markedDates[day.dateString]){
-    markedDates[day.dateString].selected = true;
-    UpdateMarkedDatesGun(markedDates);
-  }
-  else{
-    if(day.timestamp < d.getTime()){
-      markedDates = AddDayToMarkedDates(day, markedDates);
-    }
-    
-  }
-  return markedDates;
-}
-
-function AddDayToMarkedDates(day, markedDates){
-  markedDates[day.dateString] = {marked: true, dotColor: 'red', activeOpacity:0}
-  UpdateMarkedDatesGun(markedDates);
-  return markedDates;
-}
-
-function UpdateMarkedDatesGun(markedDates){
-  if(markedDates){
-      calendarGun.set(markedDates);
-  }
-}
-
-var gunDates;
-//TODO: Replace hardcoded data with GunDB values
+var gunDates = {};
 function GetCurrentMonthData(){
-  calendarGun.on(function(item, id){
-      gunDates = item[Object.keys(item)[Object.keys(item).length - 1]]
+  var loopLength = 0;
+  gun.get('users5').map().on(function(item, id){
+    if(item.id != null){
+      loopLength++
+    }
   })
+  
+  for(var x = 1; x < loopLength; x++){
+    var id = 'id' + x
+    gun.get('users5').get(id).get('intake').map().on(function(item, id){
+      var itemDateDash = item.dateOfIntake.replace(/:/g, '-')
+      if(gunDates[itemDateDash] == null){
+        gunDates[itemDateDash] = {marked: true, dotColor: 'green', activeOpacity: 0}
+        
+      }
+      
+    })
+  }
+
+  //fallback
   if(gunDates == null){
     gunDates = {
-      '2020-05-01': {marked: true, dotColor: 'green', activeOpacity: 0},
-      '2020-05-02': {marked: true, dotColor: 'green', activeOpacity: 0},
-      '2020-05-03': {marked: true, dotColor: 'green', activeOpacity: 0},
-      '2020-05-04': {marked: true, dotColor: 'green', activeOpacity: 0},
-      '2020-05-05': {marked: true, dotColor: 'green', activeOpacity: 0},
-      '2020-05-06': {marked: true, dotColor: 'green', activeOpacity: 0},
-      '2020-05-07': {marked: true, dotColor: 'red', activeOpacity: 0},
-      '2020-05-08': {marked: true, dotColor: 'green', activeOpacity: 0},
-      '2020-05-09': {marked: true, dotColor: 'green', activeOpacity: 0}
+      '2020-06-01': {marked: true, dotColor: 'red', activeOpacity: 0}
     }
     calendarGun.set(gunDates);
   }
   return gunDates
 }
 
-// var markedDates = {
+
+
+function GetAmountOfDoses(datestring){
+  var counter = 0;
+  var loopLength = 0;
+  gun.get('users5').map().on(function(item, id){
+    if(item.id != null){
+      loopLength++
+    }
+  })
+  
+  for(var x = 1; x < loopLength; x++){
+    var id = 'id' + x
+    gun.get('users5').get(id).get('intake').map().on(function(item, id){
+      var itemDateDash = item.dateOfIntake.replace(/:/g, '-')
+      if(itemDateDash == datestring){
+        counter++
+      }
+      
+    })
+  }
+  return counter;
+}
+
+
+function GetCurrentDate(){
+  var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate()
+  return date
+}
+
+//#region Debug loop
+function LoopThroughGunIntakes(){
+  var loopLength = 0;
+  gun.get('users5').map().on(function(item, id){
+    if(item.id != null){
+      loopLength++
+    }
+  })
+  
+  for(var x = 1; x < loopLength; x++){
+    var id = 'id' + x
+    gun.get('users5').get(id).get('intake').map().on(function(item, id){
+      console.log(item);
+    })
+  }
+}
+//#endregion Debug Loop
+
+// var markedDatesExample = {
 //   '2020-04-25': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-04-26': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-04-27': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-04-28': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-04-29': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-04-30': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-01': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-02': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-03': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-04': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-05': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-06': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-07': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-08': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-09': {marked: true, dotColor: 'green', activeOpacity: 0},
-//   '2020-05-10': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-11': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-12': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-13': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-14': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-15': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-16': {marked: true, dotColor: 'red', activeOpacity: 0},
-//   '2020-05-17': {marked: true, dotColor: 'red', activeOpacity: 0}
+//   '2020-04-26': {marked: true, dotColor: 'red', activeOpacity: 0},
 // }

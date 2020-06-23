@@ -30,7 +30,7 @@ export default class ChatComponent extends React.Component {
       messagesObject: ''
     }
 
-    this.$message = this.$gun.get('user').get('chat').get('message7')
+    this.$message = this.$gun.get('user').get('chat').get('message11')
     let _this = this
     this.$message.on(function(data, key) {
       _this.setState({messagesObject:getMessages("This.message.on")})
@@ -40,38 +40,43 @@ export default class ChatComponent extends React.Component {
   render() { 
     return (
        
-      <ScrollView> 
-             
-        <Text>
-        {"\n\n\n"} Message
-        </Text>
-        <TextInput 
-          style={{ 
-            borderLeftWidth: 1,
-            borderRightWidth: 1, 
-            borderTopWidth: 1, 
-            borderBottomWidth: 1, 
-            paddingLeft: 15,
-            paddingRight: 15,
-            paddingTop: 5,
-            paddingBottom: 5
-          }}
-          onChangeText={(textBoxMessage) => this.setState({textBoxMessage})} 
-        />
-        <Button title='Update' 
-          onPress={()=>{
-            //this.$message.put({message:this.state.textBoxMessage})
-            setMessage(this.state.textBoxMessage, GetTimeStamp());
-            this.setState({textBoxMessage:''})
-          }}
-        />
-
         <FlatList
           data={DATA}
-          renderItem={({ item }) => <Item title={item.title + "  -  " + item.id} />}
+          renderItem={({item, index, separators}) => (
+            <View style={{backgroundColor: 'white', flex: 1}}>
+              <Text style={{lineHeight: 25}}>{item.title} - { ConvertTimeStampToDateTime(item.timestamp) }</Text>
+            </View>
+          )}
           keyExtractor={item => item.id}
+          ListFooterComponent={
+            <View 
+            style={{flex: 0.1}}
+            contentContainerStyle={{flexGrow: 1}}
+            >
+              <TextInput 
+                style={{ 
+                  borderLeftWidth: 1,
+                  borderRightWidth: 1, 
+                  borderTopWidth: 1, 
+                  borderBottomWidth: 1, 
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  paddingTop: 5,
+                  paddingBottom: 5
+                }}
+                onChangeText={(textBoxMessage) => this.setState({textBoxMessage})} 
+              />
+              <Button title='Stuur Bericht' 
+                onPress={()=>{
+                  //this.$message.put({message:this.state.textBoxMessage})
+                  setMessage(this.state.textBoxMessage, GetTimeStamp());
+                  this.setState({textBoxMessage:''})
+                }}
+                style={{bottom: 1000, position: 'absolute'}}
+              />
+            </View>
+          }
         />
-      </ScrollView>
     );
   }  
 }
@@ -83,6 +88,21 @@ function Item({ title }) {
     </View>
   );
 }
+
+var messageObject  = {
+  title: 'message wordt getest 2',
+  timestamp: ''
+}
+
+var user1 = "mickey"
+var user2 = "luuk"
+var date = "2020:06:03"
+// var intakeId = "1"
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 
 var DATA = [
   {
@@ -102,15 +122,15 @@ function setMessage(message, timestamp)
 
   if(message){
       //sugarSetting.set(data);
-      gun.get('user').get('chat').get('message7').set(messageObject);
+      gun.get('user').get('chat').get('message11').set(messageObject);
   }
 
-  console.log(gun.get('user').get('chat').get('message7'));
+  console.log(gun.get('user').get('chat').get('message11'));
 }
 
 function getMessage()
 {
-    gun.get('user').get('chat').get('message7').on(function(item, id){
+    gun.get('user').get('chat').get('message11').on(function(item, id){
         message = item[Object.keys(item)[Object.keys(item).length - 1]]
     })
     return message
@@ -120,18 +140,18 @@ function getMessages(functionOrigin)
 {
   DATA = [];
   var counter = 0;
-  gun.get('user').get('chat').get('message7').map().on(function(item, id){
+  gun.get('user').get('chat').get('message11').map().on(function(item, id){
     var messageObject  = {
       id: id,
       title: item.title,
       timestamp: item.timestamp
     }
     if (counter == 0){
-      console.log("message id: " + messageObject.id)
+      // console.log("message id: " + messageObject.id)
       DATA.push(messageObject);
     }
     else if(DATA[DATA.length - 1] != undefined && DATA[DATA.length - 1].id != messageObject.id){
-      console.log("message id: " + messageObject.id + " past id: " + DATA[DATA.length - 1].id)
+      // console.log("message id: " + messageObject.id + " past id: " + DATA[DATA.length - 1].id)
       DATA.push(messageObject);
     }
     else{
@@ -146,4 +166,16 @@ function getMessages(functionOrigin)
 function GetTimeStamp(){
   var d = new Date();
   return d.getTime();
+}
+
+function ConvertTimeStampToDateTime(timestamp){
+  var date = new Date(timestamp);
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var day = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var formattedTime = year + "-" + month + "-" + day + " " + hours + ':' + minutes;
+  return formattedTime;
 }
