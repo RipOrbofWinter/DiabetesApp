@@ -18,13 +18,12 @@ export default class CustomCalendar extends React.Component {
       markedDates:  GetCurrentMonthData(),
       currentDoses: GetAmountOfDoses(GetCurrentDate()), //Get Gun Data
       minDate: '2020-04-01',
-      maxDate: GetCurrentDate()
+      maxDate: '2021-04-01'
     };
   }
 
   render() { 
     return (
-       
       <View>
         <Text>
           Custom Component

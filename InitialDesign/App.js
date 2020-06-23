@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Insuline functions
+import NewInsulinComponent from "./components/insulinNewComponenet";
 // import * as insulineFile from './components/insulinComponent'
 import SettingsComponent from './components/settingsComponent'
 // Calendar functions
@@ -89,72 +90,9 @@ function LoginScreen({ navigation })
 
 function InsulineScreen({ navigation }) 
 {
-  const [khValue, setKhValueVar] = useState('');
-  const [currentBloodSugar, setCurrentBloodSugar] = useState('');
-
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-     <br></br> 
-      <View style={{ alignItems: 'center', justifyContent: 'center', width: '60%', height: '30px', borderStyle: 'solid', border: '1px'}}>
-        <Text style={{ fontSize: '14pt'}}>Inname #</Text>
-      </View>
-      <br></br>
-
-      <ScrollView style={{ width: '80%'}}>
-        <br></br>
-
-        <View style={{ alignItems: 'center', justifyContent: 'center', width: '96%', height: '110px', borderStyle: 'solid', border: '1px'}}>
-          <Text style={{ fontSize: '14pt'}}>Koolhydraten bij eetmoment:</Text>
-          <TextInput
-            style={{height: 40, fontSize: '12pt'}}
-            // placeholder={insulineFile.getWeight()}
-            onChangeText={khValue => setKhValueVar(khValue)}
-            defaultValue={khValue}
-          />
-        </View>
-        <br></br>
-
-        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px', borderStyle: 'solid', border: '1px'}}>
-          <Text style={{ fontSize: '14pt'}}>CHO-ratio:</Text>
-          <br></br>
-          <Text style={{ fontSize: '12pt'}}>1:10</Text>
-        </View>
-        <br></br>
-
-        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px', borderStyle: 'solid', border: '1px'}}>
-          <Text style={{ fontSize: '14pt'}}>Huidige Bloedsuikerspiegel</Text>
-          <TextInput
-            style={{height: 40, fontSize: '12pt'}}
-            // placeholder={insulineFile.getSugar()}
-            onChangeText={currentBloodSugar => setCurrentBloodSugar(currentBloodSugar)}
-            defaultValue={currentBloodSugar}
-          />
-        </View>
-        <br></br>
-
-        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px', borderStyle: 'solid', border: '1px'}}>
-          <Text style={{ fontSize: '14pt'}}>Doel Bloedsuikerspiegel: </Text>
-          <br></br>
-          <Text style={{ fontSize: '12pt'}}> 120mg/dl</Text>
-        </View>
-        <br></br>
-
-        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: '10px', paddingBottom: '10px', borderStyle: 'solid', border: '1px'}}>
-          <Text style={{ fontSize: '14pt'}}>Insuline advies: </Text>
-          <br></br>
-          <Text style={{ fontSize: '12pt'}}>8 eenheden</Text>
-        </View>
-        <br></br>
-
-        <Button
-          title="Opslaan inname"
-          onPress={() => { navigation.navigate('Home') }} 
-        />
-        <Button
-          title="Annuleren"
-          onPress={() => navigation.navigate('Home')}
-        />
-    </ScrollView>
+  <View>
+    <NewInsulinComponent navigation={navigation}/>
   </View>
   );
 }
