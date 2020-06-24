@@ -17,13 +17,15 @@
 
 <script type="text/javascript">
 
+    var table = @Html.Raw(Json.Encode(Model));
+
     var gun = new Gun('https://diabetesappfontysgroep3.herokuapp.com/gun')
 
     function IntakeCount() {
         var counter = [];
-        gun.get('users7').map().on(function (item, id) {
+        gun.get(table).map().on(function (item, id) {
             if (item.id != undefined) {
-                counter.push(item.id);
+                counter.push(id);
             }
         })
         return counter;
@@ -35,7 +37,7 @@
     function getIntakes() {
         var DATA = [];
         for (i = 0; i < count.length; i++) {
-            gun.get('users7').get("id" + count[i]).get('intake').map().on(function (item, id) {
+            gun.get(table).get(count[i]).get('intake').map().on(function (item, id) {
 
                 var manualObject = {
                     id: count[i],
@@ -61,7 +63,7 @@
         return DATA;
     }
 
-    var intakes = getIntakes(); 
+    var intakes = getIntakes();
 
     $(document).ready(function () {
         $.ajax({
@@ -75,6 +77,6 @@
                 window.location.href = result.redirectTo;
             }
         })
-    }) 
+    })
 </script>
 

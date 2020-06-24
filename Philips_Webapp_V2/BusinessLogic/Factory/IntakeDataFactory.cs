@@ -55,7 +55,21 @@ namespace BusinessLogic.Factory
             var dataArray = intakedata.dateOfIntake.Split(':');
 
             var date = new DateTime(int.Parse(dataArray[0]), int.Parse(dataArray[1]), int.Parse(dataArray[2]));
-            
+            int insulinUnit = int.Parse(intakedata.InsulinUnits);
+            float bloodSugar = float.Parse(intakedata.bloodSugar);
+            float CHOMealGrams = float.Parse(intakedata.CHOMealGrams);
+            float weight = float.Parse(intakedata.weight);
+
+             string theme = "green";
+
+             theme = SetEventTheme(theme,insulinUnit, 10, 15, 5, 20);
+
+            //theme = SetEventTheme(theme,bloodSugar, 120, 300, 210, 310);
+
+            theme = SetEventTheme(theme,CHOMealGrams, 50, 500, 0, 1000);
+
+             theme = SetEventTheme(theme,weight, 65, 95, 55, 100);
+
             CalendarEvent calendarEvent = new CalendarEvent()
             {
                 Start = date,
@@ -69,11 +83,51 @@ namespace BusinessLogic.Factory
                 " InsulinUnits: " + intakedata.InsulinUnits +
                 " weight:" + intakedata.weight + 
                 " User: " + intakedata.user,
-                Theme = "green",
+                Theme = theme,
                 IsFullDay = true,
             };
 
             return calendarEvent;
         }
+
+        private static string SetEventTheme(string theme,float checkValue,int greenLow, int GreenHigh, int yellowLow, int yellowHigh)
+        {
+
+            if (checkValue > GreenHigh &&
+                checkValue < yellowHigh ||
+                checkValue < greenLow &&
+                checkValue > yellowLow
+                )
+            {
+                theme = "orange";
+            }
+            if (checkValue > yellowHigh || 
+                checkValue < yellowLow)
+            {
+                theme = "red";
+            }
+
+            return theme;
+        }
+        private static string SetEventTheme(string theme, int checkValue, int greenLow, int GreenHigh, int yellowLow, int yellowHigh)
+        {
+
+            if (checkValue > GreenHigh &&
+                checkValue < yellowHigh ||
+                checkValue < greenLow &&
+                checkValue > yellowLow
+                )
+            {
+                theme = "orange";
+            }
+            if (checkValue > yellowHigh ||
+                checkValue < yellowLow)
+            {
+                theme = "red";
+            }
+
+            return theme;
+        }
+
     }
 }

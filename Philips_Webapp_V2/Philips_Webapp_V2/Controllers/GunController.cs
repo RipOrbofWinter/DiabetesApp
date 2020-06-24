@@ -23,9 +23,9 @@ namespace Philips_Webapp_V2.Controllers
 			return Json(new { redirectTo = Url.Action("Chat", "Chat") });
 		}
 
-		public ActionResult GetIntakes()
+		public ActionResult GetIntakes(string Intakes = "users7")
 		{
-			return View();
+			return View((object)Intakes);
 		}
 
 		[HttpPost]
