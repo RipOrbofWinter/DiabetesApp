@@ -23,7 +23,7 @@ namespace Philips_MVC_Visual.Controllers
             return View(messageModels);
         }
 
-        public ActionResult ChatV2(string chatroom = "messageTest")
+        public ActionResult ChatV2(string chatroom = "message21")
         {
             return View((object)chatroom);
         }
